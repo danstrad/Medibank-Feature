@@ -1,0 +1,5 @@
+Rate submit button
+
+Multiple videos scrollable up/down
+
+Better header transitions

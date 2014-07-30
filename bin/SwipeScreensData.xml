@@ -1,0 +1,104 @@
+<SwipeScreensData>
+	
+	<ScreenSet>pong,rate1,vid1,art1</ScreenSet>
+	<ScreenSet>pong,rate1,vid1,graph1</ScreenSet>
+	
+	
+	<Screen id="pong" type="Pong">
+		<Colour>#1B75BB</Colour>		
+		<Handle>AUSTRALIAN OPEN 2015</Handle>
+		
+		<Title1>PROUD SPONSORS</Title1>
+		<Title2>AUSTRALIAN OPEN 2015</Title2>
+	</Screen>
+
+	
+	<Screen id="rate1" type="Rate">
+		<Colour>#F69220</Colour>		
+		<Handle>HOW DO YOU RATE HEATHCARE</Handle>
+		
+		<Title>HOW DO YOU
+RATE HEALTHCARE
+IN AUSTRALIA?</Title>
+		<Label0>POOR</Label0>
+		<Label50>GOOD</Label50>
+		<Label100>EXCELLENT</Label100>
+	</Screen>
+		
+	
+	<Screen id="vid1" type="Video">
+		<Colour>#EA2B8B</Colour>		
+		<Handle>MEET LEITH</Handle>
+
+		<Set>
+			<Video url="assets/MVI_0017.MOV" width="1920" height="1088">
+				<Title>Meet Leith</Title>
+				<Text>Leith is one of 2500 health professionals employed by Medibank to deliver 1.5 million healthcare interactions each year.
+
+As a registered nurse with more than 25 years’ experience, Leith helps patients across Australia via the nation’s largest telephone triage, health advice and referral service. Through the service, nurses like Leith assess callers based on their symptoms before providing advice and recommendations on what care they need. Just one telehealth nurse can support 6,000 patients each year.
+
+Like 85% of Medibank’s nurse workforce, Leith works from home thanks to Medibank’s unique work@home model. For Leith, it’s a win-win. She gets to stay active in the workforce while also being at home with her four teenage children.
+
+“I can work from home during the day, then pick the kids up from school, help with homework, get dinner on the table, then do a few more hours of work once my husband gets home,” Leith said. 
+
+“The work-life balance is brilliant and it also means I can work more hours than I could in a hospital, plus you don’t have to travel,” Leith said.
+
+For Medibank it means we’re tapping into an underutilised health workforce, putting years of experience and skills to good use to help relieve the burden on the public health system.
+
+In fact, the triage, health advice and referral service results in 60,000 fewer emergency department visits, 5,000 fewer ambulance callouts and savings of almost $30 million in public healthcare costs Leith thinks that’s pretty cool, and we do too. Because at Medibank, we’re about better health choices, a better health system and better health outcomes for all Australians.</Text>
+			</Video>
+			<Video url="assets/MVI_0038.MOV" width="1920" height="1088" />
+		</Set>
+		<Set>
+			<Video url="assets/003_40inch_Main.mov" width="1920" height="1080" />
+		</Set>
+
+</Screen>
+	
+	
+	<Screen id="graph1" type="Graph">
+		<Colour>#ED4135</Colour>
+		<Handle>A BETTER AUSTRALIA</Handle>
+		
+		<Title>A BETTER AUSTRALIA</Title>
+		<Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse leo nisl, consequat non metus ut, lobortis dignissim nisl. Mauris feugiat ornare sodales. Aliquam semper orci sit amet pulvinar pulvinar.</Text>
+		<Graph>
+			<Text>55,000</Text>
+			<Bar value="0.3" text="2011" />
+			<Bar value="1" text="2012" />
+			<Bar value="0.4" text="2013" />
+			<Bar value="0.2" text="2014" />
+		</Graph>
+	</Screen>
+	
+	<Screen id="art1" type="Infographic">
+		<Colour>#653279</Colour>
+		<Handle>IS IT TIME TO UNPLUG</Handle>
+		
+		<Infographic id="info1">
+			<slide type="center_text_box">
+				<appearance textColor="#ff9330" backgroundColor="#ff9330" boxColor="#FFFFFF"></appearance>
+				<featuredText>Accessing specialist care in regional Australia presents many challenges for GPs and their patients.</featuredText>
+			</slide>
+			<slide type="center_text_box">
+				<appearance textColor="#ff9330" backgroundColor="#ff9330" boxColor="#FFFFFF"></appearance>
+				<featuredText>Many patients have to travel more than 200km to see a specialist, not to mention the associated costs. Some choose to miss out on care altogether.</featuredText>
+			</slide>
+			<slide type="center_text_box">
+				<appearance textColor="#FFFFFF" backgroundColor="#ff9330" boxColor="#E4002B"></appearance>
+				<featuredText>That was before Anywhere Healthcare – Australia’s largest panel of online specialists that connects patients with specialists via video.</featuredText>
+			</slide>	
+			<slide type="center_text_box">
+				<appearance textColor="#FFFFFF" backgroundColor="#E4002B" boxColor="#ff9330"></appearance>
+				<featuredText>Anywhere Healthcare improves access to specialist care in regional and remote Australia.</featuredText>
+			</slide>
+			<slide type="people_graph">
+			</slide>		
+		</Infographic>
+		
+		
+		
+	</Screen>
+	
+	
+</SwipeScreensData>
