@@ -4,8 +4,8 @@ package med.display {
 	public class Content extends Sprite {
 
 		// 2458, 1607
-		static public function get WIDTH():Number { return SwipeScreens.WIDTH - Handle.WIDTH * (SwipeScreens.NUM_HANDLES - 1); }
-		static public const HEIGHT:Number = SwipeScreens.HEIGHT;
+		static public function get WIDTH():Number { return Main.WIDTH - Handle.WIDTH * (Main.NUM_HANDLES - 1); }
+		static public const HEIGHT:Number = Main.HEIGHT;
 		
 		protected var _full:Boolean;
 		public function get full():Boolean { return _full; }		

@@ -3,11 +3,8 @@ package med.display {
 	import flash.display.Sprite;
 	import flash.text.TextField;
 
-	public class GraphBar extends Sprite {
+	public class GraphBar extends _GraphBar {
 		
-		public var bg:Sprite;
-		public var field:TextField;
-
 		public function GraphBar(text:String, width:Number, height:Number) {
 			field.text = text || "";
 			

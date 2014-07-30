@@ -10,7 +10,7 @@ package med.display {
 	import flash.text.TextFormatAlign;
 	import med.data.TextData;
 
-	public class TextSection extends Sprite {
+	public class TextSection extends _TextSection {
 		
 		public static const MARGIN:Number = 50;
 		static public const TEXT_SCALE:Number = 1;
@@ -57,7 +57,6 @@ package med.display {
 		protected static const END_WAIT:Number = 3000;
 		protected static const AUTO_SCROLL:Number = 3;
 		
-		public var textField:TextField;
 		public var subtextField:TextField;
 		public var textMask:Sprite;
 		

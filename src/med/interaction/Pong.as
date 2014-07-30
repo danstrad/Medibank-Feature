@@ -167,7 +167,7 @@ package med.interaction {
 				
 				// Paddles' Momentum
 				var newF:Number = Math.min(1, dTime / M_TIME);
-				var oldF = 1 - newF;
+				var oldF:Number = 1 - newF;
 				m1 = m1 * oldF + (p1.y - prev1) * newF;
 				m2 = m2 * oldF + (p2.y - prev2) * newF;
 				prev1 = p1.y;

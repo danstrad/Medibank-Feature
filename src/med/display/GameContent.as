@@ -1,4 +1,5 @@
 package med.display {
+	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.geom.Rectangle;
@@ -25,10 +26,16 @@ package med.display {
 		public function GameContent(color:uint, text1:String, text2:String) {
 			super(color);
 		
-			field1 = line1.getChildByName("field") as TextField;
-			field2 = line2.getChildByName("field") as TextField;
+			var assets:MovieClip = new _GameContentAssets();
+			addChild(assets);
+			
+			field1 = assets.line1.getChildByName("field") as TextField;
+			field2 = assets.line2.getChildByName("field") as TextField;
 			field1.text = text1 || "";
 			field2.text = text2 || "";
+			
+			playerScoreField = assets.playerScoreField;
+			computerScoreField = assets.computerScoreField;
 			
 			playerScore = 0;
 			computerScore = 0;

@@ -3,18 +3,16 @@ package med.display {
 	import flash.display.Sprite;
 	import flash.text.TextField;
 
-	public class Handle extends Sprite {
+	public class Handle extends _Handle {
 
 		//133, 1607
 		static public const WIDTH:Number = 133;
-		static public const HEIGHT:Number = SwipeScreens.HEIGHT;
+		static public const HEIGHT:Number = Main.HEIGHT;
 		
 
 		public var content:Content;
 		
-		public var divider:Sprite;
 		public var grab:Sprite;
-		public var titleField:TextField;		
 		private var bg:Sprite;
 		
 		protected var color:uint;

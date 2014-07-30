@@ -12,13 +12,11 @@ package med.display {
 	import med.data.VideoSet;
 	import med.data.VideoSlide;
 
-	public class VideoSetPlayer extends Sprite {
+	public class VideoSetPlayer extends _VideoSetPlayer {
 		
 		public var videoSet:VideoSet;
 		protected var slideIndex:int;
 		
-
-		public var overlay:Sprite;
 		protected var titleField:TextField;	
 		protected var textField:TextField;	
 		
@@ -34,7 +32,7 @@ package med.display {
 		
 		public function VideoSetPlayer(videoSet:VideoSet) {
 			this.videoSet = videoSet;
-			
+
 			titleField = overlay.getChildByName("titleField") as TextField;
 			textField = overlay.getChildByName("textField") as TextField;
 			titleField.autoSize = TextFieldAutoSize.LEFT;
@@ -114,6 +112,7 @@ package med.display {
 			//else currentStream.seek(30);
 
 			showOverlay(currentSlide);
+			
 		}
 		
 		private function netStatusHandler(event:NetStatusEvent):void {

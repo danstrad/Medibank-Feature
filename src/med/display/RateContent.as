@@ -1,5 +1,6 @@
 package med.display {
 	import flash.display.BlendMode;
+	import flash.display.MovieClip;
 	import flash.display.SimpleButton;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
@@ -22,10 +23,10 @@ package med.display {
 		public var submitButton:SimpleButton;
 		
 		public var hit:Sprite;
-		public var graph:Sprite;
 		protected var bar:Sprite;
 		protected var grab:Sprite;
 		protected var circle:Sprite;
+		protected var graph:Sprite;
 		
 		protected var currentX:Number;
 		protected var startX:Number;
@@ -36,11 +37,15 @@ package med.display {
 		public function RateContent(color:uint, title:String, labels:Vector.<String>) {
 			super(color);
 
-			titleField.text = title.replace(/\n/ig, "");
-			label0.text = labels[0];
-			label50.text = labels[1];
-			label100.text = labels[2];
+			var assets:MovieClip = new _RateContentAssets();
+			addChild(assets);
 			
+			assets.titleField.text = title.replace(/\n/ig, "");
+			assets.label0.text = labels[0];
+			assets.label50.text = labels[1];
+			assets.label100.text = labels[2];
+
+			graph = assets.graph as Sprite;
 			bar = graph.getChildByName("bar") as Sprite;
 			grab = graph.getChildByName("grab") as Sprite;
 			circle = graph.getChildByName("circle") as Sprite;
@@ -49,7 +54,7 @@ package med.display {
 			graph.blendMode = BlendMode.LAYER;
 			
 			grab.hitArea = hit;
-			hit.visible = false;
+			assets.hit.visible = false;
 			grab.buttonMode = true;
 			grab.mouseChildren = false;
 			
