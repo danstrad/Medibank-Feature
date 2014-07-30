@@ -33,12 +33,16 @@
     <verbose-stacktraces>true</verbose-stacktraces>
     <source-path append="true">
       <path-element>D:\GitHub\Medibank-Feature\src</path-element>
+      <path-element>D:\GitHub\Medibank-Core\src</path-element>
+      <path-element>D:\GitHub\Medibank-Core\lib</path-element>
       <path-element>C:\Program Files (x86)\Java\jre6\bin</path-element>
       <path-element>C:\Program Files\Adobe\Adobe Flash CC 2014\Common\Configuration\ActionScript 3.0\projects\Flash\src</path-element>
       <path-element>C:\Program Files (x86)\FlashDevelop\Library\AS3\classes</path-element>
     </source-path>
     <library-path append="true">
       <path-element>D:\GitHub\Medibank-Feature\lib\SwipeScreens.swc</path-element>
+      <path-element>D:\GitHub\Medibank-Core\lib\InfographicBoxes.swc</path-element>
+      <path-element>D:\GitHub\Medibank-Core\lib\PeopleGraph.swc</path-element>
     </library-path>
   </compiler>
   <file-specs>

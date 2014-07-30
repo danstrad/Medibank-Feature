@@ -16,6 +16,8 @@
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
     <class path="src" />
+    <class path="..\Medibank-Core\src" />
+    <class path="..\Medibank-Core\lib" />
   </classpaths>
   <!-- Build options -->
   <build>
@@ -53,6 +55,8 @@
   <!-- SWC Libraries -->
   <libraryPaths>
     <element path="lib\SwipeScreens.swc" />
+    <element path="..\Medibank-Core\lib\InfographicBoxes.swc" />
+    <element path="..\Medibank-Core\lib\PeopleGraph.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>
@@ -84,7 +88,7 @@
   <postBuildCommand alwaysRun="False" />
   <!-- Other project options -->
   <options>
-    <option showHiddenPaths="False" />
+    <option showHiddenPaths="True" />
     <option testMovie="Default" />
     <option testMovieCommand="" />
   </options>

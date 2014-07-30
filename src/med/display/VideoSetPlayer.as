@@ -17,8 +17,8 @@ package med.display {
 		public var videoSet:VideoSet;
 		protected var slideIndex:int;
 		
-		protected var titleField:TextField;	
-		protected var textField:TextField;	
+		protected var titleField:TextField;
+		protected var textField:TextField;
 		
 		protected var video1:Video;
 		protected var video2:Video;

@@ -58,6 +58,8 @@ package {
 		public function Main() {
 			scaleX = scaleY = 0.4;
 			
+			new _FontDump();
+			
 			handles = new Vector.<Handle>();
 			
 			contentLayer = new Sprite();

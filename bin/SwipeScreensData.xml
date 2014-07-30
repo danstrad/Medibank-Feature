@@ -72,10 +72,18 @@ In fact, the triage, health advice and referral service results in 60,000 fewer 
 	</Screen>
 	
 	<Screen id="art1" type="Infographic">
-		<Colour>#653279</Colour>
+		<Colour>#009ca6</Colour>
 		<Handle>IS IT TIME TO UNPLUG</Handle>
 		
 		<Infographic id="info1">
+			<slide type="hotspot">
+				<Background>
+					<Image url="assets/Building.png" scale="0.6" />
+				</Background>
+				
+			</slide>
+			
+			<!-- 
 			<slide type="center_text_box">
 				<appearance textColor="#ff9330" backgroundColor="#ff9330" boxColor="#FFFFFF"></appearance>
 				<featuredText>Accessing specialist care in regional Australia presents many challenges for GPs and their patients.</featuredText>
@@ -94,6 +102,7 @@ In fact, the triage, health advice and referral service results in 60,000 fewer 
 			</slide>
 			<slide type="people_graph">
 			</slide>		
+			-->
 		</Infographic>
 		
 		
