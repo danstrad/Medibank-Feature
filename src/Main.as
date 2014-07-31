@@ -29,6 +29,7 @@ package {
 
 		public static const WIDTH:Number = 2857;
 		public static const HEIGHT:Number = 1607;
+		public static const SCALE:Number = 0.4;
 		// 0.7060167387913802
 		// 40% = 1143, 643
 
@@ -71,7 +72,9 @@ package {
 			xmlLoader.addEventListener(Event.COMPLETE, handleXMLLoaded);
 			xmlLoader.load(new URLRequest("SwipeScreensData.XML"));
 
-			addEventListener(MouseEvent.CLICK, handleFullScreenClick);
+			CONFIG::release {
+				addEventListener(MouseEvent.CLICK, handleFullScreenClick);
+			}
 			stage.addEventListener(FullScreenEvent.FULL_SCREEN, handleFullScreenChange);
 		}
 

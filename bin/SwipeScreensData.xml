@@ -1,6 +1,6 @@
 <SwipeScreensData>
 	
-	<ScreenSet>pong,rate1,vid1,art1</ScreenSet>
+	<ScreenSet>pong,rate1,vid1,prof9</ScreenSet>
 	<ScreenSet>pong,rate1,vid1,graph1</ScreenSet>
 	
 	
@@ -71,15 +71,52 @@ In fact, the triage, health advice and referral service results in 60,000 fewer 
 		</Graph>
 	</Screen>
 	
-	<Screen id="art1" type="Infographic">
+	
+	
+	<Screen id="prof9" type="Infographic">
 		<Colour>#009ca6</Colour>
 		<Handle>IS IT TIME TO UNPLUG</Handle>
 		
 		<Infographic id="info1">
 			<slide type="hotspot">
 				<Background>
-					<Image url="assets/Building.png" scale="0.6" />
+					<Image url="assets/prof9/Building.png" scale="1.44" />
 				</Background>
+				
+				<intro>
+					<explanationText>Here at Medibank, to live our ‘For Better Health’ 
+purpose, we are embracing a healthier way of 
+working that will help us to be more collaborative 
+and productive… All part of Generation Better.</explanationText>
+				</intro>
+				
+				<hotspot x="-222" y="-374" dir="dl">
+					<Text>Interior spiral staircases.</Text>
+					<Image url="assets/prof9/Medibank Atrium No.3.jpg" />
+				</hotspot>
+				<hotspot x="218" y="-440" dir="dr">
+					<Image url="assets/prof9/Medibank Atrium No.1.jpg" />
+				</hotspot>
+				<hotspot x="-286" y="-122" dir="ul">
+					<Text>Collaborative and social settings to connect.</Text>
+					<Image url="assets/prof9/Medibank-016.jpg" />
+				</hotspot>
+				<hotspot x="284" y="-248" dir="dr">
+					<Text>6 star green rating.</Text>
+				</hotspot>
+				<hotspot x="348" y="68" dir="dr">
+					<Image url="assets/prof9/Cumulus_people.jpg" />
+				</hotspot>
+				<hotspot x="-286" y="258" dir="dl">
+					<Text>Rejuvenation spaces to help recharge.</Text>
+					<Image url="assets/prof9/Reflection_people_cropped.jpg" />
+				</hotspot>				
+				<hotspot x="-286" y="576" dir="dl">
+					<Text>Edible garden for our employees.</Text>
+				</hotspot>				
+				<hotspot x="218" y="576" dir="dr">
+					<Text>Green spaces.</Text>
+				</hotspot>
 				
 			</slide>
 			

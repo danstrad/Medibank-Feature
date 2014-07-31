@@ -16,6 +16,7 @@ package med.display {
 		protected var background:Background;
 		
 		public function Content(color:uint) {
+			
 			this.color = color;
 			
 			background = new Background(WIDTH, HEIGHT);
