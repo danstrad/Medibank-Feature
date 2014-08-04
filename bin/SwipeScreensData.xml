@@ -1,6 +1,6 @@
 <SwipeScreensData>
 	
-	<ScreenSet>pong,rate1,vid1,prof9</ScreenSet>
+	<ScreenSet>pong,prof9,doc7,art1</ScreenSet>
 	<ScreenSet>pong,rate1,vid1,graph1</ScreenSet>
 	
 	
@@ -72,6 +72,154 @@ In fact, the triage, health advice and referral service results in 60,000 fewer 
 	</Screen>
 	
 	
+
+	
+	
+	<Screen id="art1" type="Infographic">
+		<Colour>#653279</Colour>
+		<Handle>REWARDING BETTER HEALTH WITH FLYBUYS AND MEDIBANK.</Handle>
+		
+		<Infographic id="info1">
+
+			<!-- 
+			<slide type="splash_text" duration="4000">
+				<text>IS IT TIME
+TO UNPLUG?</text>
+			</slide>
+			 -->
+			<slide type="time_dials">
+				<title>How many hours a day do you use a screen?</title>
+				<subtitle>Drag the hands to show your usage</subtitle>
+				
+				<dial type="input" title="Work or study" color="#b0008e" variable="work" value="2" />
+				<dial type="input" title="Leisure" color="#b0008e" variable="leisure" value="2" />
+			</slide>
+			<slide type="splash_text" duration="4000" animateOff="none" >
+				<text textScale="0.85">A NEW MEDIBANK STUDY FINDS WE’RE AVERAGING
+NINE HOURS A DAY LOOKING AT SCREENS.</text>
+			</slide>
+			<slide type="time_dials">
+				<title>Work or study</title>
+				<subtitle>Average hours per day</subtitle>
+				
+				<dial type="display" title="Australia" color="#845b94" value="3" />
+				<dial type="display" title="You" color="#b0008e" variable="work" />
+			</slide>
+			<slide type="time_dials">
+				<title>Leisure</title>
+				<subtitle>Average hours per day</subtitle>
+				
+				<dial type="display" title="Australia" color="#845b94" value="6" />
+				<dial type="display" title="You" color="#b0008e" variable="leisure" />
+			</slide>
+			<slide type="splash_text" duration="4000" animateOff="none" >
+				<text textScale="0.85">AUSTRALIAN ADULTS ARE SPENDING MORE TIME
+IN FRONT OF SCREENS THAN SLEEPING.</text>
+			</slide>
+
+		</Infographic>
+	</Screen>	
+	
+	
+	<Screen id="doc7" type="Infographic">
+		<Colour>#00a3e0</Colour>
+		<Handle>REWARDING BETTER HEALTH WITH FLYBUYS AND MEDIBANK.</Handle>
+		
+		<Infographic id="info1">
+			
+			<slide type="splash_text" duration="4000">
+				<text>REWARDING BETTER HEALTH
+WITH FLYBUYS AND MEDIBANK</text>
+				<Image url="assets/doc7/Medibank_Logo.png" x="-100" y="170" scale="0.4" />
+				<Image url="assets/doc7/Flybuys_Logo.png" x="100" y="170" scale="0.4" />
+			</slide>
+			
+			<slide type="splash_text" duration="4000" animateOff="none" >
+				<Image url="assets/doc7/Shoes.png" scale="1" />
+				<text textScale="0.85">MEDIBANK HAS PARTNERED WITH FLYBUYS
+TO REWARD MEMBERS FOR BEING ACTIVE.</text>
+			</slide>
+			<slide type="splash_text" duration="4000" animateOn="none" >
+				<Image url="assets/doc7/Shoes.png" scale="1" />
+				<text textScale="0.85">BY USING A FITBIT, MEMBERS WILL BE ABLE
+TO EARN FLYBUYS POINTS WHENEVER
+THEY REACH A DAILY 10,000 STEP GOAL.</text>
+			</slide>
+			
+			<slide type="flip_number" duration="10000">
+				<graphstate value="10000" featuredText="Steps every day." topText="Healthy adults are recommended to take at least" />		
+				<graphstate value="10" featuredText="Flybuys points." topText="For every 10,000 steps members can earn" />		
+			</slide>	
+			
+			<slide type="hotspot">
+				<Background>
+					<Image url="assets/doc7/map.png" scale="0.5" />
+				</Background>
+				<hotspotColor>#2c5697</hotspotColor>
+				
+				<intro>
+					<explanationText>Here at Medibank, to live our ‘For Better Health’ 
+purpose, we are embracing a healthier way of 
+working that will help us to be more collaborative 
+and productive… All part of Generation Better.</explanationText>
+				</intro>
+
+				<disclaimer>Steps shown are approximate
+distances based on an
+average male step.</disclaimer>
+				
+				<hotspot x="-852" y="-45" dir="dr">
+					<Title>Medibank Icehouse</Title>
+					<Text>[b]2493 Steps[/b]
+105 Pearl River Rd, Docklands</Text>
+				</hotspot>				
+				<hotspot x="-482" y="314" dir="dr">
+					<Title>Docklands Park</Title>
+					<Text>[b]525 Steps[/b]
+Corner Harbour Esplanade and Bourke St Docklands</Text>
+				</hotspot>
+				<hotspot x="-378" y="262" dir="dr">
+					<Title>YMCA Docklands</Title>
+					<Text>[b]549 Steps[/b]
+4/100 Harbour Esplanade, Docklands</Text>
+				</hotspot>
+				<hotspot x="-378" y="160" dir="dr">
+					<Title>Etihad Stadium</Title>
+					<Text>[b]131 Steps[/b]
+740 Bourke Street, Docklands</Text>
+				</hotspot>
+				<hotspot x="-186" y="160" dir="ur">
+					<Title>Southern Cross Station</Title>
+					<Text>[b]722 Steps[/b]
+Corner of Bourke St and Spencer St, Docklands</Text>
+				</hotspot>
+				<hotspot x="-122" y="-96" dir="ul">
+					<Title>Flagstaff Gardens</Title>
+					<Text>[b]2231 Steps[/b]
+West Melbourne</Text>
+				</hotspot>
+				<hotspot x="288" y="-160" dir="ur">
+					<Title>State Library of Victoria</Title>
+					<Text>[b]3018 Steps[/b]
+328 Swanston St, Melbourne</Text>
+				</hotspot>
+				<hotspot x="390" y="211" dir="ur">
+					<Title>Flinders Street Station</Title>
+					<Text>[b]3018 Steps[/b]
+Corner of Swanston St & Flinders St</Text>
+				</hotspot>
+				<hotspot x="851" y="44" dir="dl">
+					<Title>Fitzroy Gardens</Title>
+					<Text>[b]3973 Steps[/b]
+East Melbourne</Text>
+				</hotspot>
+				
+
+				
+			</slide>
+			
+		</Infographic>
+	</Screen>
 	
 	<Screen id="prof9" type="Infographic">
 		<Colour>#009ca6</Colour>
@@ -82,6 +230,7 @@ In fact, the triage, health advice and referral service results in 60,000 fewer 
 				<Background>
 					<Image url="assets/prof9/Building.png" scale="1.44" />
 				</Background>
+				<hotspotColor>#76b82a</hotspotColor>
 				
 				<intro>
 					<explanationText>Here at Medibank, to live our ‘For Better Health’ 
@@ -120,26 +269,6 @@ and productive… All part of Generation Better.</explanationText>
 				
 			</slide>
 			
-			<!-- 
-			<slide type="center_text_box">
-				<appearance textColor="#ff9330" backgroundColor="#ff9330" boxColor="#FFFFFF"></appearance>
-				<featuredText>Accessing specialist care in regional Australia presents many challenges for GPs and their patients.</featuredText>
-			</slide>
-			<slide type="center_text_box">
-				<appearance textColor="#ff9330" backgroundColor="#ff9330" boxColor="#FFFFFF"></appearance>
-				<featuredText>Many patients have to travel more than 200km to see a specialist, not to mention the associated costs. Some choose to miss out on care altogether.</featuredText>
-			</slide>
-			<slide type="center_text_box">
-				<appearance textColor="#FFFFFF" backgroundColor="#ff9330" boxColor="#E4002B"></appearance>
-				<featuredText>That was before Anywhere Healthcare – Australia’s largest panel of online specialists that connects patients with specialists via video.</featuredText>
-			</slide>	
-			<slide type="center_text_box">
-				<appearance textColor="#FFFFFF" backgroundColor="#E4002B" boxColor="#ff9330"></appearance>
-				<featuredText>Anywhere Healthcare improves access to specialist care in regional and remote Australia.</featuredText>
-			</slide>
-			<slide type="people_graph">
-			</slide>		
-			-->
 		</Infographic>
 		
 		

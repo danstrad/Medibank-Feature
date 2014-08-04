@@ -59,6 +59,7 @@ package {
 		public function Main() {
 			scaleX = scaleY = 0.4;
 			
+			TextUtils.createTextFormats();
 			new _FontDump();
 			
 			handles = new Vector.<Handle>();

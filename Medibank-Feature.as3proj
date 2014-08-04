@@ -58,6 +58,9 @@
     <element path="..\Medibank-Core\lib\InfographicBoxes.swc" />
     <element path="..\Medibank-Core\lib\PeopleGraph.swc" />
     <element path="..\Medibank-Core\lib\Hotspots.swc" />
+    <element path="..\Medibank-Core\lib\FlipNumber.swc" />
+    <element path="..\Medibank-Core\lib\TimeDials.swc" />
+    <element path="..\Medibank-Core\lib\SpinNumber.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>

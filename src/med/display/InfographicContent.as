@@ -24,6 +24,12 @@ package med.display {
 			infographic.scaleX = infographic.scaleY = scale;
 			
 		}
+		
+		override public function animate(dTime:Number):void {
+			super.animate(dTime);
+			
+			infographic.animate(dTime);
+		}
 
 	}
 

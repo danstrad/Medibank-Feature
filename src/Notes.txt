@@ -3,3 +3,21 @@ Rate submit button
 Multiple videos scrollable up/down
 
 Better header transitions
+
+
+
+
+
+add <BoxColors> to chapter XML in boxes
+
+
+art1:
+	Italics
+	Add in people dots (and stuff after)
+
+doc7:
+	Background images for first slides - Too low res?
+	add Video slide if footage suitable
+	drop shadow needed?
+	
+prof9: Complete
