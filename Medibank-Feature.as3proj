@@ -61,6 +61,14 @@
     <element path="..\Medibank-Core\lib\FlipNumber.swc" />
     <element path="..\Medibank-Core\lib\TimeDials.swc" />
     <element path="..\Medibank-Core\lib\SpinNumber.swc" />
+    <element path="..\Medibank-Core\lib\Pick3.swc" />
+    <element path="..\Medibank-Core\lib\boxes.swc" />
+    <element path="..\Medibank-Core\lib\ChapterSummary.swc" />
+    <element path="..\Medibank-Core\lib\Clock.swc" />
+    <element path="..\Medibank-Core\lib\DualBarGraph.swc" />
+    <element path="..\Medibank-Core\lib\FloatingBoxes.swc" />
+    <element path="..\Medibank-Core\lib\PieGraph.swc" />
+    <element path="..\Medibank-Core\lib\SlidingTags.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>

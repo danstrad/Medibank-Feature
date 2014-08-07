@@ -81,12 +81,6 @@ In fact, the triage, health advice and referral service results in 60,000 fewer 
 		
 		<Infographic id="info1">
 
-			<!-- 
-			<slide type="splash_text" duration="4000">
-				<text>IS IT TIME
-TO UNPLUG?</text>
-			</slide>
-			 -->
 			<slide type="time_dials">
 				<title>How many hours a day do you use a screen?</title>
 				<subtitle>Drag the hands to show your usage</subtitle>
@@ -116,7 +110,46 @@ NINE HOURS A DAY LOOKING AT SCREENS.</text>
 				<text textScale="0.85">AUSTRALIAN ADULTS ARE SPENDING MORE TIME
 IN FRONT OF SCREENS THAN SLEEPING.</text>
 			</slide>
+			<!-- Add people graphs -->
+			<slide type="pick3_input">
+				<title>What would you do instead?</title>
+				<subtitle>Tap three options</subtitle>
+				<optionColor>#744785</optionColor>
+				<selectedOptionColor>#B0018D</selectedOptionColor>
+				
+				<option id="A" text="Ride a bike" />
+				<option id="B" text="Time with the family" />
+				<option id="C" text="Go for a walk" />
+				<option id="D" text="Shop" />
+				<option id="E" text="A hobby" />
+				<option id="F" text="Call or visit a friend" />
+				<option id="G" text="Cook" />
+				<option id="H" text="Read a book" />
+				<option id="I" text="Sleeping" />
+				<option id="J" text="Go for a run" />
+				<option id="K" text="Go for a drive" />
+				<option id="L" text="Clean the house" />
+			</slide>
+			<slide type="pick3_results">
+				<title>How you compare</title>
+				<optionColor1>#744686</optionColor1>
+				<optionColor2>#845b94</optionColor2>
+				<selectedOptionColor>#B0018D</selectedOptionColor>
 
+				<bar id="A" text="Cycling" value="0.3333333333333333" />
+				<bar id="B" text="Family time" value="0.4219931271477663" />
+				<bar id="C" text="Walking" value="0.511340206185567" />				
+				<bar id="G" text="Cooking" value="0.888659793814433" />
+				<bar id="F" text="Socialising" value="1" />
+				<bar id="D" text="Shopping" value="0.888659793814433" />				
+				<bar id="H" text="Reading" value="0.6666666666666667" />
+				<bar id="E" text="Hobbies" value="0.4446735395189003" />
+				<bar id="I" text="Sleeping" value="0.3333333333333333" />
+				<bar id="K" text="Drive" value="0.2701030927835052" />
+				<bar id="L" text="House-keeping" value="0.4446735395189003" />
+				<bar id="J" text="Run" value="0.3333333333333333" />
+			</slide>
+			
 		</Infographic>
 	</Screen>	
 	
