@@ -39,7 +39,6 @@
       <path-element>C:\Program Files (x86)\FlashDevelop\Library\AS3\classes</path-element>
     </source-path>
     <library-path append="true">
-<<<<<<< HEAD
       <path-element>C:\Users\Cuuble\Documents\GitHub\Medibank-Feature\lib\SwipeScreens.swc</path-element>
       <path-element>C:\Users\Cuuble\Documents\GitHub\Medibank-Core\lib\InfographicBoxes.swc</path-element>
       <path-element>C:\Users\Cuuble\Documents\GitHub\Medibank-Core\lib\PeopleGraph.swc</path-element>
@@ -56,24 +55,6 @@
       <path-element>C:\Users\Cuuble\Documents\GitHub\Medibank-Core\lib\PieGraph.swc</path-element>
       <path-element>C:\Users\Cuuble\Documents\GitHub\Medibank-Core\lib\SlidingTags.swc</path-element>
       <path-element>C:\Users\Cuuble\Documents\GitHub\Medibank-Core\lib\Timeline.swc</path-element>
-=======
-      <path-element>D:\GitHub\Medibank-Feature\lib\SwipeScreens.swc</path-element>
-      <path-element>D:\GitHub\Medibank-Core\lib\InfographicBoxes.swc</path-element>
-      <path-element>D:\GitHub\Medibank-Core\lib\PeopleGraph.swc</path-element>
-      <path-element>D:\GitHub\Medibank-Core\lib\Hotspots.swc</path-element>
-      <path-element>D:\GitHub\Medibank-Core\lib\FlipNumber.swc</path-element>
-      <path-element>D:\GitHub\Medibank-Core\lib\TimeDials.swc</path-element>
-      <path-element>D:\GitHub\Medibank-Core\lib\SpinNumber.swc</path-element>
-      <path-element>D:\GitHub\Medibank-Core\lib\Pick3.swc</path-element>
-      <path-element>D:\GitHub\Medibank-Core\lib\boxes.swc</path-element>
-      <path-element>D:\GitHub\Medibank-Core\lib\ChapterSummary.swc</path-element>
-      <path-element>D:\GitHub\Medibank-Core\lib\Clock.swc</path-element>
-      <path-element>D:\GitHub\Medibank-Core\lib\DualBarGraph.swc</path-element>
-      <path-element>D:\GitHub\Medibank-Core\lib\FloatingBoxes.swc</path-element>
-      <path-element>D:\GitHub\Medibank-Core\lib\PieGraph.swc</path-element>
-      <path-element>D:\GitHub\Medibank-Core\lib\SlidingTags.swc</path-element>
-      <path-element>D:\GitHub\Medibank-Core\lib\Timeline.swc</path-element>
->>>>>>> fd3de5c5b7e4bee8831e47c20a49cca8aa23637c
     </library-path>
   </compiler>
   <file-specs>
