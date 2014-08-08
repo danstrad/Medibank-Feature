@@ -1,6 +1,6 @@
 <SwipeScreensData>
 	
-	<ScreenSet>pong,rate1,prof9,doc7,art1,prof1</ScreenSet>
+	<ScreenSet>pong,rate1,prof9,doc7,art1,prof1,doc2,info4</ScreenSet>
 	
 	
 	<Screen id="pong" type="Pong">
@@ -76,10 +76,16 @@ In fact, the triage, health advice and referral service results in 60,000 fewer 
 	
 	<Screen id="art1" type="Infographic">
 		<Colour>#653279</Colour>
-		<Handle>REWARDING BETTER HEALTH WITH FLYBUYS AND MEDIBANK.</Handle>
+		<Handle>IS IT TIME TO UNPLUG?</Handle>
 		
-		<Infographic id="info1">
-
+		<Infographic id="art1_graphic">
+			<InfographicColors color1="#653279" color2="#FFFFFF" color3="#B0008E" />
+						
+			<slide type="splash_text" duration="4000" animateOff="none" >
+				<text textScale="0.85">IS IT TIME
+TO UNPLUG?</text>				
+			</slide>
+			
 			<slide type="time_dials">
 				<title>How many hours a day do you use a screen?</title>
 				<subtitle>Drag the hands to show your usage</subtitle>
@@ -109,7 +115,27 @@ NINE HOURS A DAY LOOKING AT SCREENS.</text>
 				<text textScale="0.85">AUSTRALIAN ADULTS ARE SPENDING MORE TIME
 IN FRONT OF SCREENS THAN SLEEPING.</text>
 			</slide>
-			<!-- Add people graphs -->
+						
+			<slide type="people_graph">
+				<appearance backgroundColor="1" boxColor="3" />
+				<graphstate value="60" featuredText="60" usePercentage="true" topText="" bottomText="More than 60% of 
+respondents with children 
+agreed that screen time 
+affects their family time, 
+and their family's health." />
+				<graphstate value="57" featuredText="57" usePercentage="true" topText="" bottomText="57% of these 
+want to cut back 
+on screen time." />
+				<graphstate value="20" featuredText="20" usePercentage="true" textOnRightEdge="true" topText="" bottomText="And one in five say that 
+if they weren't in front of 
+a screen they would be 
+involved in a physical 
+activity instead such as 
+going for a run, riding a 
+bike or going for a walk." />
+			</slide>	
+			
+			
 			<slide type="pick3_input">
 				<title>What would you do instead?</title>
 				<subtitle>Tap three options</subtitle>
@@ -149,15 +175,172 @@ IN FRONT OF SCREENS THAN SLEEPING.</text>
 				<bar id="J" text="Run" value="0.3333333333333333" />
 			</slide>
 			
+			<slide type="splash_text" duration="4000" animateOff="none" >
+				<text textScale="0.85">HOW DOES THIS IMPACT OUR HEALTH</text>
+			</slide>			
+			
+			<slide type="floating_boxes"> 
+				<appearance textColor="2" backgroundColor="1" boxColor="3"/>
+				<featuredText>For this study, 1505 Australians were
+asked about their views on screen usage
+and its impact on health.</featuredText>	
+				<box largeBox="true" topText="A clear conclusion has been found: people suspect there is something concerning about the amount of time they spend in front of screens, but they are uncertain about exactly what the health impact is." />	
+				<box largeBox="true" topText="There is uncertainty about health risks. While 62% of respondents know that reduced physical activity is a consequence of too much screen time, almost half of those surveyed failed to recognise the likelihood of other health risks, which include obesity, attention difficulty, low self-esteem and depression." />
+				<box largeBox="true" topText="“Much greater community education is needed around what are safe levels of screen time and more programs are needed to encourage people to unplug and get involved in other recreational activities.”
+
+Dr Ian Boyd, Medibank" />
+				<box largeBox="true" topText="“The benefits of unplugging and spending more time being active are clear for both adults and children, and we need to be encouraging this before people accept our over-use of screens as the norm.”
+
+Dr Ian Boyd, Medibank"/>			
+			</slide>
+				
 		</Infographic>
 	</Screen>	
+	
+	
+
+	<Screen id="doc2" type="Infographic">
+		<Colour>#2C5697</Colour>
+		<Handle>MEETING THE MENTAL HEALTH CHALLENGE</Handle>
+		
+		<Infographic id="doc2_graphic">
+			<InfographicColors color1="#2C5697" color2="#FFFFFF" color3="#00A3E0" />
+						
+			<slide type="splash_text" duration="4000" animateOff="none" >
+				<text textScale="0.85">MEETING THE MENTAL HEALTH CHALLENGE</text>
+				<!-- todo: requires beyondblue logo -->
+			</slide>			
+			
+			<slide type="people_graph">
+				<appearance backgroundColor="1" boxColor="3" />
+				<graphstate value="20" featuredText="1 in 5" usePercentage="false" textOnRightEdge="true" topText="" bottomText="Every year, more than 
+one in five Australians
+experiences a mental 
+illness." />
+				<graphstate value="50" featuredText="50" usePercentage="true" topText="" bottomText="Almost half the Australian
+population will experience a
+mental illness at some point 
+in their life." />
+			</slide>
+			<slide type="flip_number">
+				<appearance backgroundColor="1" />
+				<graphstate value="1000000" featuredText="Australian adults will experience depression." topText="In any one year, about" />	
+				<graphstate value="2000000" featuredText="Australian adults will suffer from anxiety." topText="In any one year, about" />	
+			</slide>	
+			<slide type="floating_boxes">
+				<appearance textColor="2" backgroundColor="1" boxColor="3"/>
+				<featuredText></featuredText>	
+				<box value="6" text="Australians take their own life every day. Almost double the national road toll." />
+				<box topText="Suicide is Australia's biggest health crisis for people between 15 and 44." />
+			</slide>	
+			<slide type="spin_number">
+				<appearance textColor="2" backgroundColor="1" boxColor="3"/>
+				<graphstate value="28600000000" featuredText="Cost every year to support people with a mental illness in Australia, not including indirect costs like lost productivity." />	
+			</slide>
+			<slide type="splash_text" duration="4000" animateOff="none" >
+				<text textScale="0.85">MENTAL HEALTH IS AN ISSUE CLOSE 
+TO THE HEART OF MEDIBANK.</text>
+			</slide>
+			<slide type="splash_text" duration="4000" animateOff="none" >
+				<text textScale="0.85">AND WE BELIEVE AUSTRALIA HAS AN
+UNPRECEDENTED OPPORTUNITY
+TO MEET THE MENTAL HEALTH CHALLENGE</text>
+			</slide>
+			
+			<!-- todo: beyondblue footage with popups -->
+			
+			<!-- todo: lowercase slide needed: 
+We also partner with like-minded organisations
+such as [i]beyondblue[/i] to influence mental health
+policy and reform, and ultimately provide better care
+and life outcomes for all Australians.
+			-->
+			
+		</Infographic>
+
+	</Screen>
+	
+	
+	<Screen id="info4" type="Infographic">
+		<Colour>#00A3E0</Colour>
+		<Handle>MEDIBANK COMMUNITY FUND</Handle>
+		
+		<Infographic id="info4_graphic">
+			<InfographicColors color1="#00A3E0" color2="#FFFFFF" color3="#2C5697" />
+						
+			<slide type="splash_text" duration="4000" animateOff="none" >
+				<text textScale="0.85">MEDIBANK 
+COMMUNITY FUND.</text>
+			</slide>	
+			
+			<!-- todo: image slide? video? missing illustrator file with possible explanation -->
+			
+			<slide type="sliding_tags" duration="7000">
+				<appearance textColor="2" backgroundColor="1" boxColor="3"/>
+				<featuredText>We link people to programs
+and activities that encourage:</featuredText>			
+				<tag size="large" startLeft="true">
+					<tagstate text="Healthy eating" />				
+				</tag>	
+				<tag size="medium" startLeft="false">
+					<tagstate text="Mental and physical activity" />				
+				</tag>	
+				<tag size="small" startLeft="true">
+					<tagstate text="Community connectedness" />				
+				</tag>	
+			</slide>
+			<slide type="splash_text" duration="4000" animateOff="none" >
+				<text textScale="0.85">HELPING THROUGH FUNDING.</text>
+			</slide>	
+			<slide type="spin_number">
+				<appearance textColor="2" backgroundColor="1" boxColor="3"/>
+				<graphstate value="600000" featuredText="In grants to 51 grassroots projects" />	
+				<graphstate value="1000000" featuredText="Invested in health and 
+wellbeing partnerships" />
+				<graphstate value="100000" featuredText="In disaster relief though 
+Australia Red Cross" />	
+				<graphstate value="100000" featuredText="Towards improving indigenous 
+health and wellbeing" />	
+			</slide>
+			<slide type="splash_text" duration="4000" animateOff="none" >
+				<text textScale="0.85">HELPING THROUGH PARTICIPATION.</text>
+			</slide>
+			
+			<!-- todo: some some of image or video goes here?? -->
+			
+			<slide type="clock">
+				<appearance clockTextColor="3" />
+				<clockText>1067</clockText>
+				<featuredText>Hours of employee volunteering.</featuredText>
+			</slide>
+			<slide type="people_graph">
+				<appearance backgroundColor="1" boxColor="3" />
+				<graphstate value="33" featuredText="1 in 3" usePercentage="false" topText="" bottomText="Australians 
+participated 
+in RU OK day." />
+			</slide>	
+			<slide type="floating_boxes">
+				<appearance textColor="2" backgroundColor="1" boxColor="3"/>
+				<featuredText></featuredText>	
+				<box value="68580" text="Participants in partner healthy living programs." />
+				<box value="200" text="Students involved in learning opportunities." />				
+			</slide>
+					
+			<!-- todo: another lowercase, top-aligned splash screen
+Every aspect of the Medibank Community Fund
+approach is concerned with boosting long term 
+community health and wellbeing outcomes.		
+			-->
+			
+		</Infographic>	
+	</Screen>
 	
 	
 	<Screen id="doc7" type="Infographic">
 		<Colour>#00a3e0</Colour>
 		<Handle>REWARDING BETTER HEALTH WITH FLYBUYS AND MEDIBANK.</Handle>
 		
-		<Infographic id="info1">
+		<Infographic id="doc7_graphic">
 			
 			<slide type="splash_text" duration="4000">
 				<text>REWARDING BETTER HEALTH
@@ -178,7 +361,7 @@ TO EARN FLYBUYS POINTS WHENEVER
 THEY REACH A DAILY 10,000 STEP GOAL.</text>
 			</slide>
 			
-			<slide type="flip_number" duration="10000">
+			<slide type="flip_number">
 				<graphstate value="10000" featuredText="Steps every day." topText="Healthy adults are recommended to take at least" />		
 				<graphstate value="10" featuredText="Flybuys points." topText="For every 10,000 steps members can earn" />		
 			</slide>	
@@ -255,9 +438,16 @@ East Melbourne</Text>
 	
 	<Screen id="prof9" type="Infographic">
 		<Colour>#009ca6</Colour>
-		<Handle>IS IT TIME TO UNPLUG</Handle>
+		<Handle>A HEALTHIER WAY OF WORKING</Handle>
 		
-		<Infographic id="info1">
+		<Infographic id="prof9_info">
+			<InfographicColors color1="#009ca6" color2="#FFFFFF" color3="#76b82a" />
+						
+			<slide type="splash_text" duration="4000" animateOff="none" >
+				<text textScale="0.85">WE'RE EMBRACING 
+A HEALTHIER WAY OF WORKING.</text>
+			</slide>		
+			
 			<slide type="hotspot">
 				<Background>
 					<Image url="assets/prof9/Building.png" scale="1.44" />
