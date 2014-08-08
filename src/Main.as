@@ -72,7 +72,7 @@ package {
 			xmlLoader = new URLLoader();
 			xmlLoader.addEventListener(Event.COMPLETE, handleXMLLoaded);
 			xmlLoader.load(new URLRequest("FeatureData.XML"));
-
+			
 			CONFIG::release {
 				addEventListener(MouseEvent.CLICK, handleFullScreenClick);
 			}

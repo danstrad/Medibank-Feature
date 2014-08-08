@@ -31,3 +31,5 @@ Screensaver
 dragging arrows
 color changing
 handle opacity when idle
+
+Todos in xml. Missing images(video) in info4, left aligned splash

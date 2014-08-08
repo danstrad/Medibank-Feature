@@ -313,19 +313,21 @@ and productive… All part of Generation Better.</explanationText>
 		
 		<Infographic id="prof1 infographic">
 			
-			<slide type="video" duration="16000">
-				<video url="assets/prof1/MVI_0017.MOV" scale="0.74" />
+			<slide type="video" duration="20000">
+				<video url="assets/prof1/MVI_0017.MOV" scale="0.63" />
 				<textstate duration="4000">
 					<text type="splash">MEET LEITH.
 MEDIBANK NURSE.</text>
 				</textstate>
 				<textstate duration="4000">
-					<text type="pop" position="left">Leith is a registered nurse with more than 25 years’ experience.</text>
+					<!-- originally left, but covers her face -->
+					<text type="pop" position="right" size="medium">Leith is a registered nurse with more than 25 years’ experience.</text>
 				</textstate>
 				<textstate duration="4000">
-					<text type="pop" position="topLeft">One of 2,500 health professionals employed by Medibank.</text>
+					<!-- originally topleft, but covers her face -->
+					<text type="pop" position="topRight">One of 2,500 health professionals employed by Medibank.</text>
 				</textstate>
-				<textstate duration="4000">
+				<textstate duration="7500">
 					<text type="edge" position="bottom">As part of the nation’s largest telephone triage, health advice and referral service, Leith assesses callers based on their symptoms before providing advice and recommendations on what care they need.</text>
 				</textstate>				
 			</slide>
@@ -341,7 +343,7 @@ Leith works from home as part of our
 work@home model.</text>
 			</slide>
 			<slide type="video">
-				<video url="assets/prof1/MVI_0038.MOV" scale="0.74" />
+				<video url="assets/prof1/MVI_0038.MOV" scale="0.63" />
 				<textstate>
 					<text type="pop" position="right">5,000 fewer ambulance callouts.</text>
 					<text type="pop" position="left">Every year, the service results in 60,000 fewer emergency department visits.</text>

@@ -70,6 +70,7 @@
     <element path="..\Medibank-Core\lib\PieGraph.swc" />
     <element path="..\Medibank-Core\lib\SlidingTags.swc" />
     <element path="..\Medibank-Core\lib\Timeline.swc" />
+    <element path="..\Medibank-Core\lib\VideoSlide.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>

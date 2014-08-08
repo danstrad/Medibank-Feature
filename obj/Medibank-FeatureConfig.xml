@@ -56,6 +56,7 @@
       <path-element>D:\GitHub\Medibank-Core\lib\PieGraph.swc</path-element>
       <path-element>D:\GitHub\Medibank-Core\lib\SlidingTags.swc</path-element>
       <path-element>D:\GitHub\Medibank-Core\lib\Timeline.swc</path-element>
+      <path-element>D:\GitHub\Medibank-Core\lib\VideoSlide.swc</path-element>
     </library-path>
   </compiler>
   <file-specs>
