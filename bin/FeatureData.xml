@@ -1,7 +1,6 @@
 <SwipeScreensData>
 	
-	<ScreenSet>pong,prof9,doc7,art1</ScreenSet>
-	<ScreenSet>pong,rate1,vid1,graph1</ScreenSet>
+	<ScreenSet>pong,rate1,prof9,doc7,art1,prof1</ScreenSet>
 	
 	
 	<Screen id="pong" type="Pong">
@@ -302,6 +301,54 @@ and productive… All part of Generation Better.</explanationText>
 				
 			</slide>
 			
+		</Infographic>
+		
+		
+	</Screen>
+
+	
+	<Screen id="prof1" type="Infographic">
+		<Colour>#009ca6</Colour>
+		<Handle>MEET LEITH</Handle>
+		
+		<Infographic id="prof1 infographic">
+			
+			<slide type="video" duration="16000">
+				<video url="assets/prof1/MVI_0017.MOV" scale="0.74" />
+				<textstate duration="4000">
+					<text type="splash">MEET LEITH.
+MEDIBANK NURSE.</text>
+				</textstate>
+				<textstate duration="4000">
+					<text type="pop" position="left">Leith is a registered nurse with more than 25 years’ experience.</text>
+				</textstate>
+				<textstate duration="4000">
+					<text type="pop" position="topLeft">One of 2,500 health professionals employed by Medibank.</text>
+				</textstate>
+				<textstate duration="4000">
+					<text type="edge" position="bottom">As part of the nation’s largest telephone triage, health advice and referral service, Leith assesses callers based on their symptoms before providing advice and recommendations on what care they need.</text>
+				</textstate>				
+			</slide>
+			<slide type="splash_text" duration="4000" animateOn="none" animateOff="wipe" >
+				<!-- Add a background color independent of Background, so it can be wiped -->
+				<text textScale="0.85">JUST ONE TELEHEALTH NURSE CAN
+SUPPORT 6,000 PATIENTS EACH YEAR.</text>
+			</slide>
+			<slide type="splash_text" duration="4000" animateOn="none" animateOff="none" >
+				<!-- left aligned. animate on from left -->
+				<text textScale="0.85">Like 85% of Medibank’s nurse workforce,
+Leith works from home as part of our
+work@home model.</text>
+			</slide>
+			<slide type="video">
+				<video url="assets/prof1/MVI_0038.MOV" scale="0.74" />
+				<textstate>
+					<text type="pop" position="right">5,000 fewer ambulance callouts.</text>
+					<text type="pop" position="left">Every year, the service results in 60,000 fewer emergency department visits.</text>
+					<text type="pop" position="bottomRight">And savings of almost $30 million in public healthcare costs.</text>
+				</textstate>				
+			</slide>
+			 
 		</Infographic>
 		
 		

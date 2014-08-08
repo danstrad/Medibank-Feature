@@ -10,13 +10,23 @@ package med.display {
 		
 		/*
 		 * Default Infographic size is 1024 x 576
+		 * 
+		 * Window size for Content is 2458 - 399 x 1607 (2059 x 1607)
+		 * 
+		 * Infographic scaling to map default size to the window (with letterboxing) = 2.0107421875
+		 * Unscaled height including letterboxing = 799.2073822243808
+		 * 
+		 * scale of a 1088 video = 0.7345656086621147
+		 * scale of a 1080 video = 0.7400068353929452
 		 */
 		
 		public function InfographicContent(color:uint, infographicData:InfographicData) {
 			super(color);
 			this.infographicData = infographicData;
 			
-			infographic = new Infographic(infographicData, background);
+			var colors:Vector.<uint> = new Vector.<uint>();
+			
+			infographic = new Infographic(infographicData, background, colors);
 			addChild(infographic);
 			infographic.x = WIDTH / 2;
 			infographic.y = HEIGHT / 2;

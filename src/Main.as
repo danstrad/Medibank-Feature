@@ -33,8 +33,6 @@ package {
 		// 0.7060167387913802
 		// 40% = 1143, 643
 
-		public static var NUM_HANDLES:int;
-		
 		protected var xmlLoader:URLLoader;
 		protected var loadedXML:XML;
 		
@@ -52,6 +50,8 @@ package {
 		protected var dragFlickDistance:Number;
 		protected var dragMomentum:Number;
 		protected var dragTime:Number;
+
+		protected var currentContent:Content;
 		
 		private var contentLayer:Sprite;
 		private var handlesLayer:Sprite;
@@ -71,7 +71,7 @@ package {
 			
 			xmlLoader = new URLLoader();
 			xmlLoader.addEventListener(Event.COMPLETE, handleXMLLoaded);
-			xmlLoader.load(new URLRequest("SwipeScreensData.XML"));
+			xmlLoader.load(new URLRequest("FeatureData.XML"));
 
 			CONFIG::release {
 				addEventListener(MouseEvent.CLICK, handleFullScreenClick);
@@ -106,13 +106,23 @@ package {
 		
 		protected function handleMouseDown(event:MouseEvent):void {
 			var handle:Handle = event.target as Handle;
-			if (!handle) return;
+			if (!handle || !handle.draggable) return;
 
 			dragging = true;
 			dragHandle = handle;
 			dragPoint = new Point(mouseX, mouseY);
 			dragMomentum = 0;
 			dragTime = getTimer();
+
+			handle.contentLeft = handle.willBeLeft;// left;
+			handle.content.visible = true;
+			handle.showDragDirection();
+			if (handle.contentLeft) {
+				if (handle.prev) handle.prev.content.visible = false;				
+			} else {
+				if (handle.next) handle.next.content.visible = false;
+			}
+			updateContentMasking();
 			
 			stage.addEventListener(MouseEvent.MOUSE_MOVE, handleMouseMove);
 			stage.addEventListener(MouseEvent.MOUSE_UP, handleMouseUp);
@@ -129,13 +139,15 @@ package {
 			
 			dragHandle.x += dx;
 			clampHandlePositions();
-			updateContentVisibility();
+			updateContentMasking();
 		}	
 
 		protected function handleMouseUp(event:MouseEvent):void {
 			stage.removeEventListener(MouseEvent.MOUSE_MOVE, handleMouseMove);
 			stage.removeEventListener(MouseEvent.MOUSE_UP, handleMouseUp);
 
+			dragHandle.clearDragDirection();
+			
 			dragging = false;
 			const weight:Number = 1;//0.8;
 			dragFlickDistance = dragMomentum * weight;
@@ -143,40 +155,44 @@ package {
 			dragTime = getTimer();
 			
 			var suckRight:Boolean = (dragHandle.x + dragFlickDistance) > (WIDTH - Handle.WIDTH) / 2;
-			elasticizeDragHandle(suckRight);
+			elasticizeDragHandle(dragHandle, suckRight);
+
+			dragHandle = null;
 		}
 		
-		protected function elasticizeDragHandle(suckRight:Boolean):void {
+		protected function elasticizeDragHandle(handle:Handle, suckRight:Boolean):void {
 			var h:Handle;
-			if (dragHandle) {
-				//var suckRight:Boolean = (dragHandle.x > (WIDTH - Handle.WIDTH) / 2);
+			if (handle) {
+				//var suckRight:Boolean = (handle.x > (WIDTH - Handle.WIDTH) / 2);
 				if (suckRight) {
-					if (dragHandle.left) {
-						dragHandle.homeX = WIDTH - Handle.WIDTH - dragHandle.nextCount * Handle.WIDTH;
-						dragHandle.willBeLeft = false;
-						dragHandle.willBeVisible = false;
-						for (h = dragHandle.next; h != null; h = h.next) {
+					if (handle.left) {
+						handle.homeX = WIDTH - Handle.WIDTH - handle.nextCount * Handle.WIDTH;
+						handle.willBeLeft = false;
+						for (h = handle.next; h != null; h = h.next) {
 							h.homeX = WIDTH - Handle.WIDTH - h.nextCount * Handle.WIDTH;
 							h.willBeLeft = false;
-							//h.willBeVisible = true;
 						}
 					}
 				} else {
-					if (!dragHandle.left) {
-						dragHandle.homeX = dragHandle.prevCount * Handle.WIDTH;
-						dragHandle.willBeLeft = true;
-						dragHandle.willBeVisible = false;
-						for (h = dragHandle.prev; h != null; h = h.prev) {
+					if (!handle.left) {
+						handle.homeX = handle.prevCount * Handle.WIDTH;
+						handle.willBeLeft = true;
+						for (h = handle.prev; h != null; h = h.prev) {
 							h.homeX = h.prevCount * Handle.WIDTH;
 							h.willBeLeft = true;
-							//h.willBeVisible = true;
 						}
 					}
 				}
 			}
-			dragHandle = null;
+			
+			if (handle.left != handle.willBeLeft) {
+				for each(h in handles) {
+					h.draggable = (h != handle);
+				}
+			}
+
 			clampHandlePositions();
-			updateContentVisibility();
+			updateContentMasking();
 		}
 		
 		
@@ -185,24 +201,6 @@ package {
 			var dTime:Number = time - lastFrameTime;
 			
 			lastFrameTime = time;
-			
-			/*
-			if (dragHandle) {
-				if (!dragging) {
-					var t:Number = time - dragTime;
-					var timeConstant:Number = 325;
-					var dx:Number = -dragFlickDistance * Math.exp( -t / timeConstant);
-					if (Math.abs(dx) > 25) {// 0.5) {
-						dragHandle.x = dragPoint.x + dragFlickDistance + dx;
-						clampHandlePositions();
-						updateContentVisibility();
-					} else {
-						elasticizeDragHandle();
-						dragHandle = null;
-					}
-				}
-			}
-			*/				
 			
 			animate(dTime);
 		}
@@ -223,19 +221,15 @@ package {
 				if (Math.abs(handle.x - handle.homeX) <= 1) {
 					handle.x = handle.homeX;
 					handle.left = handle.willBeLeft;
-					if (!handle.willBeVisible) {
-						handle.visible = handle.willBeVisible;
-						handle.willBeVisible = true;
-						for each(var h:Handle in handles) {
-							if (h != handle) h.visible = h.willBeVisible = true;
-						}
-					}
 				}
 			}
-			updateContentVisibility();
+			updateContentMasking();
 			
 			for each(handle in handles) {
-				if (handle.content.visible) handle.content.animate(dTime);
+				if (handle.content.visible) {
+					handle.content.animate(dTime);
+				}
+				//handle.draggable = (handle.content != currentContent);
 			}
 		}
 		
@@ -261,47 +255,52 @@ package {
 			}
 		}
 		
-		protected function updateContentVisibility():void {
+		protected function updateContentMasking():void {
 			for each (var h:Handle in handles) {
-				if (h.left) {
-					if (h.visible) {
-						showContentBetween(rightEdgeOfPrev(h), h.x, h.content);
-					} else {
-						showContentBetween(h.x, leftEdgeOfNext(h), h.content);
-					}
+				if (!h.content.visible) continue;
+				
+				if (h.contentLeft) {
+					showContentBetween(rightEdgeOfPrev(h), h.x, h.content);
 				} else {
-					if (h.visible) {
-						showContentBetween(h.x + Handle.WIDTH, leftEdgeOfNext(h), h.content);
-					} else {
-						showContentBetween(rightEdgeOfPrev(h), h.x + Handle.WIDTH, h.content);
-					}
-				}				
+					showContentBetween(h.x + Handle.WIDTH, leftEdgeOfNext(h), h.content);
+				}
 			}
 		}
 		
 		protected function rightEdgeOfPrev(h:Handle):Number {
 			var p:Handle = h.prev;
-			if (p && !p.visible) p = p.prev;
 			if (p) return p.x + Handle.WIDTH;
 			else return 0;
 		}
 		protected function leftEdgeOfNext(h:Handle):Number {
 			var n:Handle = h.next;
-			if (n && !n.visible) n = n.next;
 			if (n) return n.x;
 			else return WIDTH;
 		}
 		
 		protected function showContentBetween(l:Number, r:Number, content:Content):void {
 			content.x = l;
+
+			content.scrollRect = new Rectangle(0, 0, Math.ceil(r - l), HEIGHT);
+			/*
 			if ((r - l) >= 1) {
 				content.visible = true;
-				content.scrollRect = new Rectangle(0, 0, r - l, HEIGHT);
+				content.scrollRect = new Rectangle(0, 0, Math.ceil(r - l), HEIGHT);
 			} else {
 				content.visible = false;
 			}
+			*/
+			
 			content.full = ((r - l) >= (Content.WIDTH - 1));
+			if (content.full) currentContent = content;
 		}
+		
+		protected function broadcastHandleColor(source:Handle, time:Number):void {
+			source.animateColor(source.homeColor, time);			
+		}
+
+		
+		
 		
 		
 		static public function preloadImages(loadedXML:XML):void {
@@ -330,11 +329,11 @@ package {
 			for each(var screenXML:XML in loadedXML.Screen) {
 				id = screenXML.@id.toString();
 				screenData[id] = screenXML;
-			}			
+			}
 		}
 		
 		protected function readHandles(screenSet:Vector.<String>):void {
-			NUM_HANDLES = screenSet.length;
+			Handle.WIDTH = Handle.TOTAL_WIDTH / screenSet.length;
 			for each(var id:String in screenSet) {
 				var screenXML:XML = screenData[id];
 				
@@ -461,21 +460,24 @@ package {
 				handle.prevCount = i;
 				handle.nextCount = handles.length - i - 1;
 				handlesLayer.addChildAt(handle, 0);
+				handle.x = handle.homeX = i * Handle.WIDTH;
+				handle.left = handle.willBeLeft = true;
 				if (i == handles.length - 1) {
-					handle.x = handle.homeX = WIDTH - Handle.WIDTH;
-					handle.left = handle.willBeLeft = false;
-					handle.visible = handle.willBeVisible = false;
+					handle.draggable = false;
+					handle.contentLeft = false;
+					handle.content.visible = true;
+					broadcastHandleColor(handle, 0);
 				} else {
-					handle.x = handle.homeX = i * Handle.WIDTH;
-					handle.left = handle.willBeLeft = true;
-					handle.visible = handle.willBeVisible = true;
+					handle.draggable = true;
+					handle.contentLeft = true;
+					handle.content.visible = false;
 				}
 				contentLayer.addChild(handle.content);
 			}
 			clampHandlePositions();
-			updateContentVisibility();
+			updateContentMasking();
 		}
-
+		
 		protected function handleFullScreenClick(event:MouseEvent):void {
 			stage.displayState = StageDisplayState.FULL_SCREEN;
 			removeEventListener(MouseEvent.CLICK, handleFullScreenClick);

@@ -69,6 +69,7 @@
     <element path="..\Medibank-Core\lib\FloatingBoxes.swc" />
     <element path="..\Medibank-Core\lib\PieGraph.swc" />
     <element path="..\Medibank-Core\lib\SlidingTags.swc" />
+    <element path="..\Medibank-Core\lib\Timeline.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>
