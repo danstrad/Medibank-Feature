@@ -16,7 +16,21 @@ package med.display {
 			super(color);
 			this.infographicData = infographicData;
 			
-			infographic = new Infographic(infographicData, background);
+			var infographicColors:Vector.<uint> = new Vector.<uint>();
+			
+			if (infographicData.xml.hasOwnProperty("InfographicColors")) {
+				// get the colors from a tag at the infographic level (rather than at Chapter level in Medibank-Core)
+				infographicColors.push(uint(infographicData.xml.InfographicColors.@color1.toString().replace("#", "0x")));
+				infographicColors.push(uint(infographicData.xml.InfographicColors.@color2.toString().replace("#", "0x")));
+				infographicColors.push(uint(infographicData.xml.InfographicColors.@color3.toString().replace("#", "0x")));			
+			} else {
+				// default colors for fallback (red/vision)
+				infographicColors.push(0xe4002b);
+				infographicColors.push(0xFFFFFF);
+				infographicColors.push(0xEC4D6B);				
+			}			
+			
+			infographic = new Infographic(infographicData, background, infographicColors);
 			addChild(infographic);
 			infographic.x = WIDTH / 2;
 			infographic.y = HEIGHT / 2;
