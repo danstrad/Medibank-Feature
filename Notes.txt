@@ -5,10 +5,7 @@ Multiple videos scrollable up/down
 Better header transitions
 
 
-
-
-
-add <BoxColors> to chapter XML in boxes
+Make infographics stop/start based on whether the current story is fullscreen
 
 
 art1:
@@ -21,3 +18,16 @@ doc7:
 	drop shadow needed?
 	
 prof9: Complete
+
+
+
+
+
+Screensaver
+
+
+
+
+dragging arrows
+color changing
+handle opacity when idle
