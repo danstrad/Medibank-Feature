@@ -1,6 +1,6 @@
 <SwipeScreensData>
 	
-	<ScreenSet>pong,rate1,prof9,doc7,art1,prof1,doc2,info4</ScreenSet>
+	<ScreenSet>pong,rate1,prof9,doc7,art1,doc2,info4,prof1</ScreenSet>
 	
 	
 	<Screen id="pong" type="Pong">
@@ -373,10 +373,8 @@ THEY REACH A DAILY 10,000 STEP GOAL.</text>
 				<hotspotColor>#2c5697</hotspotColor>
 				
 				<intro>
-					<explanationText>Here at Medibank, to live our ‘For Better Health’ 
-purpose, we are embracing a healthier way of 
-working that will help us to be more collaborative 
-and productive… All part of Generation Better.</explanationText>
+					<splashText>USE THE MAP FOR IDEAS OF
+HOW TO BUILD UP YOUR STEPS.</splashText>
 				</intro>
 
 				<disclaimer>Steps shown are approximate
@@ -455,10 +453,10 @@ A HEALTHIER WAY OF WORKING.</text>
 				<hotspotColor>#76b82a</hotspotColor>
 				
 				<intro>
-					<explanationText>Here at Medibank, to live our ‘For Better Health’ 
+					<cornerText>Here at Medibank, to live our ‘For Better Health’ 
 purpose, we are embracing a healthier way of 
 working that will help us to be more collaborative 
-and productive… All part of Generation Better.</explanationText>
+and productive… All part of Generation Better.</cornerText>
 				</intro>
 				
 				<hotspot x="-222" y="-374" dir="dl">
@@ -502,9 +500,11 @@ and productive… All part of Generation Better.</explanationText>
 		<Handle>MEET LEITH</Handle>
 		
 		<Infographic id="prof1 infographic">
+			<InfographicColors color1="#76b82a" />
 			
-			<slide type="video" duration="20000">
+			<slide type="video" duration="19000" animateOff="box_wipe">
 				<video url="assets/prof1/MVI_0017.MOV" scale="0.63" />
+				<appearance boxColor="0" />
 				<textstate duration="4000">
 					<text type="splash">MEET LEITH.
 MEDIBANK NURSE.</text>
@@ -517,27 +517,28 @@ MEDIBANK NURSE.</text>
 					<!-- originally topleft, but covers her face -->
 					<text type="pop" position="topRight">One of 2,500 health professionals employed by Medibank.</text>
 				</textstate>
-				<textstate duration="7500">
-					<text type="edge" position="bottom">As part of the nation’s largest telephone triage, health advice and referral service, Leith assesses callers based on their symptoms before providing advice and recommendations on what care they need.</text>
+				<textstate>
+					<text type="bottom">As part of the nation’s largest telephone triage, health advice and referral service, Leith assesses callers based on their symptoms before providing advice and recommendations on what care they need.</text>
 				</textstate>				
 			</slide>
 			<slide type="splash_text" duration="4000" animateOn="none" animateOff="wipe" >
-				<!-- Add a background color independent of Background, so it can be wiped -->
+				<appearance backdropColor="0" />
 				<text textScale="0.85">JUST ONE TELEHEALTH NURSE CAN
 SUPPORT 6,000 PATIENTS EACH YEAR.</text>
 			</slide>
 			<slide type="splash_text" duration="4000" animateOn="none" animateOff="none" >
 				<!-- left aligned. animate on from left -->
-				<text textScale="0.85">Like 85% of Medibank’s nurse workforce,
+				<text type="corner">Like 85% of Medibank’s nurse workforce,
 Leith works from home as part of our
 work@home model.</text>
 			</slide>
 			<slide type="video">
 				<video url="assets/prof1/MVI_0038.MOV" scale="0.63" />
+				<appearance boxColor="0" />
 				<textstate>
-					<text type="pop" position="right">5,000 fewer ambulance callouts.</text>
-					<text type="pop" position="left">Every year, the service results in 60,000 fewer emergency department visits.</text>
-					<text type="pop" position="bottomRight">And savings of almost $30 million in public healthcare costs.</text>
+					<text type="pop" position="topright" size="small">5,000 fewer ambulance callouts.</text>
+					<text type="pop" position="left" size="medium">Every year, the service results in 60,000 fewer emergency department visits.</text>
+					<text type="pop" position="bottomRight" size="large">And savings of almost $30 million in public healthcare costs.</text>
 				</textstate>				
 			</slide>
 			 
