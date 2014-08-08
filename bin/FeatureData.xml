@@ -197,6 +197,7 @@ Dr Ian Boyd, Medibank"/>
 		</Infographic>
 	</Screen>	
 	
+	
 
 	<Screen id="doc2" type="Infographic">
 		<Colour>#653279</Colour>
@@ -206,9 +207,9 @@ Dr Ian Boyd, Medibank"/>
 			<InfographicColors color1="#00A3E0" color2="#FFFFFF" color3="#2C5697" />
 						
 		</Infographic>
-		
-		
+
 	</Screen>
+	
 	
 	
 	<Screen id="doc7" type="Infographic">
