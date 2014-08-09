@@ -1,6 +1,6 @@
 <SwipeScreensData>
 	
-	<ScreenSet>pong,rate1,prof9,doc7,art1,doc2,info4,prof1</ScreenSet>
+	<ScreenSet>vision, pong,rate1,prof9,doc7,art1,doc2,info4,prof1</ScreenSet>
 	
 	
 	<Screen id="pong" type="Pong">
@@ -72,6 +72,114 @@ In fact, the triage, health advice and referral service results in 60,000 fewer 
 	
 	
 
+	<Screen id="vision" type="Infographic">
+		<Colour>#e4002b</Colour>
+		<Handle>OUR VISION</Handle>
+		
+		<Infographic id="vision_graphic">
+			<InfographicColors color1="#e4002b" color2="#FFFFFF" color3="#EC4D6B" />
+						
+			<slide type="splash_text" duration="4000" animateOff="none" >
+				<text textScale="0.85">OUR VISION.</text>				
+			</slide>
+			
+			<slide type="video" duration="6000" animateOff="box_wipe">
+				<video url="assets/vision/Generation Better.mp4" scale="0.63" />
+				<appearance boxColor="0" />
+				<textstate duration="6000">
+					<text type="splash">HEALTH IS ONE OF THE BIGGEST
+CHALLENGES FACING AUSTRALIAN SOCIETY.</text>
+				</textstate>
+			</slide>
+			
+			<slide type="people_graph">
+				<appearance backgroundColor="1" boxColor="3" />
+				<graphstate value="63" featuredText="63" usePercentage="true" topText="" bottomText="We're getting bigger.
+Obesity rates in Australia 
+are climbing faster than 
+anywhere else in the world 
+and 63% of Australian 
+adults are now overweight." />
+				<graphstate value="14" featuredText="14.4" usePercentage="true" topText="" bottomText="We’re getting older. 
+By 2060, Australians
+aged 75 or more are 
+expected to account for 
+14.4% of the population 
+(up from 6.4% in 2012). " />
+				<graphstate value="90" featuredText="90" usePercentage="true" topText="" bottomText="We’re getting sicker. 
+Chronic disease is on 
+the rise, accounting for 
+90% of all deaths in 2011." />
+				<graphstate value="189" featuredText="189" usePercentage="true" topText="" bottomText="And to cope with all of these 
+issues, we’re spending up big. 
+Over the past decade, 
+government spending on 
+healthcare has skyrocketed and 
+is projected to increase by 189%
+by 2033, reflecting 12.4% of GDP." />  
+			</slide>			
+						
+			
+			<slide type="video" duration="6000" animateOff="box_wipe">
+				<video url="assets/vision/Generation Better.mp4" scale="0.63" />
+				<appearance boxColor="0" />
+				<textstate duration="6000">
+					<text type="splash">AT MEDIBANK, WE BELIEVE WE HAVE AN IMPORTANT
+ROLE TO PLAY IN MEETING THIS CHALLENGE, FROM
+PREVENTION THROUGH TO POLICY.</text>
+				</textstate>
+			</slide>
+			
+			
+			<slide type="floating_boxes">
+				<appearance boxColor="2" textColor="1" />
+				<featuredText>We are a leading health company. 
+And we stand for better health.</featuredText>	
+				<box topText="As well as being Australia’s largest health insurer, we also partner with government and other organisations to provide scalable, multi-channel healthcare services that reduce the burden on the public system while providing high quality, accessible care at an efficient cost. " />				
+				<box topText="At a policy level, we work with government to find long-term solutions to ensure all Australians and New Zealanders have access to healthcare. " />
+				<box topText="Better health is our business, and our purpose." />
+			</slide>
+			<slide type="timeline_number" duration="10000" markerFrequency="0" lineSpacing="22" alwaysShowYear="false">
+				<appearance backgroundColor="1" /> 
+				<featuredText>We've been on this journey for more than</featuredText>
+				<graphstate value="37" bottomText="years" featuredText="37" />		
+			</slide>
+			
+			<slide type="splash_text" duration="4000" animateOn="none" animateOff="none" >
+				<text type="corner">And today we provide an unmatched
+combination of health cover and healthcare
+services that deliver better health to millions
+of people in Australia and New Zealand.</text>
+			</slide>			
+			
+			<slide type="splash_text" duration="3000" animateOff="none" >
+				<text textScale="0.85">HOW DO WE DO IT?</text>				
+			</slide>
+			<slide type="chapter_summary" duration="9000">
+				<wipe color="#653179" text="BY SUPPORTING PEOPLE TO ACHIEVE BETTER HEALTH OUTCOMES." animation="Floating" source="right" />
+				<wipe color="#ff9330" text="BY CREATING BETTER HEALTHCARE CONNECTIONS." animation="Sprouting" source="bottom" />
+				<wipe color="#00a2e0" text="AND BY BUILDING AN EFFECTIVE HEALTHCARE SYSTEM" animation="Sliding" source="left" />
+			</slide>
+			<slide type="sliding_tags" duration="10000">
+				<appearance textColor="1" backgroundColor="1" boxColor="2"/>
+				<featuredText></featuredText>			
+				<tag size="large" startLeft="true">
+					<tagstate text="Better health is better for everyone--" />				
+				</tag>			
+				<tag size="small" startLeft="true">
+					<tagstate text="us," />		
+				</tag>
+				<tag size="medium" startLeft="false">
+					<tagstate text="our members," />			
+				</tag>			
+				<tag size="large" startLeft="true">
+					<tagstate text="and the whole community" />				
+				</tag>					
+			</slide>	
+			
+		</Infographic>
+	</Screen>
+	
 	
 	
 	<Screen id="art1" type="Infographic">
