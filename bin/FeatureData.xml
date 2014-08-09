@@ -184,12 +184,12 @@ bike or going for a walk." />
 				<featuredText>For this study, 1505 Australians were
 asked about their views on screen usage
 and its impact on health.</featuredText>	
-				<box largeBox="true" topText="A clear conclusion has been found: people suspect there is something concerning about the amount of time they spend in front of screens, but they are uncertain about exactly what the health impact is." />	
-				<box largeBox="true" topText="There is uncertainty about health risks. While 62% of respondents know that reduced physical activity is a consequence of too much screen time, almost half of those surveyed failed to recognise the likelihood of other health risks, which include obesity, attention difficulty, low self-esteem and depression." />
-				<box largeBox="true" topText="“Much greater community education is needed around what are safe levels of screen time and more programs are needed to encourage people to unplug and get involved in other recreational activities.”
+				<box topText="A clear conclusion has been found: people suspect there is something concerning about the amount of time they spend in front of screens, but they are uncertain about exactly what the health impact is." />	
+				<box topText="There is uncertainty about health risks. While 62% of respondents know that reduced physical activity is a consequence of too much screen time, almost half of those surveyed failed to recognise the likelihood of other health risks, which include obesity, attention difficulty, low self-esteem and depression." />
+				<box topText="“Much greater community education is needed around what are safe levels of screen time and more programs are needed to encourage people to unplug and get involved in other recreational activities.”
 
 Dr Ian Boyd, Medibank" />
-				<box largeBox="true" topText="“The benefits of unplugging and spending more time being active are clear for both adults and children, and we need to be encouraging this before people accept our over-use of screens as the norm.”
+				<box topText="“The benefits of unplugging and spending more time being active are clear for both adults and children, and we need to be encouraging this before people accept our over-use of screens as the norm.”
 
 Dr Ian Boyd, Medibank"/>			
 			</slide>
@@ -341,6 +341,7 @@ community health and wellbeing outcomes.
 		<Handle>REWARDING BETTER HEALTH WITH FLYBUYS AND MEDIBANK.</Handle>
 		
 		<Infographic id="doc7_graphic">
+			<InfographicColors color1="#00A3E0" color2="#FFFFFF" color3="#2C5697" />
 			
 			<slide type="splash_text" duration="4000">
 				<text>REWARDING BETTER HEALTH
@@ -362,6 +363,7 @@ THEY REACH A DAILY 10,000 STEP GOAL.</text>
 			</slide>
 			
 			<slide type="flip_number">
+				<appearance backgroundColor="1" />
 				<graphstate value="10000" featuredText="Steps every day." topText="Healthy adults are recommended to take at least" />		
 				<graphstate value="10" featuredText="Flybuys points." topText="For every 10,000 steps members can earn" />		
 			</slide>	
