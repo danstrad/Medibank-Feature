@@ -15,6 +15,8 @@ package med.display {
 
 		protected var background:Background;
 		
+		protected var paused:Boolean;
+		
 		public function Content(color:uint) {
 			
 			this.color = color;
@@ -26,6 +28,18 @@ package med.display {
 		}
 		
 		public function animate(dTime:Number):void {
+			
+		}
+		
+		public function pause():void {
+			paused = true;
+		}
+		
+		public function resume():void {
+			paused = false;
+		}
+		
+		public function reset():void {
 			
 		}
 		

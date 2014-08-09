@@ -24,15 +24,15 @@ prof9: Complete
 
 
 Screensaver
-
-
-
-
-dragging arrows
-color changing
-handle opacity when idle
-
 Todos in xml. Missing images(video) in info4, left aligned splash
-
 Vision
-video colors
+
+scrollRect is still flickering a little
+
+reset/pause all Content types
+
+dragHandle flickers colors when it arrives
+
+slight mvoe left while holding a handle (rounding on scrollrect?)
+
+if you close a content and then open it without releasing handle, it doesnt reappear

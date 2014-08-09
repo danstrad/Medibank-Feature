@@ -54,6 +54,28 @@ package med.display {
 			
 			infographic.animate(dTime);
 		}
+		
+		
+		
+		override public function pause():void {
+			if (paused) return;
+			paused = true;
+			
+			infographic.pauseMedia();
+		}
+		
+		override public function resume():void {
+			if (!paused) return;
+			paused = false;
+
+			infographic.resumeMedia();
+		}
+		
+		override public function reset():void {
+			super.reset();
+			
+			infographic.reset();
+		}
 
 	}
 

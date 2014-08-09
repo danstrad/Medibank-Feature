@@ -20,6 +20,12 @@ package med.display {
 		private var bg:Sprite;
 		
 		public var homeColor:uint;
+		protected var sourceColor:uint;
+		protected var targetColor:uint;
+		protected var currentColor:uint;
+		protected var colorAnimateTime:Number;
+		protected var totalColorAnimateTime:Number;
+		protected var animatingCT:ColorTransform;
 
 		public var prev:Handle;
 		public var next:Handle;
@@ -43,12 +49,14 @@ package med.display {
 		public function Handle(title:String, content:Content) {
 			this.content = content;
 			homeColor = content.color;
+			currentColor = homeColor;
+			animatingCT = new ColorTransform(0, 0, 0, 1);
 			
 			bg = new Sprite();
 			bg.graphics.beginFill(0xFFFFFF);
 			bg.graphics.drawRect(0, 0, WIDTH, HEIGHT);
 			addChildAt(bg, 0);
-			animateColor(homeColor, 0);
+			animateColorTo(homeColor, 0);
 						
 			prevCount = 0;
 			nextCount = 0;
@@ -78,13 +86,52 @@ package med.display {
 		}
 		
 		
-		public function animateColor(color:uint, time:Number):void {
+		public function animateColorTo(color:uint, time:Number):void {
+			if (color == targetColor) return;
+			targetColor = color;
+			sourceColor = currentColor;
+			
 			if (time > 0) {
-				TweenMax.to(bg, time / 1000, { colorTransform:{ tint:color, tintAmount:1 }, ease:Quad.easeOut } ) 
+				colorAnimateTime = totalColorAnimateTime = time;
+				//TweenMax.to(bg, time / 1000, { colorTransform:{ tint:color, tintAmount:1 }, ease:Quad.easeOut } ) 
 			} else {
-				var ct:ColorTransform = new ColorTransform(0, 0, 0, 1);
-				ct.color = color;
-				bg.transform.colorTransform = ct;
+				setColor(color);
+			}
+		}		
+		protected function setColor(color:uint):void {
+			currentColor = color;
+			animatingCT.color = color;
+			bg.transform.colorTransform = animatingCT;
+		}
+		
+		public function animateAlphaTo(alpha:Number, time:Number):void {
+			if (time > 0) {
+				TweenMax.to(titleField, time / 1000, { alpha:alpha, ease:Quad.easeOut } ) 
+			} else {
+				titleField.alpha = alpha;
+			}
+		}
+		
+		public function animate(dTime:Number):void {
+			if (colorAnimateTime > 0) {
+				colorAnimateTime = Math.max(0, colorAnimateTime - dTime);
+				if (colorAnimateTime == 0) {
+					setColor(targetColor);
+				} else {
+					var f:Number = (1 - colorAnimateTime / totalColorAnimateTime);
+					var eased:Number = Utils.easeOut(f);
+					var sourceR:uint = (sourceColor & 0xFF0000) >> 16;
+					var sourceG:uint = (sourceColor & 0xFF00) >> 8;
+					var sourceB:uint = (sourceColor & 0xFF);
+					var targetR:uint = (targetColor & 0xFF0000) >> 16;
+					var targetG:uint = (targetColor & 0xFF00) >> 8;
+					var targetB:uint = (targetColor & 0xFF);
+					var currentR:uint = uint(sourceR + (targetR - sourceR) * eased) << 16;
+					var currentG:uint = uint(sourceG + (targetG - sourceG) * eased) << 8;
+					var currentB:uint = uint(sourceB + (targetB - sourceB) * eased);
+					
+					setColor(currentR + currentG + currentB);
+				}
 			}
 		}
 		

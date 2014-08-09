@@ -306,7 +306,7 @@ health and wellbeing" />
 				<text textScale="0.85">HELPING THROUGH PARTICIPATION.</text>
 			</slide>
 			
-			<!-- todo: some some of image or video goes here?? -->
+			<!-- todo: some sort of image or video goes here?? -->
 			
 			<slide type="clock">
 				<appearance clockTextColor="3" />
@@ -529,7 +529,6 @@ MEDIBANK NURSE.</text>
 SUPPORT 6,000 PATIENTS EACH YEAR.</text>
 			</slide>
 			<slide type="splash_text" duration="4000" animateOn="none" animateOff="none" >
-				<!-- left aligned. animate on from left -->
 				<text type="corner">Like 85% of Medibank’s nurse workforce,
 Leith works from home as part of our
 work@home model.</text>

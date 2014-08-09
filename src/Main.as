@@ -1,4 +1,5 @@
 package {
+	import com.greensock.TweenMax;
 	import flash.display.BitmapData;
 	import flash.display.Sprite;
 	import flash.display.StageDisplayState;
@@ -27,6 +28,11 @@ package {
 
 	public class Main extends Sprite {
 
+		static public const HANDLE_COLOR_QUICK_CHANGE_TIME:Number = 500;
+		static public const HANDLE_COLOR_CHANGE_TIME:Number = 1000;
+		static public const HANDLE_ALPHA_CHANGE_TIME:Number = 300;
+		static public const HANDLE_TEXT_ALPHA:Number = 0.5;
+
 		public static const WIDTH:Number = 2857;
 		public static const HEIGHT:Number = 1607;
 		public static const SCALE:Number = 0.4;
@@ -51,7 +57,10 @@ package {
 		protected var dragMomentum:Number;
 		protected var dragTime:Number;
 
-		protected var currentContent:Content;
+		protected var currentHandle:Handle;
+		protected var colorSourceHandle:Handle;
+		protected var handlesIdle:Boolean;
+		protected var playingCurrent:Boolean;
 		
 		private var contentLayer:Sprite;
 		private var handlesLayer:Sprite;
@@ -114,19 +123,37 @@ package {
 			dragMomentum = 0;
 			dragTime = getTimer();
 
-			handle.contentLeft = handle.willBeLeft;// left;
-			handle.content.visible = true;
+			handle.contentLeft = handle.willBeLeft;;
+			showContent(handle.content);
 			handle.showDragDirection();
 			if (handle.contentLeft) {
-				if (handle.prev) handle.prev.content.visible = false;				
+				if (handle.prev) hideContent(handle.prev.content);
 			} else {
-				if (handle.next) handle.next.content.visible = false;
+				if (handle.next) hideContent(handle.next.content);
 			}
 			updateContentMasking();
+			
+			if (handlesIdle) {
+				setHandlesIdle(false);
+			}
+			dragHandle.animateColorTo(dragHandle.homeColor, HANDLE_COLOR_QUICK_CHANGE_TIME);
 			
 			stage.addEventListener(MouseEvent.MOUSE_MOVE, handleMouseMove);
 			stage.addEventListener(MouseEvent.MOUSE_UP, handleMouseUp);
 		}		
+		
+		protected function hideContent(content:Content):void {
+			if (content.visible) {
+				content.visible = false;
+				content.reset();
+			}
+		}
+		protected function showContent(content:Content):void {
+			if (!content.visible) {
+				content.visible = true;
+			}
+		}
+		
 		
 		protected function handleMouseMove(event:MouseEvent):void {
 			var dx:Number = mouseX - dragPoint.x;
@@ -140,6 +167,13 @@ package {
 			dragHandle.x += dx;
 			clampHandlePositions();
 			updateContentMasking();
+			
+			var onRight:Boolean = (dragHandle.x > ((WIDTH - Handle.WIDTH) / 2));
+			if (onRight == dragHandle.left) {
+				if (dragHandle != colorSourceHandle) broadcastHandleColor(dragHandle, HANDLE_COLOR_CHANGE_TIME);
+			} else {
+				if (currentHandle != colorSourceHandle) broadcastHandleColor(currentHandle, HANDLE_COLOR_CHANGE_TIME);
+			}
 		}	
 
 		protected function handleMouseUp(event:MouseEvent):void {
@@ -203,6 +237,8 @@ package {
 			lastFrameTime = time;
 			
 			animate(dTime);
+			
+			for each(var h:Handle in handles) h.animate(dTime);
 		}
 		
 		protected function animate(dTime:Number):void {
@@ -215,22 +251,40 @@ package {
 				else handle.x = Math.min(handle.x + MOVE, handle.homeX);
 			}
 			clampHandlePositions();
+			
 			// Reached desinations?
+			var allAtHome:Boolean = (dragHandle == null);
 			for each(handle in handles) {
 				if (handle == dragHandle) continue;
 				if (Math.abs(handle.x - handle.homeX) <= 1) {
 					handle.x = handle.homeX;
 					handle.left = handle.willBeLeft;
+				} else {
+					allAtHome = false;
 				}
 			}
-			updateContentMasking();
+			updateContentMasking();			
 			
-			for each(handle in handles) {
-				if (handle.content.visible) {
-					handle.content.animate(dTime);
-				}
-				//handle.draggable = (handle.content != currentContent);
+			if (allAtHome && !handlesIdle) {
+				setHandlesIdle(true);
+				broadcastHandleColor(currentHandle, HANDLE_COLOR_CHANGE_TIME);
 			}
+
+			if (currentHandle && currentHandle.content.full) {
+				if (!playingCurrent) {
+					TweenMax.resumeAll();
+					currentHandle.content.resume();
+					playingCurrent = true;
+				}
+				currentHandle.content.animate(dTime);
+			} else {
+				if (playingCurrent) {
+					TweenMax.pauseAll();
+					currentHandle.content.pause();
+					playingCurrent = false;
+				}
+			}
+			
 		}
 		
 		protected function clampHandlePositions():void {			
@@ -264,6 +318,12 @@ package {
 				} else {
 					showContentBetween(h.x + Handle.WIDTH, leftEdgeOfNext(h), h.content);
 				}
+				
+				if (h.content.full) {
+					if (h != currentHandle) {
+						currentHandle = h;
+					}
+				}
 			}
 		}
 		
@@ -280,23 +340,59 @@ package {
 		
 		protected function showContentBetween(l:Number, r:Number, content:Content):void {
 			content.x = l;
-
-			content.scrollRect = new Rectangle(0, 0, Math.ceil(r - l), HEIGHT);
-			/*
-			if ((r - l) >= 1) {
-				content.visible = true;
+			content.full = ((r - l) >= (Content.WIDTH - 1));
+			
+			if ((dragHandle && (content == dragHandle.content)) || (r - l >= 1)) {
 				content.scrollRect = new Rectangle(0, 0, Math.ceil(r - l), HEIGHT);
 			} else {
-				content.visible = false;
+				hideContent(content);
 			}
-			*/
-			
-			content.full = ((r - l) >= (Content.WIDTH - 1));
-			if (content.full) currentContent = content;
 		}
 		
-		protected function broadcastHandleColor(source:Handle, time:Number):void {
-			source.animateColor(source.homeColor, time);			
+		protected function broadcastHandleColor(source:Handle, time:Number):void {			
+			colorSourceHandle = source;
+			var len:int = handles.length;
+			var index:int = handles.indexOf(source);
+			var maxAway:int = Math.max(index, len - index - 1);
+			var step:Number = 1 / maxAway;
+			var current:Number;
+			var h:Handle;
+			var color:uint;
+
+			source.animateColorTo(source.homeColor, time);
+			
+			current = 0;
+			for (h = source.prev; h != null; h = h.prev) {
+				current += step;
+				color = adjustColor(source.homeColor, current);
+				h.animateColorTo(color, time);
+			}
+			
+			current = 0;
+			for (h = source.next; h != null; h = h.next) {
+				current += step;
+				color = adjustColor(source.homeColor, current);
+				h.animateColorTo(color, time);
+			}
+			
+		}
+		
+		protected function setHandlesIdle(value:Boolean):void {
+			if (handlesIdle == value) return;
+			handlesIdle = value;
+			var alpha:Number = value ? HANDLE_TEXT_ALPHA : 1;			
+			for each(var h:Handle in handles) {
+				h.animateAlphaTo(alpha, HANDLE_ALPHA_CHANGE_TIME);
+			}
+		}
+		
+		
+		protected function adjustColor(sourceColor:uint, offsetF:Number):uint {
+			var channelIncrease:Number = offsetF * 50;
+			var r:uint = Math.min(0xFF, uint(((sourceColor & 0xFF0000) >> 16) + channelIncrease)) << 16;
+			var g:uint = Math.min(0xFF, uint(((sourceColor & 0xFF00) >> 8) + channelIncrease)) << 8;
+			var b:uint = Math.min(0xFF, uint(((sourceColor & 0xFF)) + channelIncrease));
+			return r + g + b;
 		}
 
 		
