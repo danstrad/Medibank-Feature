@@ -27,12 +27,8 @@ Screensaver
 Todos in xml. Missing images(video) in info4, left aligned splash
 Vision
 
-scrollRect is still flickering a little
+reset/pause all Content types - GameContent, VideoContent
 
-reset/pause all Content types
 
-dragHandle flickers colors when it arrives
+chapterSummary needs to extend vertically
 
-slight mvoe left while holding a handle (rounding on scrollrect?)
-
-if you close a content and then open it without releasing handle, it doesnt reappear

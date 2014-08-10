@@ -10,6 +10,7 @@ package med.display {
 		protected var _full:Boolean;
 		public function get full():Boolean { return _full; }		
 		public function set full(value:Boolean):void { _full = value; }
+		public var closed:Boolean;
 		
 		public var color:uint;
 

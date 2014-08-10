@@ -8,6 +8,7 @@ package {
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
+	import flash.media.SoundTransform;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	import flash.utils.Dictionary;
@@ -16,6 +17,7 @@ package {
 	import med.data.TextData;
 	import med.data.VideoSet;
 	import med.data.VideoSlide;
+	import med.display.Background;
 	import med.display.Content;
 	import med.display.GameContent;
 	import med.display.GraphContent;
@@ -53,6 +55,7 @@ package {
 		protected var dragging:Boolean;
 		protected var dragHandle:Handle;
 		protected var dragPoint:Point;
+		protected var dragOffset:Number; // Where on the handle was grabbed
 		protected var dragFlickDistance:Number;
 		protected var dragMomentum:Number;
 		protected var dragTime:Number;
@@ -62,6 +65,7 @@ package {
 		protected var handlesIdle:Boolean;
 		protected var playingCurrent:Boolean;
 		
+		private var background:Background;
 		private var contentLayer:Sprite;
 		private var handlesLayer:Sprite;
 
@@ -71,8 +75,13 @@ package {
 			TextUtils.createTextFormats();
 			new _FontDump();
 			
+			soundTransform = new SoundTransform(0);
+			
 			handles = new Vector.<Handle>();
 			
+			background = new Background(WIDTH, HEIGHT);
+			background.showColor(0x0);
+			addChild(background);
 			contentLayer = new Sprite();
 			addChild(contentLayer);
 			handlesLayer = new Sprite();
@@ -120,10 +129,17 @@ package {
 			dragging = true;
 			dragHandle = handle;
 			dragPoint = new Point(mouseX, mouseY);
+			dragOffset = dragPoint.x - dragHandle.x;
 			dragMomentum = 0;
 			dragTime = getTimer();
 
-			handle.contentLeft = handle.willBeLeft;;
+			for each(var h:Handle in handles) {
+				if ((h != dragHandle) && !h.content.full) {
+					h.contentLeft = (h.x > dragHandle.x);
+				}
+			}
+			
+			handle.contentLeft = handle.willBeLeft;
 			showContent(handle.content);
 			handle.showDragDirection();
 			if (handle.contentLeft) {
@@ -137,6 +153,7 @@ package {
 				setHandlesIdle(false);
 			}
 			dragHandle.animateColorTo(dragHandle.homeColor, HANDLE_COLOR_QUICK_CHANGE_TIME);
+			background.fadeToColor(dragHandle.homeColor, HANDLE_COLOR_QUICK_CHANGE_TIME);
 			
 			stage.addEventListener(MouseEvent.MOUSE_MOVE, handleMouseMove);
 			stage.addEventListener(MouseEvent.MOUSE_UP, handleMouseUp);
@@ -155,25 +172,35 @@ package {
 		}
 		
 		
-		protected function handleMouseMove(event:MouseEvent):void {
-			var dx:Number = mouseX - dragPoint.x;
+		protected function handleMouseMove(event:MouseEvent):void {			
 			dragPoint.x = mouseX;
-			//dragHandle.x = mouseX - Handle.WIDTH / 2;
+
+			var newX:Number = mouseX - dragOffset;
+			var dx:Number = newX - dragPoint.x;
 			
 			var elapsedTime:Number = getTimer() - dragTime;
 			var v:Number = 1000 * dx / (1 + elapsedTime);
 			dragMomentum = 0.8 * v + 0.2 * dragMomentum;
 			
-			dragHandle.x += dx;
+			//updateDragPosition();
+		}
+		protected function updateDragPosition():void {
+			dragHandle.x = dragPoint.x - dragOffset;
 			clampHandlePositions();
-			updateContentMasking();
 			
 			var onRight:Boolean = (dragHandle.x > ((WIDTH - Handle.WIDTH) / 2));
-			if (onRight == dragHandle.left) {
-				if (dragHandle != colorSourceHandle) broadcastHandleColor(dragHandle, HANDLE_COLOR_CHANGE_TIME);
+			var crossed:Boolean = onRight == dragHandle.left;
+			if (crossed) {
+				if (dragHandle != colorSourceHandle) {
+					broadcastHandleColor(dragHandle, HANDLE_COLOR_CHANGE_TIME);
+				}
 			} else {
-				if (currentHandle != colorSourceHandle) broadcastHandleColor(currentHandle, HANDLE_COLOR_CHANGE_TIME);
+				if (currentHandle != colorSourceHandle) {
+					broadcastHandleColor(currentHandle, HANDLE_COLOR_CHANGE_TIME);
+					dragHandle.animateColorTo(dragHandle.homeColor, HANDLE_COLOR_QUICK_CHANGE_TIME);
+				}
 			}
+			
 		}	
 
 		protected function handleMouseUp(event:MouseEvent):void {
@@ -225,8 +252,6 @@ package {
 				}
 			}
 
-			clampHandlePositions();
-			updateContentMasking();
 		}
 		
 		
@@ -242,6 +267,10 @@ package {
 		}
 		
 		protected function animate(dTime:Number):void {
+			background.animate(dTime);
+
+			if (dragHandle) updateDragPosition();
+						
 			clampHandlePositions();	
 			for each(var handle:Handle in handles) {
 				if (handle == dragHandle) continue;
@@ -263,11 +292,22 @@ package {
 					allAtHome = false;
 				}
 			}
+			
 			updateContentMasking();			
 			
-			if (allAtHome && !handlesIdle) {
-				setHandlesIdle(true);
-				broadcastHandleColor(currentHandle, HANDLE_COLOR_CHANGE_TIME);
+			if (allAtHome) {
+				for each (var h:Handle in handles) {
+					if (h.content.full) {
+						if (h != currentHandle) {
+							currentHandle = h;
+						}
+					}
+				}			
+			
+				if (!handlesIdle) {
+					setHandlesIdle(true);
+					broadcastHandleColor(currentHandle, HANDLE_COLOR_CHANGE_TIME);
+				}
 			}
 
 			if (currentHandle && currentHandle.content.full) {
@@ -311,7 +351,7 @@ package {
 		
 		protected function updateContentMasking():void {
 			for each (var h:Handle in handles) {
-				if (!h.content.visible) continue;
+				//if (!h.content.visible) continue;
 				
 				if (h.contentLeft) {
 					showContentBetween(rightEdgeOfPrev(h), h.x, h.content);
@@ -319,9 +359,11 @@ package {
 					showContentBetween(h.x + Handle.WIDTH, leftEdgeOfNext(h), h.content);
 				}
 				
-				if (h.content.full) {
-					if (h != currentHandle) {
-						currentHandle = h;
+				if (!h.content.closed) showContent(h.content);
+				
+				if (!dragHandle) {
+					if (h.content.closed) {
+						hideContent(h.content);
 					}
 				}
 			}
@@ -342,10 +384,13 @@ package {
 			content.x = l;
 			content.full = ((r - l) >= (Content.WIDTH - 1));
 			
-			if ((dragHandle && (content == dragHandle.content)) || (r - l >= 1)) {
-				content.scrollRect = new Rectangle(0, 0, Math.ceil(r - l), HEIGHT);
+			if (r - l >= 1) {
+				content.closed = false;
+				var w:Number = Math.ceil(r - l);
+				var x:Number = Math.ceil((Content.WIDTH - (r - l)) / 2);
+				content.scrollRect = new Rectangle(x, 0, w, HEIGHT);
 			} else {
-				hideContent(content);
+				content.closed = true;
 			}
 		}
 		
