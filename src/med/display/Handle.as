@@ -14,10 +14,11 @@ package med.display {
 		static public var WIDTH:Number;
 		static public const HEIGHT:Number = Main.HEIGHT;
 		
-		
-		public var content:Content;
+		public var screen:Screen;
 		
 		private var bg:Sprite;
+		
+		public var idleFlasher:Shape;
 		
 		public var homeColor:uint;
 		protected var sourceColor:uint;
@@ -35,7 +36,7 @@ package med.display {
 		
 		public var left:Boolean;
 		public var willBeLeft:Boolean;
-		public var contentLeft:Boolean;
+		public var screenLeft:Boolean;
 		
 		protected var _draggable:Boolean;
 		public function get draggable():Boolean { return _draggable; }
@@ -46,15 +47,16 @@ package med.display {
 		}
 		
 		
-		public function Handle(title:String, content:Content) {
-			this.content = content;
-			homeColor = content.color;
+		public function Handle(title:String, screen:Screen) {
+			this.screen = screen;
+			homeColor = screen.color;
 			currentColor = homeColor;
 			animatingCT = new ColorTransform(0, 0, 0, 1);
-			
+
 			bg = new Sprite();
 			bg.graphics.beginFill(0xFFFFFF);
 			bg.graphics.drawRect(0, 0, WIDTH + 0.5, HEIGHT);
+			bg.graphics.endFill();
 			addChildAt(bg, 0);
 			animateColorTo(homeColor, 0);
 						
@@ -66,6 +68,13 @@ package med.display {
 			
 			grab.x = WIDTH / 2;
 			grab.gotoAndStop(1);
+			
+			idleFlasher = new Shape();
+			idleFlasher.graphics.beginFill(0xFFFFFF);
+			idleFlasher.graphics.drawRect(0, 0, WIDTH + 0.5, HEIGHT);
+			idleFlasher.graphics.endFill();
+			addChild(idleFlasher);
+			idleFlasher.alpha = 0;
 			
 			hitArea = bg;
 			

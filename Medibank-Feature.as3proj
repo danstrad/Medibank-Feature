@@ -73,6 +73,7 @@
     <element path="..\Medibank-Core\lib\VideoSlide.swc" />
     <element path="..\Medibank-Core\lib\SplashText.swc" />
     <element path="..\Medibank-Core\lib\Reset.swc" />
+    <element path="..\Medibank-Core\lib\ScreenSaver.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>

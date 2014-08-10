@@ -1,53 +1,71 @@
 <SwipeScreensData>
 	
-	<ScreenSet>art1,doc2,doc7,info4,prof1,prof9,vision</ScreenSet>
-	<!-- <ScreenSet>vision, pong,rate1,prof9,doc7,art1,doc2,info4,prof1</ScreenSet>  -->
+	<!-- Whichever of these is placed first will be used -->
+	<ScreenSet>art1,doc2,doc7,info4,prof1,prof9,vision</ScreenSet> <!-- Both sets -->
+	<ScreenSet>info4,doc2,prof9,art1</ScreenSet> <!-- Set1 -->
+	<ScreenSet>vision,prof1,doc7</ScreenSet> <!-- Set2 -->
+	<ScreenSet>vision, pong,rate1,prof9,doc7,art1,doc2,info4,prof1</ScreenSet> <!-- Everything -->
 	
 	
-	<Screen id="pong" type="Pong">
+	<Screen id="pong">
 		<Colour>#1B75BB</Colour>		
-		<Handle>AUSTRALIAN OPEN 2015</Handle>
+		<Handle>AUSTRALIAN OPEN 2015.</Handle>
 		
-		<Title1>PROUD SPONSORS</Title1>
-		<Title2>AUSTRALIAN OPEN 2015</Title2>
+		<Content type="Pong">
+			<Title1>PROUD SPONSORS</Title1>
+			<Title2>AUSTRALIAN OPEN 2015</Title2>
+		</Content>
 	</Screen>
 
 	
-	<Screen id="rate1" type="Rate">
+	<Screen id="rate1">
 		<Colour>#F69220</Colour>		
-		<Handle>HOW DO YOU RATE HEATHCARE</Handle>
+		<Handle>HOW DO YOU RATE HEATHCARE.</Handle>
 		
-		<Title>HOW DO YOU
+		<Content type="Rate">
+			<Title>HOW DO YOU
 RATE HEALTHCARE
 IN AUSTRALIA?</Title>
-		<Label0>POOR</Label0>
-		<Label50>GOOD</Label50>
-		<Label100>EXCELLENT</Label100>
+			<Label0>POOR</Label0>
+			<Label50>GOOD</Label50>
+			<Label100>EXCELLENT</Label100>
+		</Content>
 	</Screen>
 		
 	
 	
-	<Screen id="graph1" type="Graph">
+	<Screen id="graph1">
 		<Colour>#ED4135</Colour>
-		<Handle>A BETTER AUSTRALIA</Handle>
+		<Handle>A BETTER AUSTRALIA.</Handle>
 		
-		<Title>A BETTER AUSTRALIA</Title>
-		<Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse leo nisl, consequat non metus ut, lobortis dignissim nisl. Mauris feugiat ornare sodales. Aliquam semper orci sit amet pulvinar pulvinar.</Text>
-		<Graph>
-			<Text>55,000</Text>
-			<Bar value="0.3" text="2011" />
-			<Bar value="1" text="2012" />
-			<Bar value="0.4" text="2013" />
-			<Bar value="0.2" text="2014" />
-		</Graph>
+		<Content type="Graph">
+			<Title>A BETTER AUSTRALIA</Title>
+			<Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse leo nisl, consequat non metus ut, lobortis dignissim nisl. Mauris feugiat ornare sodales. Aliquam semper orci sit amet pulvinar pulvinar.</Text>
+			<Graph>
+				<Text>55,000</Text>
+				<Bar value="0.3" text="2011" />
+				<Bar value="1" text="2012" />
+				<Bar value="0.4" text="2013" />
+				<Bar value="0.2" text="2014" />
+			</Graph>
+		</Content>
 	</Screen>
 	
 	
 
-	<Screen id="vision" type="Infographic">
+	<Screen id="vision">
 		<Colour>#e4002b</Colour>
-		<Handle>OUR VISION</Handle>
+		<Handle>OUR VISION.</Handle>
 		
+		<ScreenSaverContent type="Infographic">
+			<Infographic id="vision_graphic">
+				<slide type="video">
+					<video url="assets/vision/Generation Better.mp4" sourceWidth="640" sourceHeight="360" scale="auto" />
+				</slide>
+			</Infographic>
+		</ScreenSaverContent>
+		
+		<Content type="Infographic">
 		<Infographic id="vision_graphic">
 			<InfographicColors color1="#e4002b" color2="#FFFFFF" color3="#EC4D6B" />
 						
@@ -153,14 +171,16 @@ of people in Australia and New Zealand.</text>
 			</slide>			
 			
 		</Infographic>
+		</Content>
 	</Screen>
 	
 	
 	
-	<Screen id="art1" type="Infographic">
+	<Screen id="art1">
 		<Colour>#653279</Colour>
 		<Handle>IS IT TIME TO UNPLUG?</Handle>
 		
+		<Content type="Infographic">
 		<Infographic id="art1_graphic">
 			<InfographicColors color1="#653279" color2="#FFFFFF" color3="#B0008E" color4="#7b4e8e" color5="#845b94" color6="#b0018d" />
 						
@@ -279,14 +299,16 @@ Dr Ian Boyd, Medibank"/>
 			</slide>			
 				
 		</Infographic>
+		</Content>
 	</Screen>	
 	
 	
 
-	<Screen id="doc2" type="Infographic">
+	<Screen id="doc2">
 		<Colour>#2C5697</Colour>
-		<Handle>MEETING THE MENTAL HEALTH CHALLENGE</Handle>
+		<Handle>MEETING THE MENTAL HEALTH CHALLENGE.</Handle>
 		
+		<Content type="Infographic">
 		<Infographic id="doc2_graphic">
 			<InfographicColors color1="#2C5697" color2="#FFFFFF" color3="#00A3E0" />
 			<slide type="splash_text" duration="4000">
@@ -356,14 +378,15 @@ care and life outcomes for all Australians.</text>
 			</slide>			
 			
 		</Infographic>
-
+		</Content>
 	</Screen>
 	
 	
-	<Screen id="info4" type="Infographic">
+	<Screen id="info4">
 		<Colour>#2C5697</Colour>
-		<Handle>MEDIBANK COMMUNITY FUND</Handle>
+		<Handle>MEDIBANK COMMUNITY FUND.</Handle>
 		
+		<Content type="Infographic">
 		<Infographic id="info4_graphic">
 			<InfographicColors color1="#2C5697" color2="#FFFFFF" color3="#00A3E0"/>
 						
@@ -429,13 +452,15 @@ community health and wellbeing outcomes.</text>
 			</slide>			
 			
 		</Infographic>	
+		</Content>
 	</Screen>
 	
 	
-	<Screen id="doc7" type="Infographic">
+	<Screen id="doc7">
 		<Colour>#00a3e0</Colour>
 		<Handle>REWARDING BETTER HEALTH WITH FLYBUYS AND MEDIBANK.</Handle>
 		
+		<Content type="Infographic">
 		<Infographic id="doc7_graphic">
 			<InfographicColors color1="#00A3E0" color2="#FFFFFF" color3="#2C5697" />
 
@@ -531,12 +556,14 @@ East Melbourne</Text>
 			</slide>
 			
 		</Infographic>
+		</Content>
 	</Screen>
 	
-	<Screen id="prof9" type="Infographic">
+	<Screen id="prof9">
 		<Colour>#009ca6</Colour>
-		<Handle>A HEALTHIER WAY OF WORKING</Handle>
+		<Handle>A HEALTHIER WAY OF WORKING.</Handle>
 		
+		<Content type="Infographic">
 		<Infographic id="prof9_info">
 			<InfographicColors color1="#009ca6" color2="#FFFFFF" color3="#76b82a" />
 
@@ -587,15 +614,16 @@ and productive… All part of Generation Better.</cornerText>
 			</slide>
 			
 		</Infographic>
-		
+		</Content>
 		
 	</Screen>
 
 	
-	<Screen id="prof1" type="Infographic">
+	<Screen id="prof1">
 		<Colour>#009ca6</Colour>
-		<Handle>MEET LEITH</Handle>
+		<Handle>MEET LEITH.</Handle>
 		
+		<Content type="Infographic">
 		<Infographic id="prof1 infographic">
 			<InfographicColors color1="#009ca6" color2="#FFFFFF" color3="#76b82a" />
 			
@@ -651,8 +679,7 @@ work@home model.</text>
 			</slide>			
 			
 		</Infographic>
-		
-		
+		</Content>		
 		
 	</Screen>
 	

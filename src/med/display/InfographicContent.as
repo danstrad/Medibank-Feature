@@ -6,7 +6,11 @@ package med.display {
 		
 		protected var infographicData:InfographicData;
 
+		protected var background:Background;
 		protected var infographic:Infographic;
+		
+		override public function get isIdle():Boolean { return infographic.isOnLastFrame; }
+		
 		
 		/*
 		 * Default Infographic size is 1024 x 576
@@ -26,6 +30,10 @@ package med.display {
 			super(color);
 			this.infographicData = infographicData;
 			
+			background = new Background(WIDTH, HEIGHT);
+			background.showColor(color);
+			addChild(background);
+			
 			var infographicColors:Vector.<uint> = new Vector.<uint>();
 			
 			if (infographicData.xml.hasOwnProperty("InfographicColors")) {
@@ -38,8 +46,8 @@ package med.display {
 				infographicColors.push(uint(infographicData.xml.InfographicColors.@color6.toString().replace("#", "0x")));			
 			} else {
 				Infographic.DEFAULT_COLORS;
-			}			
-			
+			}
+						
 			infographic = new Infographic(infographicData, background, infographicColors);
 			addChild(infographic);
 			infographic.x = WIDTH / 2;

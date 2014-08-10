@@ -1,4 +1,5 @@
 package {
+	import com.greensock.easing.Quad;
 	import com.greensock.TweenMax;
 	import flash.display.BitmapData;
 	import flash.display.Sprite;
@@ -24,11 +25,19 @@ package {
 	import med.display.Handle;
 	import med.display.InfographicContent;
 	import med.display.RateContent;
+	import med.display.Screen;
+	import med.display.ScreenSaver;
+	import med.display.ScreenSaverOverlay;
 	import med.display.StoryContent;
 	import med.display.VideoContent;
 	import med.infographic.InfographicData;
 
 	public class Main extends Sprite {
+
+		static public const SCREEN_SAVER_IDLE_TIME:Number = 3 * 60 * 1000; // 3 minutes (in ms)
+		static public const SCREEN_SAVER_WAVE_TIME_TOTAL:Number = 1600;
+		static public const SCREEN_SAVER_WAVE_FLASH_TIME:Number = 0.7;
+		static public const SCREEN_SAVER_WAVE_ALPHA:Number = 0.25;
 
 		static public const HANDLE_COLOR_QUICK_CHANGE_TIME:Number = 500;
 		static public const HANDLE_COLOR_CHANGE_TIME:Number = 1000;
@@ -49,6 +58,10 @@ package {
 		
 		
 		protected var lastFrameTime:Number;
+		protected var idleTime:Number;
+		protected var screenSaverMode:Boolean;
+		protected var screenSaverWaveIndex:Number;
+		protected var screenSaverWaveTime:Number;
 
 		private var handles:Vector.<Handle>;
 		
@@ -65,9 +78,9 @@ package {
 		protected var handlesIdle:Boolean;
 		protected var playingCurrent:Boolean;
 		
-		private var background:Background;
 		private var contentLayer:Sprite;
 		private var handlesLayer:Sprite;
+		
 
 		public function Main() {
 			scaleX = scaleY = 0.4;
@@ -79,9 +92,6 @@ package {
 			
 			handles = new Vector.<Handle>();
 			
-			background = new Background(WIDTH, HEIGHT);
-			background.showColor(0x0);
-			addChild(background);
 			contentLayer = new Sprite();
 			addChild(contentLayer);
 			handlesLayer = new Sprite();
@@ -118,11 +128,17 @@ package {
 			
 			lastFrameTime = getTimer();
 			
+			enterScreenSaverMode();
+			idleTime = 0;
+			
 			addEventListener(Event.ENTER_FRAME, handleEnterFrame);
 			addEventListener(MouseEvent.MOUSE_DOWN, handleMouseDown);
 		}
 		
 		protected function handleMouseDown(event:MouseEvent):void {
+			idleTime = 0;
+			
+			if (screenSaverMode) return;
 			var handle:Handle = event.target as Handle;
 			if (!handle || !handle.draggable) return;
 
@@ -134,18 +150,18 @@ package {
 			dragTime = getTimer();
 
 			for each(var h:Handle in handles) {
-				if ((h != dragHandle) && !h.content.full) {
-					h.contentLeft = (h.x > dragHandle.x);
+				if ((h != dragHandle) && !h.screen.full) {
+					h.screenLeft = (h.x > dragHandle.x);
 				}
 			}
 			
-			handle.contentLeft = handle.willBeLeft;
-			showContent(handle.content);
+			handle.screenLeft = handle.willBeLeft;
+			showScreen(handle.screen);
 			handle.showDragDirection();
-			if (handle.contentLeft) {
-				if (handle.prev) hideContent(handle.prev.content);
+			if (handle.screenLeft) {
+				if (handle.prev) hideScreen(handle.prev.screen);
 			} else {
-				if (handle.next) hideContent(handle.next.content);
+				if (handle.next) hideScreen(handle.next.screen);
 			}
 			updateContentMasking();
 			
@@ -153,21 +169,21 @@ package {
 				setHandlesIdle(false);
 			}
 			dragHandle.animateColorTo(dragHandle.homeColor, HANDLE_COLOR_QUICK_CHANGE_TIME);
-			background.fadeToColor(dragHandle.homeColor, HANDLE_COLOR_QUICK_CHANGE_TIME);
+			//background.fadeToColor(dragHandle.homeColor, HANDLE_COLOR_QUICK_CHANGE_TIME);
 			
 			stage.addEventListener(MouseEvent.MOUSE_MOVE, handleMouseMove);
 			stage.addEventListener(MouseEvent.MOUSE_UP, handleMouseUp);
 		}		
 		
-		protected function hideContent(content:Content):void {
-			if (content.visible) {
-				content.visible = false;
-				content.reset();
+		protected function hideScreen(screen:Screen):void {
+			if (screen.visible) {
+				screen.visible = false;
+				screen.resetContent();
 			}
 		}
-		protected function showContent(content:Content):void {
-			if (!content.visible) {
-				content.visible = true;
+		protected function showScreen(screen:Screen):void {
+			if (!screen.visible) {
+				screen.visible = true;
 			}
 		}
 		
@@ -267,7 +283,32 @@ package {
 		}
 		
 		protected function animate(dTime:Number):void {
-			background.animate(dTime);
+			//background.animate(dTime);
+			
+			if (screenSaverMode) {
+				// continue the flashing handle wave
+				screenSaverWaveTime += dTime;
+				var waveTime:Number = SCREEN_SAVER_WAVE_TIME_TOTAL / handles.length;
+				if (screenSaverWaveTime >= waveTime) {
+					screenSaverWaveTime -= waveTime;
+					screenSaverWaveIndex = (screenSaverWaveIndex + 1) % handles.length;
+					var waveHandle:Handle = handles[screenSaverWaveIndex];
+					var flashTime:Number = SCREEN_SAVER_WAVE_FLASH_TIME;
+					TweenMax.to(waveHandle.idleFlasher, flashTime, { alpha:SCREEN_SAVER_WAVE_ALPHA, ease:Quad.easeOut } );
+					TweenMax.to(waveHandle.idleFlasher, flashTime, { alpha:0, delay:flashTime, ease:Quad.easeIn } );
+				}
+			} else {
+				// Check if enough idleTime has passed to enter screenSaverMode
+				if (currentHandle && currentHandle.screen.content.isIdle) {
+					idleTime += dTime;
+					if (idleTime > SCREEN_SAVER_IDLE_TIME) {
+						idleTime = 0;
+						enterScreenSaverMode();
+					}
+				} else {
+					idleTime = 0;
+				}
+			}
 
 			if (dragHandle) updateDragPosition();
 						
@@ -298,7 +339,7 @@ package {
 			
 			if (allAtHome) {
 				for each (var h:Handle in handles) {
-					if (h.content.full) {
+					if (h.screen.full) {
 						if (h != currentHandle) {
 							currentHandle = h;
 						}
@@ -311,17 +352,17 @@ package {
 				}
 			}
 
-			if (currentHandle && currentHandle.content.full) {
+			if (currentHandle && currentHandle.screen.full) {
 				if (!playingCurrent) {
 					TweenMax.resumeAll();
-					currentHandle.content.resume();
+					currentHandle.screen.resumeContent();
 					playingCurrent = true;
 				}
-				currentHandle.content.animate(dTime);
+				currentHandle.screen.animate(dTime);
 			} else {
 				if (playingCurrent) {
 					TweenMax.pauseAll();
-					currentHandle.content.pause();
+					currentHandle.screen.pauseContent();
 					playingCurrent = false;
 				}
 			}
@@ -354,17 +395,17 @@ package {
 			for each (var h:Handle in handles) {
 				//if (!h.content.visible) continue;
 				
-				if (h.contentLeft) {
-					showContentBetween(rightEdgeOfPrev(h), h.x, h.content);
+				if (h.screenLeft) {
+					showScreenBetween(rightEdgeOfPrev(h), h.x, h.screen);
 				} else {
-					showContentBetween(h.x + Handle.WIDTH, leftEdgeOfNext(h), h.content);
+					showScreenBetween(h.x + Handle.WIDTH, leftEdgeOfNext(h), h.screen);
 				}
 				
 				//if (!h.content.closed) showContent(h.content);
 				
 				if (!dragHandle) {
-					if (h.content.closed) {
-						hideContent(h.content);
+					if (h.screen.closed) {
+						hideScreen(h.screen);
 					}
 				}
 			}
@@ -381,17 +422,17 @@ package {
 			else return WIDTH;
 		}
 		
-		protected function showContentBetween(l:Number, r:Number, content:Content):void {
-			content.x = l;
-			content.full = ((r - l) >= (Content.WIDTH - 1)) && content.visible;
+		protected function showScreenBetween(l:Number, r:Number, screen:Screen):void {
+			screen.x = l;
+			screen.full = ((r - l) >= (Content.WIDTH - 1)) && screen.visible;
 			
 			if (r - l >= 1) {
-				content.closed = false;
+				screen.closed = false;
 				var w:Number = Math.ceil(r - l);
 				var x:Number = Math.ceil((Content.WIDTH - (r - l)) / 2);
-				content.scrollRect = new Rectangle(x, 0, w, HEIGHT);
+				screen.scrollRect = new Rectangle(x, 0, w, HEIGHT);
 			} else {
-				content.closed = true;
+				screen.closed = true;
 			}
 		}
 		
@@ -445,6 +486,34 @@ package {
 		
 		
 		
+		protected function enterScreenSaverMode():void {
+			screenSaverWaveIndex = -1;
+			screenSaverWaveTime = 0;
+			screenSaverMode = true;
+			for each(var h:Handle in handles) {
+				var instant:Boolean = (h != currentHandle);
+				h.screen.fadeToScreenSaver(instant);
+			}
+		}
+		
+		protected function onScreenSaverFinished():void {
+			screenSaverMode = false;
+			for each(var h:Handle in handles) {
+				var instant:Boolean = (h != currentHandle);
+				h.screen.fadeToContent(instant);
+			}
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		static public function preloadImages(loadedXML:XML):void {
 			//<Image url="assets/Test Image.png" />
 			var xmlString:String = loadedXML.toString();
@@ -487,6 +556,7 @@ package {
 					color = uint("0x" + colorString);
 				} else {
 					switch(handles.length) {
+						default:
 						case 0: color = 0x1B75BB; break;
 						case 1: color = 0xF69220; break;
 						case 2: color = 0xEA2B8B; break;
@@ -498,98 +568,110 @@ package {
 				var handleText:String = "";
 				if (screenXML.hasOwnProperty("Handle")) handleText = screenXML.Handle[0].toString();
 				
-				// Type
-				var title:String;
-				var title1:String;
-				var title2:String;
-				var text:String;
-				var graphText:String;
-				
 				var content:Content;
-				switch(screenXML.@type.toString().toLowerCase()) {
-					case "pong":
-						title1 = "";
-						title2 = "";
-						if (screenXML.hasOwnProperty("Title1")) title1 = screenXML.Title1.toString();
-						if (screenXML.hasOwnProperty("Title2")) title2 = screenXML.Title2.toString();
-						content = new GameContent(color, title1, title2);
-						break;
-						
-					case "graph":
-						title = "";
-						text = "";
-						graphText = "";
-						var bars:Vector.<BarData> = new Vector.<BarData>();
-						if (screenXML.hasOwnProperty("Title")) title = screenXML.Title.toString();
-						if (screenXML.hasOwnProperty("Text")) text = screenXML.Text.toString();
-						if (screenXML.hasOwnProperty("Graph")) {
-							var graphXML:XML = screenXML.Graph[0];
-							if (graphXML.hasOwnProperty("Text")) graphText = graphXML.Text.toString();
-							for each(var barXML:XML in graphXML.Bar) {
-								bars.push(new BarData(parseFloat(barXML.@value) || 1, barXML.@text.toString() || ""));
-							}
-						}
-						content = new GraphContent(color, title, text, graphText, bars);
-						break;
-						
-					case "rate":
-						title = "";
-						if (screenXML.hasOwnProperty("Title")) title = screenXML.Title.toString();
-						var labels:Vector.<String> = new Vector.<String>();
-						if (screenXML.hasOwnProperty("Label0")) labels.push(screenXML.Label0.toString());
-						else labels.push("");
-						if (screenXML.hasOwnProperty("Label50")) labels.push(screenXML.Label50.toString());
-						else labels.push("");
-						if (screenXML.hasOwnProperty("Label100")) labels.push(screenXML.Label100.toString());
-						else labels.push("");
-						content = new RateContent(color, title, labels);
-						break;
-						
-					case "video":
-						var sets:Vector.<VideoSet> = new Vector.<VideoSet>();
-						for each(var setXML:XML in screenXML.Set) {
-							var videoSet:VideoSet = new VideoSet();
-							for each(var slideXML:XML in setXML.Video) {
-								var slide:VideoSlide = new VideoSlide();
-								if (slideXML.hasOwnProperty("@url")) slide.url = slideXML.@url.toString();
-								else continue;
-								if (slideXML.hasOwnProperty("@width")) slide.width = parseFloat(slideXML.@width);
-								else slide.width = 1920;
-								if (slideXML.hasOwnProperty("@height")) slide.height = parseFloat(slideXML.@height);
-								else slide.height = 1088;
-								if (slideXML.hasOwnProperty("Title")) slide.title = slideXML.Title[0].toString();
-								if (slideXML.hasOwnProperty("Text")) slide.text = slideXML.Text[0].toString();
-								videoSet.slides.push(slide);
-							}
-							sets.push(videoSet);
-						}
-						content = new VideoContent(color, sets);
-						break;
-						
-					case "story":
-						var datas:Vector.<TextData> = new Vector.<TextData>();
-						for each(var textXML:XML in screenXML.Text) {
-							datas.push(new TextData(textXML.@type.toString(), textXML.toString()));
-						}
-						var bgImage:BitmapData;
-						if (screenXML.hasOwnProperty("Background")) {
-							var backgroundXML:XML = screenXML.Background[0];
-							if (backgroundXML.hasOwnProperty("Image")) {
-								var imageXML:XML = backgroundXML.Image[0];
-								bgImage = AssetManager.getImage(imageXML.@url.toString());
-							}
-						}
-						content = new StoryContent(color, datas, bgImage);
-						break;
-						
-					case "infographic":
-						var infographicXML:XML = screenXML.Infographic[0];
-						content = new InfographicContent(color, new InfographicData(infographicXML));
-						break;
-				}				
-				handles.push(new Handle(handleText, content));
+				if (screenXML.hasOwnProperty("Content")) content = createContent(screenXML.Content[0], color);
+				if (!content) content = new Content(color);				
+				var screenSaverContent:Content;
+				if (screenXML.hasOwnProperty("ScreenSaverContent")) screenSaverContent = createContent(screenXML.ScreenSaverContent[0], color);
+				if (!screenSaverContent) screenSaverContent = new Content(color);
+				
+				var screen:Screen = new Screen(handleText, color, content, screenSaverContent, onScreenSaverFinished);
+				
+				handles.push(new Handle(handleText, screen));
 			}
 				
+		}
+		
+		protected static function createContent(xml:XML, color:uint):Content {
+			var title:String;
+			var title1:String;
+			var title2:String;
+			var text:String;
+			var graphText:String;
+			
+			var content:Content;
+			switch(xml.@type.toString().toLowerCase()) {
+				case "pong":
+					title1 = "";
+					title2 = "";
+					if (xml.hasOwnProperty("Title1")) title1 = xml.Title1.toString();
+					if (xml.hasOwnProperty("Title2")) title2 = xml.Title2.toString();
+					content = new GameContent(color, title1, title2);
+					break;
+					
+				case "graph":
+					title = "";
+					text = "";
+					graphText = "";
+					var bars:Vector.<BarData> = new Vector.<BarData>();
+					if (xml.hasOwnProperty("Title")) title = xml.Title.toString();
+					if (xml.hasOwnProperty("Text")) text = xml.Text.toString();
+					if (xml.hasOwnProperty("Graph")) {
+						var graphXML:XML = xml.Graph[0];
+						if (graphXML.hasOwnProperty("Text")) graphText = graphXML.Text.toString();
+						for each(var barXML:XML in graphXML.Bar) {
+							bars.push(new BarData(parseFloat(barXML.@value) || 1, barXML.@text.toString() || ""));
+						}
+					}
+					content = new GraphContent(color, title, text, graphText, bars);
+					break;
+					
+				case "rate":
+					title = "";
+					if (xml.hasOwnProperty("Title")) title = xml.Title.toString();
+					var labels:Vector.<String> = new Vector.<String>();
+					if (xml.hasOwnProperty("Label0")) labels.push(xml.Label0.toString());
+					else labels.push("");
+					if (xml.hasOwnProperty("Label50")) labels.push(xml.Label50.toString());
+					else labels.push("");
+					if (xml.hasOwnProperty("Label100")) labels.push(xml.Label100.toString());
+					else labels.push("");
+					content = new RateContent(color, title, labels);
+					break;
+					
+				case "video":
+					var sets:Vector.<VideoSet> = new Vector.<VideoSet>();
+					for each(var setXML:XML in xml.Set) {
+						var videoSet:VideoSet = new VideoSet();
+						for each(var slideXML:XML in setXML.Video) {
+							var slide:VideoSlide = new VideoSlide();
+							if (slideXML.hasOwnProperty("@url")) slide.url = slideXML.@url.toString();
+							else continue;
+							if (slideXML.hasOwnProperty("@width")) slide.width = parseFloat(slideXML.@width);
+							else slide.width = 1920;
+							if (slideXML.hasOwnProperty("@height")) slide.height = parseFloat(slideXML.@height);
+							else slide.height = 1088;
+							if (slideXML.hasOwnProperty("Title")) slide.title = slideXML.Title[0].toString();
+							if (slideXML.hasOwnProperty("Text")) slide.text = slideXML.Text[0].toString();
+							videoSet.slides.push(slide);
+						}
+						sets.push(videoSet);
+					}
+					content = new VideoContent(color, sets);
+					break;
+					
+				case "story":
+					var datas:Vector.<TextData> = new Vector.<TextData>();
+					for each(var textXML:XML in xml.Text) {
+						datas.push(new TextData(textXML.@type.toString(), textXML.toString()));
+					}
+					var bgImage:BitmapData;
+					if (xml.hasOwnProperty("Background")) {
+						var backgroundXML:XML = xml.Background[0];
+						if (backgroundXML.hasOwnProperty("Image")) {
+							var imageXML:XML = backgroundXML.Image[0];
+							bgImage = AssetManager.getImage(imageXML.@url.toString());
+						}
+					}
+					content = new StoryContent(color, datas, bgImage);
+					break;
+					
+				case "infographic":
+					var infographicXML:XML = xml.Infographic[0];
+					content = new InfographicContent(color, new InfographicData(infographicXML));
+					break;
+			}
+			return content;
 		}
 		
 		protected function setupHandles():void {
@@ -604,18 +686,18 @@ package {
 				handlesLayer.addChildAt(handle, 0);
 				handle.x = handle.homeX = i * Handle.WIDTH;
 				handle.left = handle.willBeLeft = true;
-				handle.content.pause()
+				handle.screen.pauseContent()
 				if (i == handles.length - 1) {
 					handle.draggable = false;
-					handle.contentLeft = false;
-					handle.content.visible = true;
+					handle.screenLeft = false;
+					handle.screen.visible = true;
 					broadcastHandleColor(handle, 0);
 				} else {
 					handle.draggable = true;
-					handle.contentLeft = true;
-					handle.content.visible = false;
+					handle.screenLeft = true;
+					handle.screen.visible = false;
 				}
-				contentLayer.addChild(handle.content);
+				contentLayer.addChild(handle.screen);
 			}
 			clampHandlePositions();
 			updateContentMasking();

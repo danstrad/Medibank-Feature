@@ -59,6 +59,7 @@
       <path-element>D:\GitHub\Medibank-Core\lib\VideoSlide.swc</path-element>
       <path-element>D:\GitHub\Medibank-Core\lib\SplashText.swc</path-element>
       <path-element>D:\GitHub\Medibank-Core\lib\Reset.swc</path-element>
+      <path-element>D:\GitHub\Medibank-Core\lib\ScreenSaver.swc</path-element>
     </library-path>
   </compiler>
   <file-specs>
