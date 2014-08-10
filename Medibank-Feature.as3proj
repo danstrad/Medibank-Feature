@@ -72,6 +72,7 @@
     <element path="..\Medibank-Core\lib\Timeline.swc" />
     <element path="..\Medibank-Core\lib\VideoSlide.swc" />
     <element path="..\Medibank-Core\lib\SplashText.swc" />
+    <element path="..\Medibank-Core\lib\Reset.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>

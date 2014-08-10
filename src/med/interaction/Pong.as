@@ -125,6 +125,14 @@ package med.interaction {
 			p1.y = Math.max(top + pry, Math.min(bottom - pry, mouseY));			
 		}
 		
+		public function reset(resetPlayer:Boolean):void {
+			playing = false;
+			ball.x = midX;
+			ball.y = midY;
+			p2.y = midY;
+			if (resetPlayer) p1.y = midY;
+		}
+		
 
 		protected function beginGame():void {
 			playing = true;
@@ -137,10 +145,7 @@ package med.interaction {
 		}
 		
 		protected function endGame(playerWin:Boolean):void {
-			playing = false;
-			ball.x = midX;
-			ball.y = midY;
-			p2.y = midY;
+			reset(false);
 			if (playerWin) dispatchEvent(new Event("Win"));
 			else dispatchEvent(new Event("Lose"));
 		}
@@ -155,7 +160,6 @@ package med.interaction {
 		
 		
 		public function animate(dTime:Number):void {
-			
 			
 			if (playing) {
 				// AI
@@ -211,6 +215,7 @@ package med.interaction {
 			}
 			
 		}
+		
 		
 	}
 

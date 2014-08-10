@@ -1,34 +1,42 @@
-Rate submit button
-
-Multiple videos scrollable up/down
-
-Better header transitions
 
 
-Make infographics stop/start based on whether the current story is fullscreen
+Screensavers
+video offsets
+video wipes/transitions - side wipes for most. In and out. Seperate wipe color, since it needs to match background
 
+* Used splash slide to start, to avoid this: Starting on a video allows it to fast forward through its boxes, or leith is playing somehow
+* Should all infographics end on blank and a replay button appear? Yes. Apart from hotspots
 
-art1:
-	Italics
-	Add in people dots (and stuff after)
+*art1: IS IT TIME TO UNPLUG?
+~	"our study" - floating boxes side text can't change
+	*some timing makes it hard to read.
 
-doc7:
-	Background images for first slides - Too low res?
-	add Video slide if footage suitable
-	drop shadow needed?
+doc2: MEETING THE MENTAL HEALTH CHALLENGE
+	*made mono beyondblue logo myself. Good enough?
+	*beyondblue name should be in italics at the end
+	video offset
+	*video wipes
 	
-prof9: Complete
+*info4: MEDIBANK COMMUNITY FUND
+	*missing image/video slide with no text at the start
+	*Same after "helping through participation"
+	
+doc7: REWARDING BETTER HEALTH WITH FLYBUYS AND MEDIBANK.
+	video offset
+	*video wipes
 
+*prof9: A HEALTHIER WAY OF WORKING
+	*Button placement?
+	*1. Whenever you select one of the pluses the building could fade slightly and possibly scale down.
+	*2. Before people click the pluses, they might do the same little jump as the purple squares. Or if that's too excessive just the slow fades. 
 
-
-
-
-Screensaver
-Todos in xml. Missing images(video) in info4, left aligned splash
-Vision
-
-reset/pause all Content types - GameContent, VideoContent
-
-
-chapterSummary needs to extend vertically
-
+*prof1: MEET LEITH
+	*used static launch screen to get around pausesync issues on first slide
+	*video offset
+	*video wipes
+	
+vision: OUR VISION
+~	187%
+	*boxes should be bold? Text doesn't look styled properly
+	video offset x 2
+	*video wipes x 2

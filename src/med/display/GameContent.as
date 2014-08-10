@@ -38,8 +38,7 @@ package med.display {
 			computerScoreField = assets.computerScoreField;
 			
 			playerScore = 0;
-			computerScore = 0;
-			
+			computerScore = 0;			
 			updateScores();
 			
 			pong = new Pong(new Rectangle(110, 400, 2238, 1100));
@@ -51,8 +50,18 @@ package med.display {
 		
 		override public function animate(dTime:Number):void {
 			super.animate(dTime);
-			
+
 			pong.animate(dTime);
+		}
+		
+		override public function reset():void {
+			super.reset();
+
+			playerScore = 0;
+			computerScore = 0;			
+			updateScores();
+			
+			pong.reset(true);
 		}
 		
 		protected function updateScores():void {

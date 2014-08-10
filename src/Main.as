@@ -33,7 +33,7 @@ package {
 		static public const HANDLE_COLOR_QUICK_CHANGE_TIME:Number = 500;
 		static public const HANDLE_COLOR_CHANGE_TIME:Number = 1000;
 		static public const HANDLE_ALPHA_CHANGE_TIME:Number = 300;
-		static public const HANDLE_TEXT_ALPHA:Number = 0.5;
+		static public const HANDLE_TEXT_ALPHA:Number = 0.4;
 
 		public static const WIDTH:Number = 2857;
 		public static const HEIGHT:Number = 1607;
@@ -271,10 +271,11 @@ package {
 
 			if (dragHandle) updateDragPosition();
 						
-			clampHandlePositions();	
+			clampHandlePositions();
+			var snapF:Number = (dragHandle != null) ? 1 : 0.3;
 			for each(var handle:Handle in handles) {
 				if (handle == dragHandle) continue;
-				handle.x = handle.x + (handle.homeX - handle.x) * 0.3;
+				handle.x = handle.x + (handle.homeX - handle.x) * snapF;
 				var MOVE:Number = 3;
 				if (handle.x > handle.homeX) handle.x = Math.max(handle.x - MOVE, handle.homeX);
 				else handle.x = Math.min(handle.x + MOVE, handle.homeX);
@@ -359,7 +360,7 @@ package {
 					showContentBetween(h.x + Handle.WIDTH, leftEdgeOfNext(h), h.content);
 				}
 				
-				if (!h.content.closed) showContent(h.content);
+				//if (!h.content.closed) showContent(h.content);
 				
 				if (!dragHandle) {
 					if (h.content.closed) {
@@ -382,7 +383,7 @@ package {
 		
 		protected function showContentBetween(l:Number, r:Number, content:Content):void {
 			content.x = l;
-			content.full = ((r - l) >= (Content.WIDTH - 1));
+			content.full = ((r - l) >= (Content.WIDTH - 1)) && content.visible;
 			
 			if (r - l >= 1) {
 				content.closed = false;
@@ -603,6 +604,7 @@ package {
 				handlesLayer.addChildAt(handle, 0);
 				handle.x = handle.homeX = i * Handle.WIDTH;
 				handle.left = handle.willBeLeft = true;
+				handle.content.pause()
 				if (i == handles.length - 1) {
 					handle.draggable = false;
 					handle.contentLeft = false;

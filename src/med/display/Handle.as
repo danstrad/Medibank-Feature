@@ -54,7 +54,7 @@ package med.display {
 			
 			bg = new Sprite();
 			bg.graphics.beginFill(0xFFFFFF);
-			bg.graphics.drawRect(0, 0, WIDTH, HEIGHT);
+			bg.graphics.drawRect(0, 0, WIDTH + 0.5, HEIGHT);
 			addChildAt(bg, 0);
 			animateColorTo(homeColor, 0);
 						
