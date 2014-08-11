@@ -14,6 +14,7 @@ package med.display {
 		static public var WIDTH:Number;
 		static public const HEIGHT:Number = Main.HEIGHT;
 		
+		public var title:String;
 		public var screen:Screen;
 		
 		private var bg:Sprite;
@@ -48,6 +49,7 @@ package med.display {
 		
 		
 		public function Handle(title:String, screen:Screen) {
+			this.title = title;
 			this.screen = screen;
 			homeColor = screen.color;
 			currentColor = homeColor;

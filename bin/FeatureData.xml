@@ -1,5 +1,8 @@
 <SwipeScreensData>
 	
+	<ScreenSet>art1,doc2,doc7,info4,prof1,prof9,vision</ScreenSet> <!-- Both sets -->
+
+	
 	<!-- Whichever of these is placed first will be used -->
 	<ScreenSet>art1,doc2,doc7,info4,prof1,prof9,vision</ScreenSet> <!-- Both sets -->
 	<ScreenSet>info4,doc2,prof9,art1</ScreenSet> <!-- Set1 -->
@@ -83,7 +86,7 @@ CHALLENGES FACING AUSTRALIAN SOCIETY.</text>
 			
 			<slide type="people_graph">
 				<appearance backgroundColor="1" boxColor="3" />
-				<graphstate value="63" featuredText="63" usePercentage="true" topText="" bottomText="We're getting bigger.
+				<graphstate value="63" featuredText="63" usePercentage="true" topText="" bottomText="We’re getting bigger.
 Obesity rates in Australia 
 are climbing faster than 
 anywhere else in the world 
@@ -151,17 +154,17 @@ of people in Australia and New Zealand.</text>
 			</slide>
 			<slide type="sliding_tags" duration="10000">
 				<appearance textColor="1" backgroundColor="1" boxColor="2"/>
-				<featuredText></featuredText>			
+				<featuredText></featuredText>
 				<tag size="large" startLeft="true">
-					<tagstate text="Better health is better for everyone--" />				
+					<tagstate text="Better health is better for everyone" />				
 				</tag>			
-				<tag size="small" startLeft="true">
+				<tag size="medium" startLeft="true">
 					<tagstate text="us," />		
 				</tag>
 				<tag size="medium" startLeft="false">
 					<tagstate text="our members," />			
 				</tag>			
-				<tag size="large" startLeft="true">
+				<tag size="medium" startLeft="true">
 					<tagstate text="and the whole community" />				
 				</tag>					
 			</slide>	
@@ -313,8 +316,9 @@ Dr Ian Boyd, Medibank"/>
 			<InfographicColors color1="#2C5697" color2="#FFFFFF" color3="#00A3E0" />
 			<slide type="splash_text" duration="4000">
 				<text>MEETING THE MENTAL
-HEALTH CHALLENGE</text>
-				<Image url="assets/doc2/beyondblue_mono.png" x="0" y="170" scale="0.25" />
+HEALTH CHALLENGE.</text>
+				<Image url="assets/doc2/Medibank_Logo.png" x="-100" y="170" scale="0.4" />
+				<Image url="assets/doc2/beyondblue_mono.png" x="100" y="170" scale="0.2" />
 			</slide>	
 			<slide type="people_graph">
 				<appearance backgroundColor="1" boxColor="3" />
@@ -398,13 +402,13 @@ COMMUNITY FUND.</text>
 				<appearance textColor="2" backgroundColor="1" boxColor="3"/>
 				<featuredText>We link people to programs
 and activities that encourage:</featuredText>			
-				<tag size="large" startLeft="true">
+				<tag size="medium" startLeft="true">
 					<tagstate text="Healthy eating" />				
 				</tag>	
 				<tag size="medium" startLeft="false">
 					<tagstate text="Mental and physical activity" />				
 				</tag>	
-				<tag size="small" startLeft="true">
+				<tag size="medium" startLeft="true">
 					<tagstate text="Community connectedness" />				
 				</tag>	
 			</slide>
@@ -417,7 +421,7 @@ and activities that encourage:</featuredText>
 				<graphstate value="1000000" featuredText="Invested in health and 
 wellbeing partnerships" />
 				<graphstate value="100000" featuredText="In disaster relief though 
-Australia Red Cross" />	
+Australian Red Cross" />	
 				<graphstate value="100000" featuredText="Towards improving indigenous 
 health and wellbeing" />	
 			</slide>
@@ -466,9 +470,12 @@ community health and wellbeing outcomes.</text>
 
 			<slide type="splash_text" duration="4000">
 				<text>REWARDING BETTER HEALTH
-WITH FLYBUYS AND MEDIBANK</text>
+WITH FLYBUYS AND MEDIBANK.</text>
+				<Image url="assets/doc7/Medibank_Logo.png" x="0" y="170" scale="0.4" />
+				<!-- 
 				<Image url="assets/doc7/Medibank_Logo.png" x="-100" y="170" scale="0.4" />
 				<Image url="assets/doc7/Flybuys_Logo.png" x="100" y="170" scale="0.4" />
+				-->
 			</slide>
 
 			<slide type="video" duration="8000" animateOn="wipe_from_left" animateOff="wipe_from_left">
@@ -479,15 +486,15 @@ WITH FLYBUYS AND MEDIBANK</text>
 TO REWARD MEMBERS FOR BEING ACTIVE.</text>
 				</textstate>
 				<textstate>
-					<text type="splash" textScale="0.85">BY USING A FITBIT, MEMBERS WILL BE ABLE
-TO EARN FLYBUYS POINTS WHENEVER
+					<text type="splash" textScale="0.85">BY USING AN ACTIVITY TRACKER, MEMBERS WILL
+BE ABLE TO EARN FLYBUYS POINTS WHENEVER
 THEY REACH A DAILY 10,000 STEP GOAL.</text>
 				</textstate>
 			</slide>
 			<slide type="flip_number">
 				<appearance backgroundColor="1" />
-				<graphstate value="10000" featuredText="Steps every day." topText="Healthy adults are recommended to take at least" />		
-				<graphstate value="10" featuredText="Flybuys points." topText="For every 10,000 steps members can earn" />		
+				<graphstate value="10000" featuredText="steps every day." topText="Healthy adults are recommended to take at least" />		
+				<graphstate value="10" featuredText="flybuys points." topText="For every 10,000 steps members can earn" />		
 			</slide>	
 			
 			<slide type="hotspot">

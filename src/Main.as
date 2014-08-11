@@ -33,16 +33,20 @@ package {
 	import med.infographic.InfographicData;
 
 	public class Main extends Sprite {
+		
+		protected static const START_ON_SCREEN_SAVER:Boolean = false;
 
-		static public const SCREEN_SAVER_IDLE_TIME:Number = 3 * 60 * 1000; // 3 minutes (in ms)
+		static public const SCREEN_SAVER_IDLE_TIME:Number = 2 * 60 * 1000; // 2 minutes (in ms)
 		static public const SCREEN_SAVER_WAVE_TIME_TOTAL:Number = 1600;
 		static public const SCREEN_SAVER_WAVE_FLASH_TIME:Number = 0.7;
 		static public const SCREEN_SAVER_WAVE_ALPHA:Number = 0.25;
+		static public const SCREEN_SAVER_SCREEN_TIME:Number = 10 * 1000; // 10 seconds
 
 		static public const HANDLE_COLOR_QUICK_CHANGE_TIME:Number = 500;
 		static public const HANDLE_COLOR_CHANGE_TIME:Number = 1000;
 		static public const HANDLE_ALPHA_CHANGE_TIME:Number = 300;
 		static public const HANDLE_TEXT_ALPHA:Number = 0.4;
+		static public const HANDLE_TEXT_CURRENT_ALPHA:Number = 0.6;
 
 		public static const WIDTH:Number = 2857;
 		public static const HEIGHT:Number = 1607;
@@ -62,11 +66,14 @@ package {
 		protected var screenSaverMode:Boolean;
 		protected var screenSaverWaveIndex:Number;
 		protected var screenSaverWaveTime:Number;
+		protected var screenSaverScreenTime:Number;
+		protected var screenSaverScreenIndex:int;
 
 		private var handles:Vector.<Handle>;
 		
+		protected var movingHandle:Handle;
+
 		protected var dragging:Boolean;
-		protected var dragHandle:Handle;
 		protected var dragPoint:Point;
 		protected var dragOffset:Number; // Where on the handle was grabbed
 		protected var dragFlickDistance:Number;
@@ -128,8 +135,9 @@ package {
 			
 			lastFrameTime = getTimer();
 			
-			enterScreenSaverMode();
+			if (START_ON_SCREEN_SAVER) enterScreenSaverMode();
 			idleTime = 0;
+			screenSaverScreenTime = 0;
 			
 			addEventListener(Event.ENTER_FRAME, handleEnterFrame);
 			addEventListener(MouseEvent.MOUSE_DOWN, handleMouseDown);
@@ -142,16 +150,24 @@ package {
 			var handle:Handle = event.target as Handle;
 			if (!handle || !handle.draggable) return;
 
+			movingHandle = handle;
+
 			dragging = true;
-			dragHandle = handle;
 			dragPoint = new Point(mouseX, mouseY);
-			dragOffset = dragPoint.x - dragHandle.x;
+			dragOffset = dragPoint.x - movingHandle.x;
 			dragMomentum = 0;
 			dragTime = getTimer();
 
+			beginMovingHandle(movingHandle);
+			
+			stage.addEventListener(MouseEvent.MOUSE_MOVE, handleMouseMove);
+			stage.addEventListener(MouseEvent.MOUSE_UP, handleMouseUp);
+		}		
+		
+		protected function beginMovingHandle(handle:Handle):void {
 			for each(var h:Handle in handles) {
-				if ((h != dragHandle) && !h.screen.full) {
-					h.screenLeft = (h.x > dragHandle.x);
+				if ((h != handle) && !h.screen.full) {
+					h.screenLeft = (h.x > handle.x);
 				}
 			}
 			
@@ -168,12 +184,9 @@ package {
 			if (handlesIdle) {
 				setHandlesIdle(false);
 			}
-			dragHandle.animateColorTo(dragHandle.homeColor, HANDLE_COLOR_QUICK_CHANGE_TIME);
-			//background.fadeToColor(dragHandle.homeColor, HANDLE_COLOR_QUICK_CHANGE_TIME);
-			
-			stage.addEventListener(MouseEvent.MOUSE_MOVE, handleMouseMove);
-			stage.addEventListener(MouseEvent.MOUSE_UP, handleMouseUp);
-		}		
+			handle.animateColorTo(handle.homeColor, HANDLE_COLOR_QUICK_CHANGE_TIME);
+			//background.fadeToColor(handle.homeColor, HANDLE_COLOR_QUICK_CHANGE_TIME);
+		}
 		
 		protected function hideScreen(screen:Screen):void {
 			if (screen.visible) {
@@ -198,22 +211,27 @@ package {
 			var v:Number = 1000 * dx / (1 + elapsedTime);
 			dragMomentum = 0.8 * v + 0.2 * dragMomentum;
 			
-			//updateDragPosition();
+			//updateMovingHandlePosition();
 		}
-		protected function updateDragPosition():void {
-			dragHandle.x = dragPoint.x - dragOffset;
-			clampHandlePositions();
+		protected function updateMovingHandlePosition():void {
 			
-			var onRight:Boolean = (dragHandle.x > ((WIDTH - Handle.WIDTH) / 2));
-			var crossed:Boolean = onRight == dragHandle.left;
+			if (dragging) {
+				movingHandle.x = dragPoint.x - dragOffset;
+				clampHandlePositions();
+			}
+			
+			var leftBuffer:Number = handles.indexOf(movingHandle) * Handle.WIDTH;
+			
+			var onRight:Boolean = (movingHandle.x > leftBuffer + ((WIDTH - Handle.WIDTH) / 2));
+			var crossed:Boolean = onRight == movingHandle.left;
 			if (crossed) {
-				if (dragHandle != colorSourceHandle) {
-					broadcastHandleColor(dragHandle, HANDLE_COLOR_CHANGE_TIME);
+				if (movingHandle != colorSourceHandle) {
+					broadcastHandleColor(movingHandle, HANDLE_COLOR_CHANGE_TIME);
 				}
 			} else {
 				if (currentHandle != colorSourceHandle) {
 					broadcastHandleColor(currentHandle, HANDLE_COLOR_CHANGE_TIME);
-					dragHandle.animateColorTo(dragHandle.homeColor, HANDLE_COLOR_QUICK_CHANGE_TIME);
+					movingHandle.animateColorTo(movingHandle.homeColor, HANDLE_COLOR_QUICK_CHANGE_TIME);
 				}
 			}
 			
@@ -222,22 +240,25 @@ package {
 		protected function handleMouseUp(event:MouseEvent):void {
 			stage.removeEventListener(MouseEvent.MOUSE_MOVE, handleMouseMove);
 			stage.removeEventListener(MouseEvent.MOUSE_UP, handleMouseUp);
-
-			dragHandle.clearDragDirection();
 			
 			dragging = false;
 			const weight:Number = 1;//0.8;
 			dragFlickDistance = dragMomentum * weight;
-			dragPoint.x = dragHandle.x;
+			dragPoint.x = movingHandle.x;
 			dragTime = getTimer();
 			
-			var suckRight:Boolean = (dragHandle.x + dragFlickDistance) > (WIDTH - Handle.WIDTH) / 2;
-			elasticizeDragHandle(dragHandle, suckRight);
+			const DRAG_REQUIRED:Number = 0.1;
+			var dragF:Number = (movingHandle.left) ? DRAG_REQUIRED : (1 - DRAG_REQUIRED);
+			var dragCutoff:Number = WIDTH * dragF - Handle.WIDTH / 2;
+			
+			var suckRight:Boolean = (movingHandle.x + dragFlickDistance) > dragCutoff;
+			suckHandle(movingHandle, suckRight);
 
-			dragHandle = null;
+			movingHandle.clearDragDirection();
+			movingHandle = null;
 		}
 		
-		protected function elasticizeDragHandle(handle:Handle, suckRight:Boolean):void {
+		protected function suckHandle(handle:Handle, suckRight:Boolean):void {
 			var h:Handle;
 			if (handle) {
 				//var suckRight:Boolean = (handle.x > (WIDTH - Handle.WIDTH) / 2);
@@ -297,6 +318,11 @@ package {
 					TweenMax.to(waveHandle.idleFlasher, flashTime, { alpha:SCREEN_SAVER_WAVE_ALPHA, ease:Quad.easeOut } );
 					TweenMax.to(waveHandle.idleFlasher, flashTime, { alpha:0, delay:flashTime, ease:Quad.easeIn } );
 				}
+				screenSaverScreenTime += dTime;
+				if (screenSaverScreenTime >= SCREEN_SAVER_SCREEN_TIME) {
+					screenSaverScreenTime -= SCREEN_SAVER_SCREEN_TIME;
+					nextScreenSaverScreen();
+				}
 			} else {
 				// Check if enough idleTime has passed to enter screenSaverMode
 				if (currentHandle && currentHandle.screen.content.isIdle) {
@@ -310,12 +336,12 @@ package {
 				}
 			}
 
-			if (dragHandle) updateDragPosition();
+			if (movingHandle) updateMovingHandlePosition();
 						
 			clampHandlePositions();
-			var snapF:Number = (dragHandle != null) ? 1 : 0.3;
+			var snapF:Number = (dragging) ? 1 : 0.3;
 			for each(var handle:Handle in handles) {
-				if (handle == dragHandle) continue;
+				if (dragging && (handle == movingHandle)) continue;
 				handle.x = handle.x + (handle.homeX - handle.x) * snapF;
 				var MOVE:Number = 3;
 				if (handle.x > handle.homeX) handle.x = Math.max(handle.x - MOVE, handle.homeX);
@@ -324,12 +350,16 @@ package {
 			clampHandlePositions();
 			
 			// Reached desinations?
-			var allAtHome:Boolean = (dragHandle == null);
+			var allAtHome:Boolean = !dragging;
 			for each(handle in handles) {
-				if (handle == dragHandle) continue;
+				if (dragging && (handle == movingHandle)) continue;
 				if (Math.abs(handle.x - handle.homeX) <= 1) {
 					handle.x = handle.homeX;
 					handle.left = handle.willBeLeft;
+					if (handle == movingHandle) {
+						movingHandle.clearDragDirection();
+						movingHandle = null;
+					}					
 				} else {
 					allAtHome = false;
 				}
@@ -370,14 +400,14 @@ package {
 		}
 		
 		protected function clampHandlePositions():void {			
-			if (dragHandle) {
+			if (movingHandle) {
 				var h:Handle;
 				// Push left from handle
-				for (h = dragHandle.prev; h != null; h = h.prev) {
+				for (h = movingHandle.prev; h != null; h = h.prev) {
 					h.x = Math.min(h.x, h.next.x - Handle.WIDTH);
 				}
 				// Push right from handle
-				for (h = dragHandle.next; h != null; h = h.next) {
+				for (h = movingHandle.next; h != null; h = h.next) {
 					h.x = Math.max(h.x, h.prev.x + Handle.WIDTH);
 				}
 			}
@@ -403,7 +433,7 @@ package {
 				
 				//if (!h.content.closed) showContent(h.content);
 				
-				if (!dragHandle) {
+				if (!movingHandle) {
 					if (h.screen.closed) {
 						hideScreen(h.screen);
 					}
@@ -428,7 +458,7 @@ package {
 			
 			if (r - l >= 1) {
 				screen.closed = false;
-				var w:Number = Math.ceil(r - l);
+				var w:Number = Math.ceil(r - l) + 1;
 				var x:Number = Math.ceil((Content.WIDTH - (r - l)) / 2);
 				screen.scrollRect = new Rectangle(x, 0, w, HEIGHT);
 			} else {
@@ -467,8 +497,14 @@ package {
 		protected function setHandlesIdle(value:Boolean):void {
 			if (handlesIdle == value) return;
 			handlesIdle = value;
-			var alpha:Number = value ? HANDLE_TEXT_ALPHA : 1;			
 			for each(var h:Handle in handles) {
+				var alpha:Number;
+				if (value) {
+					if (h == currentHandle) alpha = HANDLE_TEXT_CURRENT_ALPHA;
+					else alpha = HANDLE_TEXT_ALPHA;
+				} else {
+					alpha = 1;
+				}
 				h.animateAlphaTo(alpha, HANDLE_ALPHA_CHANGE_TIME);
 			}
 		}
@@ -485,6 +521,16 @@ package {
 		
 		
 		
+		protected function nextScreenSaverScreen():void {
+			var currentIndex:int = screenSaverScreenIndex;
+			screenSaverScreenIndex = (screenSaverScreenIndex + 1) % handles.length;
+			var handle:Handle = handles[screenSaverScreenIndex];
+			if (!handle.draggable) return;
+			movingHandle = handle;
+			beginMovingHandle(handle);
+			suckHandle(handle, (screenSaverScreenIndex < currentIndex));
+		}
+		
 		
 		protected function enterScreenSaverMode():void {
 			screenSaverWaveIndex = -1;
@@ -494,6 +540,8 @@ package {
 				var instant:Boolean = (h != currentHandle);
 				h.screen.fadeToScreenSaver(instant);
 			}
+			screenSaverScreenIndex = handles.indexOf(currentHandle);
+			
 		}
 		
 		protected function onScreenSaverFinished():void {
@@ -692,6 +740,7 @@ package {
 					handle.screenLeft = false;
 					handle.screen.visible = true;
 					broadcastHandleColor(handle, 0);
+					currentHandle = handle;
 				} else {
 					handle.draggable = true;
 					handle.screenLeft = true;

@@ -33,10 +33,12 @@ package med.display {
 		}
 		
 		protected function handleAddedToStage(event:Event):void {
-			overlay.addEventListener(MouseEvent.MOUSE_DOWN, handleOverlayClick, false, 0, true);
+			//overlay.addEventListener(MouseEvent.MOUSE_DOWN, handleOverlayClick, false, 0, true);
+			stage.addEventListener(MouseEvent.MOUSE_DOWN, handleOverlayClick, false, 0, true);
 		}
 		protected function handleRemovedFromStage(event:Event):void {
-			overlay.removeEventListener(MouseEvent.MOUSE_DOWN, handleOverlayClick, false);
+			//overlay.removeEventListener(MouseEvent.MOUSE_DOWN, handleOverlayClick, false);
+			stage.removeEventListener(MouseEvent.MOUSE_DOWN, handleOverlayClick, false);
 		}		
 		protected function handleOverlayClick(event:MouseEvent):void {
 			overlay.mouseEnabled = false;

@@ -1,19 +1,22 @@
 
 
 Screensavers
-	Disable dragging
-	Flash handles
 	ScreenSaver Content for each Screen
+
 
 	
 ~video offsets
+Videos
+	Vision x 2
+	doc7
+	doc2
+All high res videos please.
 
 * Used splash slide to start, to avoid this: Starting on a video allows it to fast forward through its boxes, or leith is playing somehow
 * Should all infographics end on blank and a replay button appear? Yes. Apart from hotspots
 
 *art1: IS IT TIME TO UNPLUG?
 ~	"our study" - floating boxes side text can't change
-	*some timing makes it hard to read.
 
 ~doc2: MEETING THE MENTAL HEALTH CHALLENGE
 	*made mono beyondblue logo myself. Good enough?
@@ -44,3 +47,35 @@ vision: OUR VISION
 	*boxes should be bold? Text doesn't look styled properly
 	video offset x 2
 	*video wipes x 2
+
+	
+	
+	
+	
+A way to restart, at least in core
+	needed in feature?
+	maybe for hotspots in the corner?
+
+Medibank logo next to beyondblue one
+beyondblue in italics - Core too
+
+Building changes
+Arrange things on the building better?
+
+
+should the current tab fade out completely so people dont try to drag it? or stay a bit brighter?
+
+General comments
+·         Screen saver – it only works when you touch the screen, not when you swipe
+·         Need a way to stop each feature mid way and return to home/screen saver
+ 
+Flybuys feature
+·         Should be able to restart message for all features once you’ve finished – there was no replay at the end of the Flybuys feature
+
+
+
+DAN:-------------------------
+Unplug, last box appeared over left text
+dots in middle of people graph
+bigger left text on floatingBoxes
+some timing makes it hard to read.
