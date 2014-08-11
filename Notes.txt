@@ -1,9 +1,4 @@
 
-
-Screensavers
-	ScreenSaver Content for each Screen
-
-
 	
 ~video offsets
 Videos
@@ -11,71 +6,46 @@ Videos
 	doc7
 	doc2
 All high res videos please.
+video screensaver for vision, doc2
+screenSaver for info4 - video?
 
-* Used splash slide to start, to avoid this: Starting on a video allows it to fast forward through its boxes, or leith is playing somehow
-* Should all infographics end on blank and a replay button appear? Yes. Apart from hotspots
-
-*art1: IS IT TIME TO UNPLUG?
-~	"our study" - floating boxes side text can't change
-
-~doc2: MEETING THE MENTAL HEALTH CHALLENGE
-	*made mono beyondblue logo myself. Good enough?
-	*beyondblue name should be in italics at the end
-	~video offset
-	*video wipes
-	
-*info4: MEDIBANK COMMUNITY FUND
-	*missing image/video slide with no text at the start
-	*Same after "helping through participation"
-	
-~doc7: REWARDING BETTER HEALTH WITH FLYBUYS AND MEDIBANK.
-~	video offset
-	*video wipes
-
-*prof9: A HEALTHIER WAY OF WORKING
-	*Button placement?
-	*1. Whenever you select one of the pluses the building could fade slightly and possibly scale down.
-	*2. Before people click the pluses, they might do the same little jump as the purple squares. Or if that's too excessive just the slow fades. 
-
-*prof1: MEET LEITH
-	*used static launch screen to get around pausesync issues on first slide
-	*video offset
-	*video wipes
-	
-vision: OUR VISION
-~	187%
-	*boxes should be bold? Text doesn't look styled properly
-	video offset x 2
-	*video wipes x 2
-
-	
-	
-	
-	
-A way to restart, at least in core
-	needed in feature?
-	maybe for hotspots in the corner?
-
-Medibank logo next to beyondblue one
-beyondblue in italics - Core too
 
 Building changes
 Arrange things on the building better?
+hotspots aren't returning to white
+- 6 star green rating
+- green spaces image
+- edible garden image
+Get rid of staircase/collaborative? (top left)
+Add new images
 
 
-should the current tab fade out completely so people dont try to drag it? or stay a bit brighter?
+ 
+
+
+
+
+
+
+NOPE:------------------------
+
+*doc2: MEETING THE MENTAL HEALTH CHALLENGE
+	*made mono beyondblue logo myself. Good enough?
+	
+*prof9: A HEALTHIER WAY OF WORKING
+	*1. Whenever you select one of the pluses the building could fade slightly and possibly scale down.
+	*2. Before people click the pluses, they might do the same little jump as the purple squares. Or if that's too excessive just the slow fades. 
 
 General comments
 ·         Screen saver – it only works when you touch the screen, not when you swipe
-·         Need a way to stop each feature mid way and return to home/screen saver
- 
-Flybuys feature
-·         Should be able to restart message for all features once you’ve finished – there was no replay at the end of the Flybuys feature
 
+fade screenSavers after click?
+draggable screensaver overlay?
 
+Need a way to stop each feature mid way and return to home/screen saver
 
-DAN:-------------------------
-Unplug, last box appeared over left text
-dots in middle of people graph
-bigger left text on floatingBoxes
-some timing makes it hard to read.
+should the current tab fade out completely so people dont try to drag it? or stay a bit brighter?
+
+art1: IS IT TIME TO UNPLUG?
+~	"our study" - floating boxes side text can't change
+

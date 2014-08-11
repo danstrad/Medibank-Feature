@@ -15,6 +15,12 @@ package med.display {
 		public var overlay:ScreenSaverOverlay;
 		
 		protected var clickCallback:Function;
+		
+		protected var animatingOff:Boolean;
+		protected var animatingOn:Boolean;
+		protected var animateTime:Number;
+		protected var animateOffCallback:Function;
+		
 
 		public function ScreenSaver(title:String, content:Content, clickCallback:Function) {
 			this.clickCallback = clickCallback;
@@ -51,7 +57,10 @@ package med.display {
 				overlay.x = homeX;				
 			} else {				
 				overlay.x = homeX - SCROLL_X;
-				TweenMax.to(overlay, SCROLL_TIME, { x:homeX, ease:Quad.easeOut } );
+				//TweenMax.to(overlay, SCROLL_TIME, { x:homeX, ease:Quad.easeOut } );
+				animatingOff = false;
+				animatingOn = true;
+				animateTime = 0;
 			}
 			overlay.mouseEnabled = true;
 		}
@@ -60,12 +69,45 @@ package med.display {
 			var endX:Number = Content.WIDTH / 2 + SCROLL_X;
 			if (instant) {
 				overlay.x = endX;
-			} else {				
-				TweenMax.to(overlay, SCROLL_TIME, { x:endX, ease:Quad.easeIn, onComplete:onAnimatedOff, onCompleteParams:[callback] } );
+			} else {
+				animateOffCallback = callback;
+				//TweenMax.to(overlay, SCROLL_TIME, { x:endX, ease:Quad.easeIn, onComplete:onAnimatedOff, onCompleteParams:[callback] } );
+				animatingOn = false;
+				animatingOff = true;
+				animateTime = 0;
 			}
 		}				
 		protected function onAnimatedOff(callback:Function):void {
 			if (callback != null) callback();
+		}
+		
+		public function animate(dTime:Number):void {
+			var f:Number;
+			var eased:Number;
+			if (animatingOn) {
+				animateTime += dTime;
+				if (animateTime >= SCROLL_TIME * 1000) {
+					animatingOn = false;
+					overlay.x = Content.WIDTH / 2;
+				} else {
+					f = animateTime / (SCROLL_TIME * 1000);
+					eased = Utils.easeOut(f);
+					overlay.x = Content.WIDTH / 2 + SCROLL_X * ( -1 + eased);
+				}
+			} else if (animatingOff) {
+				animateTime += dTime;
+				if (animateTime >= SCROLL_TIME * 1000) {
+					animatingOff = false;
+					overlay.x = Content.WIDTH / 2 + SCROLL_X;
+					if (animateOffCallback != null) animateOffCallback();
+				} else {
+					f = animateTime / (SCROLL_TIME * 1000);
+					eased = Utils.easeIn(f);
+					overlay.x = Content.WIDTH / 2 + SCROLL_X * eased;
+				}
+			} else {
+				content.animate(dTime);
+			}
 		}
 		
 		

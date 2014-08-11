@@ -22,11 +22,11 @@ package med.display {
 		public var color:uint;
 		
 		
-		public function Screen(title:String, color:uint, content:Content, screenSaverContent:Content, screenSaverFinishedCallback:Function) {
+		public function Screen(title:String, color:uint, content:Content, screenSaverContent:Content, screenSaverText:String, screenSaverFinishedCallback:Function) {
 			this.screenSaverFinishedCallback = screenSaverFinishedCallback;
 			this.color = color;
 			this.content = content;			
-			screenSaver = new ScreenSaver(title, screenSaverContent, onScreenSaverFinished);
+			screenSaver = new ScreenSaver(screenSaverText, screenSaverContent, onScreenSaverFinished);
 
 			var background:Background;
 			background = new Background(Content.WIDTH, Content.HEIGHT);
@@ -52,14 +52,27 @@ package med.display {
 			content.resume();
 		}
 		
-		protected function resetScreenSaver():void {
+		public function resetScreenSaver():void {
 			screenSaver.content.reset();
 		}
 		
+		public function pauseScreenSaver():void {
+			screenSaver.content.pause();
+		}
+
+		public function resumeScreenSaver():void {
+			screenSaver.content.resume();
+		}
 		
-		public function animate(dTime:Number):void {
+		
+		public function animateContent(dTime:Number):void {
 			if (content.parent) {
 				content.animate(dTime);
+			}
+		}
+		public function animateScreenSaver(dTime:Number):void {
+			if (screenSaver.parent) {
+				screenSaver.animate(dTime);
 			}
 		}
 		
@@ -91,6 +104,7 @@ package med.display {
 				screenSaver.animateOff(false, onScreenSaverAnimatefOff);
 			}
 		}
+		
 		protected function onScreenSaverAnimatefOff():void {
 			if (screenSaver.parent) screenSaver.parent.removeChild(screenSaver);
 			resetScreenSaver();

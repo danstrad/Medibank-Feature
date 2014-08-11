@@ -34,7 +34,7 @@ package {
 
 	public class Main extends Sprite {
 		
-		protected static const START_ON_SCREEN_SAVER:Boolean = false;
+		protected static const START_ON_SCREEN_SAVER:Boolean = true;
 
 		static public const SCREEN_SAVER_IDLE_TIME:Number = 2 * 60 * 1000; // 2 minutes (in ms)
 		static public const SCREEN_SAVER_WAVE_TIME_TOTAL:Number = 1600;
@@ -146,7 +146,8 @@ package {
 		protected function handleMouseDown(event:MouseEvent):void {
 			idleTime = 0;
 			
-			if (screenSaverMode) return;
+			//if (screenSaverMode) return;
+			
 			var handle:Handle = event.target as Handle;
 			if (!handle || !handle.draggable) return;
 
@@ -247,9 +248,11 @@ package {
 			dragPoint.x = movingHandle.x;
 			dragTime = getTimer();
 			
+			var leftBuffer:Number = handles.indexOf(movingHandle) * Handle.WIDTH;
+			
 			const DRAG_REQUIRED:Number = 0.1;
 			var dragF:Number = (movingHandle.left) ? DRAG_REQUIRED : (1 - DRAG_REQUIRED);
-			var dragCutoff:Number = WIDTH * dragF - Handle.WIDTH / 2;
+			var dragCutoff:Number = leftBuffer + Content.WIDTH * dragF - Handle.WIDTH / 2;
 			
 			var suckRight:Boolean = (movingHandle.x + dragFlickDistance) > dragCutoff;
 			suckHandle(movingHandle, suckRight);
@@ -314,6 +317,10 @@ package {
 					screenSaverWaveTime -= waveTime;
 					screenSaverWaveIndex = (screenSaverWaveIndex + 1) % handles.length;
 					var waveHandle:Handle = handles[screenSaverWaveIndex];
+					if (waveHandle == currentHandle) {
+						screenSaverWaveIndex = (screenSaverWaveIndex + 1) % handles.length;
+						waveHandle = handles[screenSaverWaveIndex];
+					}
 					var flashTime:Number = SCREEN_SAVER_WAVE_FLASH_TIME;
 					TweenMax.to(waveHandle.idleFlasher, flashTime, { alpha:SCREEN_SAVER_WAVE_ALPHA, ease:Quad.easeOut } );
 					TweenMax.to(waveHandle.idleFlasher, flashTime, { alpha:0, delay:flashTime, ease:Quad.easeIn } );
@@ -388,12 +395,18 @@ package {
 					currentHandle.screen.resumeContent();
 					playingCurrent = true;
 				}
-				currentHandle.screen.animate(dTime);
+				currentHandle.screen.animateContent(dTime);
 			} else {
 				if (playingCurrent) {
 					TweenMax.pauseAll();
 					currentHandle.screen.pauseContent();
 					playingCurrent = false;
+				}
+			}
+
+			for each(h in handles) {
+				if (!h.screen.closed && h.screen.visible) {
+					h.screen.animateScreenSaver(dTime);
 				}
 			}
 			
@@ -462,6 +475,9 @@ package {
 				var x:Number = Math.ceil((Content.WIDTH - (r - l)) / 2);
 				screen.scrollRect = new Rectangle(x, 0, w, HEIGHT);
 			} else {
+				if (!screen.closed) {
+					if (screen.screenSaver.visible) screen.resetScreenSaver();
+				}
 				screen.closed = true;
 			}
 		}
@@ -614,16 +630,25 @@ package {
 				
 				// Handle Text
 				var handleText:String = "";
-				if (screenXML.hasOwnProperty("Handle")) handleText = screenXML.Handle[0].toString();
+				if (screenXML.hasOwnProperty("Handle")) handleText = screenXML.Handle[0].toString();				
+				var screenSaverText:String = handleText;
 				
-				var content:Content;
+				var content:Content = null;
 				if (screenXML.hasOwnProperty("Content")) content = createContent(screenXML.Content[0], color);
 				if (!content) content = new Content(color);				
-				var screenSaverContent:Content;
-				if (screenXML.hasOwnProperty("ScreenSaverContent")) screenSaverContent = createContent(screenXML.ScreenSaverContent[0], color);
+				var screenSaverContent:Content = null;
+				if (screenXML.hasOwnProperty("ScreenSaverContent")) {
+					screenSaverContent = createContent(screenXML.ScreenSaverContent[0], color);
+					var screenSaverXML:XML = screenXML.ScreenSaverContent[0];
+					if (screenSaverXML.hasOwnProperty("@alpha")) {
+						if (screenSaverContent) screenSaverContent.alpha = parseFloat(screenSaverXML.@alpha);
+					}
+					if (screenSaverXML.hasOwnProperty("ScreenSaverText")) screenSaverText = TextUtils.safeText(screenSaverXML.ScreenSaverText[0].toString());
+				}
 				if (!screenSaverContent) screenSaverContent = new Content(color);
 				
-				var screen:Screen = new Screen(handleText, color, content, screenSaverContent, onScreenSaverFinished);
+				
+				var screen:Screen = new Screen(handleText, color, content, screenSaverContent, screenSaverText, onScreenSaverFinished);
 				
 				handles.push(new Handle(handleText, screen));
 			}

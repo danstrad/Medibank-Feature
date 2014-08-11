@@ -1,13 +1,13 @@
 <SwipeScreensData>
 	
-	<ScreenSet>art1,doc2,doc7,info4,prof1,prof9,vision</ScreenSet> <!-- Both sets -->
+	<ScreenSet>doc2,doc7,info4,prof1,prof9,vision,art1</ScreenSet>
 
 	
 	<!-- Whichever of these is placed first will be used -->
 	<ScreenSet>art1,doc2,doc7,info4,prof1,prof9,vision</ScreenSet> <!-- Both sets -->
 	<ScreenSet>info4,doc2,prof9,art1</ScreenSet> <!-- Set1 -->
 	<ScreenSet>vision,prof1,doc7</ScreenSet> <!-- Set2 -->
-	<ScreenSet>vision, pong,rate1,prof9,doc7,art1,doc2,info4,prof1</ScreenSet> <!-- Everything -->
+	<ScreenSet>vision,pong,rate1,prof9,doc7,art1,doc2,info4,prof1</ScreenSet> <!-- Everything -->
 	
 	
 	<Screen id="pong">
@@ -61,7 +61,10 @@ IN AUSTRALIA?</Title>
 		<Handle>OUR VISION.</Handle>
 		
 		<ScreenSaverContent type="Infographic">
-			<Infographic id="vision_graphic">
+			<ScreenSaverText>OUR VISION.</ScreenSaverText>
+			
+			<Infographic>
+				<slide type="splash_text" duration="1" />
 				<slide type="video">
 					<video url="assets/vision/Generation Better.mp4" sourceWidth="640" sourceHeight="360" scale="auto" />
 				</slide>
@@ -182,6 +185,25 @@ of people in Australia and New Zealand.</text>
 	<Screen id="art1">
 		<Colour>#653279</Colour>
 		<Handle>IS IT TIME TO UNPLUG?</Handle>
+		
+		<ScreenSaverContent type="Infographic" alpha="0.3">
+			<ScreenSaverText>IS IT TIME
+TO UNPLUG?</ScreenSaverText>
+
+			<Infographic id="art1_graphic">
+				<InfographicColors color1="#653279" color2="#FFFFFF" color3="#B0008E" color4="#7b4e8e" color5="#845b94" color6="#b0018d" />
+				
+				<slide type="splash_text" duration="1" />
+				<slide type="time_dials">
+					<title></title>
+					<subtitle></subtitle>
+					<appearance graphColor1="5" selectionColor="6" />
+					
+					<dial type="winding" title="" />
+					<dial type="winding" title="" />
+				</slide>
+			</Infographic>
+		</ScreenSaverContent>
 		
 		<Content type="Infographic">
 		<Infographic id="art1_graphic">
@@ -310,6 +332,18 @@ Dr Ian Boyd, Medibank"/>
 	<Screen id="doc2">
 		<Colour>#2C5697</Colour>
 		<Handle>MEETING THE MENTAL HEALTH CHALLENGE.</Handle>
+
+		<ScreenSaverContent type="Infographic">
+			<ScreenSaverText>MEETING THE MENTAL
+HEALTH CHALLENGE.</ScreenSaverText>
+
+			<Infographic>
+				<slide type="splash_text" duration="1" />
+				<slide type="video">
+					<video url="assets/vision/Generation Better.mp4" sourceWidth="640" sourceHeight="360" scale="auto" />
+				</slide>
+			</Infographic>
+		</ScreenSaverContent>
 		
 		<Content type="Infographic">
 		<Infographic id="doc2_graphic">
@@ -319,7 +353,7 @@ Dr Ian Boyd, Medibank"/>
 HEALTH CHALLENGE.</text>
 				<Image url="assets/doc2/Medibank_Logo.png" x="-100" y="170" scale="0.4" />
 				<Image url="assets/doc2/beyondblue_mono.png" x="100" y="170" scale="0.2" />
-			</slide>	
+			</slide>
 			<slide type="people_graph">
 				<appearance backgroundColor="1" boxColor="3" />
 				<graphstate value="20" featuredText="1 in 5" usePercentage="false" textOnRightEdge="true" topText="" bottomText="Every year, more than 
@@ -372,7 +406,7 @@ via online, telephone and face-to-face channels.</text>
 			</slide>
 			<slide type="splash_text" duration="5000" animateOff="none" >
 				<text type="corner">We also partner with like-minded organisations
-such as beyondblueto influence mental health
+such as beyondblue to influence mental health
 policy and reform, and ultimately provide better
 care and life outcomes for all Australians.</text>
 			</slide>
@@ -389,6 +423,18 @@ care and life outcomes for all Australians.</text>
 	<Screen id="info4">
 		<Colour>#2C5697</Colour>
 		<Handle>MEDIBANK COMMUNITY FUND.</Handle>
+		
+		<ScreenSaverContent type="Infographic">
+			<ScreenSaverText>MEDIBANK 
+COMMUNITY FUND.</ScreenSaverText>
+
+			<Infographic>
+				<slide type="splash_text" duration="1" />
+				<slide type="video">
+					<video url="assets/vision/Generation Better.mp4" sourceWidth="640" sourceHeight="360" scale="auto" />
+				</slide>
+			</Infographic>
+		</ScreenSaverContent>
 		
 		<Content type="Infographic">
 		<Infographic id="info4_graphic">
@@ -464,6 +510,70 @@ community health and wellbeing outcomes.</text>
 		<Colour>#00a3e0</Colour>
 		<Handle>REWARDING BETTER HEALTH WITH FLYBUYS AND MEDIBANK.</Handle>
 		
+		<ScreenSaverContent type="Infographic" alpha="0.3">
+		<ScreenSaverText>REWARDING BETTER HEALTH
+WITH FLYBUYS AND MEDIBANK.</ScreenSaverText>	
+
+		<Infographic>
+			<InfographicColors color1="#00A3E0" color2="#FFFFFF" color3="#2C5697" />
+			<slide type="splash_text" duration="1" />
+			<slide type="hotspot">
+				<mode>auto</mode>
+				<appearance graphColor1="3" />
+				
+				<!-- Order these so sequential ones don't overlap -->
+				<hotspot x="-852" y="-45" dir="dr">
+					<Title>Medibank Icehouse</Title>
+					<Text>[b]2493 Steps[/b]
+105 Pearl River Rd, Docklands</Text>
+				</hotspot>				
+				<hotspot x="851" y="44" dir="dl">
+					<Title>Fitzroy Gardens</Title>
+					<Text>[b]3973 Steps[/b]
+East Melbourne</Text>
+				</hotspot>
+				<hotspot x="-482" y="314" dir="dr">
+					<Title>Docklands Park</Title>
+					<Text>[b]525 Steps[/b]
+Corner Harbour Esplanade and Bourke St Docklands</Text>
+				</hotspot>
+				<hotspot x="288" y="-160" dir="ur">
+					<Title>State Library of Victoria</Title>
+					<Text>[b]3018 Steps[/b]
+328 Swanston St, Melbourne</Text>
+				</hotspot>
+				<hotspot x="-122" y="-96" dir="ul">
+					<Title>Flagstaff Gardens</Title>
+					<Text>[b]2231 Steps[/b]
+West Melbourne</Text>
+				</hotspot>
+				<hotspot x="-378" y="262" dir="dr">
+					<Title>YMCA Docklands</Title>
+					<Text>[b]549 Steps[/b]
+4/100 Harbour Esplanade, Docklands</Text>
+				</hotspot>
+				<hotspot x="-186" y="160" dir="ur">
+					<Title>Southern Cross Station</Title>
+					<Text>[b]722 Steps[/b]
+Corner of Bourke St and Spencer St, Docklands</Text>
+				</hotspot>
+				<hotspot x="390" y="211" dir="ur">
+					<Title>Flinders Street Station</Title>
+					<Text>[b]3018 Steps[/b]
+Corner of Swanston St & Flinders St</Text>
+				</hotspot>
+				<hotspot x="-378" y="160" dir="dr">
+					<Title>Etihad Stadium</Title>
+					<Text>[b]131 Steps[/b]
+740 Bourke Street, Docklands</Text>
+				</hotspot>
+				
+				
+			</slide>				
+		</Infographic>
+		</ScreenSaverContent>
+		
+		
 		<Content type="Infographic">
 		<Infographic id="doc7_graphic">
 			<InfographicColors color1="#00A3E0" color2="#FFFFFF" color3="#2C5697" />
@@ -512,7 +622,7 @@ HOW TO BUILD UP YOUR STEPS.</splashText>
 				<disclaimer>Steps shown are approximate
 distances based on an
 average male step.</disclaimer>
-				
+
 				<hotspot x="-852" y="-45" dir="dr">
 					<Title>Medibank Icehouse</Title>
 					<Text>[b]2493 Steps[/b]
@@ -559,6 +669,9 @@ Corner of Swanston St & Flinders St</Text>
 East Melbourne</Text>
 				</hotspot>
 				
+				<resetButton>
+					<text>Replay</text>
+				</resetButton>
 				
 			</slide>
 			
@@ -569,6 +682,23 @@ East Melbourne</Text>
 	<Screen id="prof9">
 		<Colour>#009ca6</Colour>
 		<Handle>A HEALTHIER WAY OF WORKING.</Handle>
+
+		<ScreenSaverContent type="Infographic" alpha="0.3">
+			<ScreenSaverText>WE'RE EMBRACING 
+A HEALTHIER WAY OF WORKING.</ScreenSaverText>	
+
+			<Infographic>
+				<InfographicColors color1="#2C5697" color2="#FFFFFF" color3="#00A3E0" />
+			
+				<slide type="splash_text" duration="1" />
+				<slide type="hotspot">
+					<Background>
+						<Image url="assets/prof9/Building.png" scale="1.44" />
+					</Background>
+				</slide>
+				
+			</Infographic>
+		</ScreenSaverContent>
 		
 		<Content type="Infographic">
 		<Infographic id="prof9_info">
@@ -603,20 +733,26 @@ and productive… All part of Generation Better.</cornerText>
 					<Image url="assets/prof9/Reflection_people_cropped.jpg" />
 				</hotspot>				
 				<hotspot x="-360" y="576" dir="dl">
-					<Text>Edible garden for our employees.</Text>
+					<Text>An edible garden featuring seasonal fruit and vegetables and a demonstration kitchen next to the staff kitchen provides inspiration for fresh and healthy eating.</Text>
 				</hotspot>				
 				<hotspot x="292" y="-440" dir="dr">
+					<Text>A dynamic central atrium, linked by two staircases, breaks up the building’s almost 3000sqm floor plates and creates connections.</Text>
 					<Image url="assets/prof9/Medibank Atrium No.1.jpg" />
 				</hotspot>
 				<hotspot x="322" y="-248" dir="dr">
 					<Text>6 star green rating.</Text>
 				</hotspot>
 				<hotspot x="348" y="68" dir="dr">
+					<Text>The building is filled with flexible work and creative spaces, designed for closer collaboration between people.</Text>
 					<Image url="assets/prof9/Cumulus_people.jpg" />
 				</hotspot>
 				<hotspot x="326" y="576" dir="dr">
-					<Text>Green spaces.</Text>
+					<Text>Green spaces inside and out provide better air quality and natural cooling, while spiral staircases create active connections between floors.</Text>
 				</hotspot>
+				
+				<resetButton>
+					<text>Replay</text>
+				</resetButton>
 				
 			</slide>
 			
@@ -630,6 +766,18 @@ and productive… All part of Generation Better.</cornerText>
 		<Colour>#009ca6</Colour>
 		<Handle>MEET LEITH.</Handle>
 		
+		<ScreenSaverContent type="Infographic">
+			<ScreenSaverText>MEET LEITH.
+MEDIBANK NURSE.</ScreenSaverText>	
+
+			<Infographic>
+				<slide type="splash_text" duration="1" />
+				<slide type="video">
+					<video url="assets/prof1/MVI_0017.MOV" sourceWidth="1920" sourceHeight="1088" scale="auto" />
+				</slide>				
+			</Infographic>
+		</ScreenSaverContent>
+				
 		<Content type="Infographic">
 		<Infographic id="prof1 infographic">
 			<InfographicColors color1="#009ca6" color2="#FFFFFF" color3="#76b82a" />
