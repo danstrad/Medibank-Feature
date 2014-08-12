@@ -74,6 +74,7 @@
     <element path="..\Medibank-Core\lib\SplashText.swc" />
     <element path="..\Medibank-Core\lib\Reset.swc" />
     <element path="..\Medibank-Core\lib\ScreenSaver.swc" />
+    <element path="..\Medibank-Core\lib\Fonts.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>

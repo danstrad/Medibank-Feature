@@ -348,6 +348,7 @@ HEALTH CHALLENGE.</ScreenSaverText>
 		<Content type="Infographic">
 		<Infographic id="doc2_graphic">
 			<InfographicColors color1="#2C5697" color2="#FFFFFF" color3="#00A3E0" />
+			
 			<slide type="splash_text" duration="4000">
 				<text>MEETING THE MENTAL
 HEALTH CHALLENGE.</text>
@@ -406,7 +407,7 @@ via online, telephone and face-to-face channels.</text>
 			</slide>
 			<slide type="splash_text" duration="5000" animateOff="none" >
 				<text type="corner">We also partner with like-minded organisations
-such as beyondblue to influence mental health
+such as [i]beyondblue[/i] to influence mental health
 policy and reform, and ultimately provide better
 care and life outcomes for all Australians.</text>
 			</slide>
