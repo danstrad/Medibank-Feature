@@ -700,56 +700,62 @@ A HEALTHIER WAY OF WORKING.</ScreenSaverText>
 				
 			</Infographic>
 		</ScreenSaverContent>
-		
+				
 		<Content type="Infographic">
 		<Infographic id="prof9_info">
 			<InfographicColors color1="#009ca6" color2="#FFFFFF" color3="#76b82a" />
-
+<!-- 
 			<slide type="splash_text" duration="4000" animateOff="none" >
 				<text>WE'RE EMBRACING 
 A HEALTHIER WAY OF WORKING.</text>
-			</slide>		
+			</slide>
+-->
 			<slide type="hotspot">
 				<Background>
 					<Image url="assets/prof9/Building.png" scale="1.44" />
 				</Background>
 
 				<appearance graphColor1="3" />
+<!-- 
 				<intro>
 					<cornerText>Here at Medibank, to live our ‘For Better Health’ 
 purpose, we are embracing a healthier way of 
 working that will help us to be more collaborative 
 and productive… All part of Generation Better.</cornerText>
 				</intro>
+ -->				
 				<hotspot x="-266" y="-374" dir="dl">
-					<Text>Interior spiral staircases.</Text>
-					<Image url="assets/prof9/Medibank Atrium No.3.jpg" />
-				</hotspot>
-				<hotspot x="-318" y="-122" dir="ul">
-					<Text>Collaborative and social settings to connect.</Text>
-					<Image url="assets/prof9/Medibank-016.jpg" />
-				</hotspot>
-				<hotspot x="-366" y="258" dir="dl">
-					<Text>Rejuvenation spaces to help recharge.</Text>
-					<Image url="assets/prof9/Reflection_people_cropped.jpg" />
-				</hotspot>				
-				<hotspot x="-360" y="576" dir="dl">
-					<Text>An edible garden featuring seasonal fruit and vegetables and a demonstration kitchen next to the staff kitchen provides inspiration for fresh and healthy eating.</Text>
-				</hotspot>				
-				<hotspot x="292" y="-440" dir="dr">
-					<Text>A dynamic central atrium, linked by two staircases, breaks up the building’s almost 3000sqm floor plates and creates connections.</Text>
-					<Image url="assets/prof9/Medibank Atrium No.1.jpg" />
-				</hotspot>
-				<hotspot x="322" y="-248" dir="dr">
-					<Text>6 star green rating.</Text>
-				</hotspot>
-				<hotspot x="348" y="68" dir="dr">
 					<Text>The building is filled with flexible work and creative spaces, designed for closer collaboration between people.</Text>
 					<Image url="assets/prof9/Cumulus_people.jpg" />
 				</hotspot>
-				<hotspot x="326" y="576" dir="dr">
-					<Text>Green spaces inside and out provide better air quality and natural cooling, while spiral staircases create active connections between floors.</Text>
+				<hotspot x="-318" y="-122" dir="ul">
+					<Text>Rejuvenation spaces to help recharge.</Text>
+					<Image url="assets/prof9/Reflection_people_cropped.jpg" />
 				</hotspot>
+				<hotspot x="-366" y="258" dir="dl">
+					<Text>6 star green rating.</Text>
+				</hotspot>				
+				<hotspot x="-360" y="576" dir="ul">
+					<Text>A dynamic central atrium, linked by two staircases, breaks up the building’s almost 3000sqm floor plates and creates connections.</Text>
+					<Image url="assets/prof9/Medibank Atrium No.1.jpg" />
+				</hotspot>				
+				<hotspot x="292" y="-440" dir="dr">
+					<Text>A multipurpose sports court, internal bike storage and change room facilities make it easy for employees to incorporate physical activity into their day.</Text>
+					<Image url="assets/prof9/image003.jpg" />
+				</hotspot>
+				<hotspot x="322" y="-248" dir="dr">
+					<Text>An edible garden featuring seasonal fruit and vegetables and a demonstration kitchen next to the staff kitchen provides inspiration for fresh and healthy eating.</Text>
+					<Image url="assets/prof9/Edible Garden 2.png" />
+				</hotspot>
+				<hotspot x="348" y="68" dir="dr">
+					<Text>Collaborative and social settings to connect.</Text>
+					<Image url="assets/prof9/Medibank-016.jpg" />
+				</hotspot>
+				<hotspot x="326" y="576" dir="ur">
+					<Text>Green spaces inside and out provide better air quality and natural cooling, while spiral staircases create active connections between floors.</Text>
+					<Image url="assets/prof9/Medibank Atrium No.3.jpg" />
+				</hotspot>
+
 				
 				<resetButton>
 					<text>Replay</text>

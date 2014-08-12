@@ -9,34 +9,7 @@ All high res videos please.
 video screensaver for vision, doc2
 screenSaver for info4 - video?
 
-
-Building changes
-Arrange things on the building better?
-hotspots aren't returning to white
-- 6 star green rating
-- green spaces image
-- edible garden image
-Get rid of staircase/collaborative? (top left)
-Add new images
-
-
-Playing court
  
--          A multipurpose sports court, internal bike storage and change room facilities make it easy for employees to incorporate physical activity into their day
- 
-Kitchen
- 
--          An edible garden featuring seasonal fruit and vegetables and a demonstration kitchen next to the staff kitchen provides inspiration for fresh and healthy eating
-
-
-
-
-tap brings up menu to go back?
-
- 
-
-
-
 
 
 
@@ -62,3 +35,4 @@ should the current tab fade out completely so people dont try to drag it? or sta
 art1: IS IT TIME TO UNPLUG?
 ~	"our study" - floating boxes side text can't change
 
+6 star green rating: image
