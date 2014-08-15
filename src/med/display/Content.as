@@ -4,10 +4,13 @@ package med.display {
 	public class Content extends Sprite {
 
 		// 2458, 1607
-		static public function get WIDTH():Number { return (Main.WIDTH - Handle.TOTAL_WIDTH); }
+		//static public function get WIDTH():Number { return (Main.WIDTH - Handle.TOTAL_WIDTH); }
+		static public function get WIDTH():Number { return (Main.WIDTH - Handle.TOTAL_WIDTH + 1); }
 		static public const HEIGHT:Number = Main.HEIGHT;
 
 		public var color:uint;
+
+		public var takenAction:Boolean; // When something has happened which should cause the overall idleTime to be reset
 
 		protected var _full:Boolean;
 		public function get full():Boolean { return _full; }		

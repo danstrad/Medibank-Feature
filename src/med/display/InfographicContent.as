@@ -11,6 +11,7 @@ package med.display {
 		
 		override public function get isIdle():Boolean { return infographic.isOnLastFrame; }
 		
+		protected var showingSlideIndex:int;
 		
 		/*
 		 * Default Infographic size is 1024 x 576
@@ -23,6 +24,7 @@ package med.display {
 		 * scale of a 1080 video = 0.6198836753759455
 		 * scale of a 1088 video = 0.6153257071746518
 		 */
+				
 		
 		public function InfographicContent(color:uint, infographicData:InfographicData) {
 			Infographic.HEIGHT = 670;
@@ -59,6 +61,11 @@ package med.display {
 		
 		override public function animate(dTime:Number):void {
 			super.animate(dTime);
+			
+			if (showingSlideIndex != infographic.currentSlideIndex) {
+				showingSlideIndex = infographic.currentSlideIndex;
+				takenAction = true;
+			}
 			
 			infographic.animate(dTime);
 		}

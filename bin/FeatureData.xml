@@ -1,14 +1,13 @@
 <SwipeScreensData>
 	
-	<ScreenSet>doc2,doc7,info4,prof1,prof9,vision,art1</ScreenSet>
-
+	<ScreenSet>art1,doc2,doc7,info4,prof1,prof9,vision</ScreenSet> <!-- Test -->
 	
 	<!-- Whichever of these is placed first will be used -->
-	<ScreenSet>art1,doc2,doc7,info4,prof1,prof9,vision</ScreenSet> <!-- Both sets -->
 	<ScreenSet>info4,doc2,prof9,art1</ScreenSet> <!-- Set1 -->
 	<ScreenSet>vision,prof1,doc7</ScreenSet> <!-- Set2 -->
-	<ScreenSet>vision,pong,rate1,prof9,doc7,art1,doc2,info4,prof1</ScreenSet> <!-- Everything -->
 	
+	<ScreenSet>pong,rate1,prof9,doc7,art1,doc2,info4,prof1,vision</ScreenSet> <!-- Everything -->
+
 	
 	<Screen id="pong">
 		<Colour>#1B75BB</Colour>		
@@ -66,7 +65,7 @@ IN AUSTRALIA?</Title>
 			<Infographic>
 				<slide type="splash_text" duration="1" />
 				<slide type="video">
-					<video url="assets/vision/Generation Better.mp4" sourceWidth="640" sourceHeight="360" scale="auto" />
+					<video url="assets/vision/Generation Better.mp4" startTime="0" sourceWidth="640" sourceHeight="360" scale="auto" />
 				</slide>
 			</Infographic>
 		</ScreenSaverContent>
@@ -116,7 +115,7 @@ by 2033, reflecting 12.4% of GDP." />
 			</slide>			
 						
 			<slide type="video" duration="6000" animateOn="wipe_from_left" animateOff="wipe_from_top">
-				<video url="assets/vision/Generation Better.mp4" sourceWidth="640" sourceHeight="360" scale="auto" />
+				<video url="assets/vision/Generation Better.mp4" startTime="7" sourceWidth="640" sourceHeight="360" scale="auto" />
 				<appearance boxColor="1" wipeColor="1" />
 				<textstate duration="6000">
 					<text type="splash">AT MEDIBANK, WE BELIEVE WE HAVE AN IMPORTANT
@@ -340,7 +339,7 @@ HEALTH CHALLENGE.</ScreenSaverText>
 			<Infographic>
 				<slide type="splash_text" duration="1" />
 				<slide type="video">
-					<video url="assets/vision/Generation Better.mp4" sourceWidth="640" sourceHeight="360" scale="auto" />
+					<video url="assets/vision/Generation Better.mp4" startTime="34" sourceWidth="640" sourceHeight="360" scale="auto" />
 				</slide>
 			</Infographic>
 		</ScreenSaverContent>
@@ -391,7 +390,7 @@ UNPRECEDENTED OPPORTUNITY
 TO MEET THE MENTAL HEALTH CHALLENGE.</text>
 			</slide>
 			<slide type="video" duration="12500" animateOn="wipe_from_left" animateOff="wipe_from_top">
-				<video url="assets/vision/Generation Better.mp4" sourceWidth="640" sourceHeight="360" scale="auto" />
+				<video url="assets/vision/Generation Better.mp4" startTime="34" sourceWidth="640" sourceHeight="360" scale="auto" />
 				<appearance boxColor="3" wipeColor="1" />
 				<textstate duration="4000">
 					<text type="pop" position="bottomRight" size="medium">But major system changes are needed to get the best outcomes.</text>
@@ -432,7 +431,7 @@ COMMUNITY FUND.</ScreenSaverText>
 			<Infographic>
 				<slide type="splash_text" duration="1" />
 				<slide type="video">
-					<video url="assets/vision/Generation Better.mp4" sourceWidth="640" sourceHeight="360" scale="auto" />
+					<video url="assets/vision/Generation Better.mp4" startTime="13" sourceWidth="640" sourceHeight="360" scale="auto" />
 				</slide>
 			</Infographic>
 		</ScreenSaverContent>
@@ -591,7 +590,7 @@ WITH FLYBUYS AND MEDIBANK.</text>
 
 			<slide type="video" duration="8000" animateOn="wipe_from_left" animateOff="wipe_from_left">
 				<appearance boxColor="1" wipeColor="1" />
-				<video url="assets/vision/Generation Better.mp4" sourceWidth="640" sourceHeight="360" scale="auto" />
+				<video url="assets/vision/Generation Better.mp4" startTime="22" sourceWidth="640" sourceHeight="360" scale="auto" />
 				<textstate duration="4000">
 					<text type="splash" textScale="0.85">MEDIBANK HAS PARTNERED WITH FLYBUYS
 TO REWARD MEMBERS FOR BEING ACTIVE.</text>
@@ -704,26 +703,22 @@ A HEALTHIER WAY OF WORKING.</ScreenSaverText>
 		<Content type="Infographic">
 		<Infographic id="prof9_info">
 			<InfographicColors color1="#009ca6" color2="#FFFFFF" color3="#76b82a" />
-<!-- 
 			<slide type="splash_text" duration="4000" animateOff="none" >
 				<text>WE'RE EMBRACING 
 A HEALTHIER WAY OF WORKING.</text>
 			</slide>
--->
 			<slide type="hotspot">
 				<Background>
 					<Image url="assets/prof9/Building.png" scale="1.44" />
 				</Background>
 
 				<appearance graphColor1="3" />
-<!-- 
 				<intro>
 					<cornerText>Here at Medibank, to live our ‘For Better Health’ 
 purpose, we are embracing a healthier way of 
 working that will help us to be more collaborative 
 and productive… All part of Generation Better.</cornerText>
 				</intro>
- -->				
 				<hotspot x="-266" y="-374" dir="dl">
 					<Text>The building is filled with flexible work and creative spaces, designed for closer collaboration between people.</Text>
 					<Image url="assets/prof9/Cumulus_people.jpg" />
@@ -780,7 +775,7 @@ MEDIBANK NURSE.</ScreenSaverText>
 			<Infographic>
 				<slide type="splash_text" duration="1" />
 				<slide type="video">
-					<video url="assets/prof1/MVI_0017.MOV" sourceWidth="1920" sourceHeight="1088" scale="auto" />
+					<video url="assets/prof1/MVI_0017.MOV" sourceWidth="1920" sourceHeight="1088" scale="auto" volume="0" />
 				</slide>				
 			</Infographic>
 		</ScreenSaverContent>
@@ -795,7 +790,7 @@ MEDIBANK NURSE.</text>
 			</slide>		
 			
 			<slide type="video" duration="19000" animateOn="wipe_from_bottom" animateOff="wipe_from_bottom">
-				<video url="assets/prof1/MVI_0017.MOV" sourceWidth="1920" sourceHeight="1088" scale="auto" />
+				<video url="assets/prof1/MVI_0017.MOV" sourceWidth="1920" sourceHeight="1088" scale="auto" volume="0" />
 				<appearance boxColor="3" wipeColor="3" />
 				<!-- 
 				<textstate duration="4000">

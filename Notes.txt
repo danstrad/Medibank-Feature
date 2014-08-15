@@ -1,17 +1,32 @@
 
 	
 ~video offsets
-Videos
-	Vision x 2
-	doc7
-	doc2
 All high res videos please.
-video screensaver for vision, doc2
 screenSaver for info4 - video?
 
+Buffer.Full event
+
+
  
+ 
+*Slowing down after multiple videos have played.
+?Show different video snippets in the different features (currently all play from the start of the gen better ad)
+*Make the screensavers trigger after a time, whether the end of the story is reached or not.
+"Swipe here" on the bars for Feature (or some other instructions to let people know)
+Audio on videos and screensaver (Do we need to source/approve audio for the screensaver?)
+Improve performance however possible
 
-
+Restrict camera and frame new stories better in Core
+*Video improvements in Core too
+ 
+ 
+ 
+Audio starting at video offsets is going to be weird
+audio on video sounds mental
+ 
+Who is managing the iPad content?
+ 
+ 
 
 NOPE:------------------------
 

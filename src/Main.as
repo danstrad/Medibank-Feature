@@ -12,6 +12,7 @@ package {
 	import flash.media.SoundTransform;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
+	import flash.ui.Mouse;
 	import flash.utils.Dictionary;
 	import flash.utils.getTimer;
 	import med.data.BarData;
@@ -34,13 +35,15 @@ package {
 
 	public class Main extends Sprite {
 		
+		static public const SET_INDEX:int = 0;
+
 		protected static const START_ON_SCREEN_SAVER:Boolean = true;
 
 		static public const SCREEN_SAVER_IDLE_TIME:Number = 2 * 60 * 1000; // 2 minutes (in ms)
 		static public const SCREEN_SAVER_WAVE_TIME_TOTAL:Number = 1600;
 		static public const SCREEN_SAVER_WAVE_FLASH_TIME:Number = 0.7;
 		static public const SCREEN_SAVER_WAVE_ALPHA:Number = 0.25;
-		static public const SCREEN_SAVER_SCREEN_TIME:Number = 10 * 1000; // 10 seconds
+		static public const SCREEN_SAVER_SCREEN_TIME:Number = 6 * 1000; // 6 seconds
 
 		static public const HANDLE_COLOR_QUICK_CHANGE_TIME:Number = 500;
 		static public const HANDLE_COLOR_CHANGE_TIME:Number = 1000;
@@ -95,7 +98,7 @@ package {
 			TextUtils.createTextFormats();
 			new _FontDump();
 			
-			soundTransform = new SoundTransform(0);
+			//soundTransform = new SoundTransform(0);
 			
 			handles = new Vector.<Handle>();
 			
@@ -109,6 +112,7 @@ package {
 			xmlLoader.load(new URLRequest("FeatureData.XML"));
 			
 			CONFIG::release {
+				Mouse.hide();
 				addEventListener(MouseEvent.CLICK, handleFullScreenClick);
 			}
 			stage.addEventListener(FullScreenEvent.FULL_SCREEN, handleFullScreenChange);
@@ -130,7 +134,7 @@ package {
 			removeEventListener(Event.ENTER_FRAME, handleCheckImagesLoaded);			
 
 			readSets(loadedXML);
-			readHandles(screenSets[0]);
+			readHandles(screenSets[SET_INDEX]);
 			setupHandles();
 			
 			lastFrameTime = getTimer();
@@ -332,11 +336,17 @@ package {
 				}
 			} else {
 				// Check if enough idleTime has passed to enter screenSaverMode
-				if (currentHandle && currentHandle.screen.content.isIdle) {
-					idleTime += dTime;
-					if (idleTime > SCREEN_SAVER_IDLE_TIME) {
+				if (currentHandle) {
+					//if (currentHandle && currentHandle.screen.content.isIdle) {
+					if (currentHandle.screen.content.takenAction) {
+						currentHandle.screen.content.takenAction = false;
 						idleTime = 0;
-						enterScreenSaverMode();
+					} else {
+						idleTime += dTime;
+						if (idleTime > SCREEN_SAVER_IDLE_TIME) {
+							idleTime = 0;
+							enterScreenSaverMode();
+						}
 					}
 				} else {
 					idleTime = 0;
@@ -467,7 +477,8 @@ package {
 		
 		protected function showScreenBetween(l:Number, r:Number, screen:Screen):void {
 			screen.x = l;
-			screen.full = ((r - l) >= (Content.WIDTH - 1)) && screen.visible;
+			//screen.full = ((r - l) >= (Content.WIDTH - 1)) && screen.visible;
+			screen.full = ((r - l) >= (Content.WIDTH * 0.98)) && screen.visible;
 			
 			if (r - l >= 1) {
 				screen.closed = false;

@@ -29,7 +29,7 @@ package med.display {
 			screenSaver = new ScreenSaver(screenSaverText, screenSaverContent, onScreenSaverFinished);
 
 			var background:Background;
-			background = new Background(Content.WIDTH, Content.HEIGHT);
+			background = new Background(Content.WIDTH + 1, Content.HEIGHT);
 			background.showColor(color);			
 			addChild(background);
 			
