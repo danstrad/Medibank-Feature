@@ -35,7 +35,7 @@ package {
 
 	public class Main extends Sprite {
 		
-		static public const SET_INDEX:int = 0;
+		static public const SET_INDEX:int = 1;
 
 		protected static const START_ON_SCREEN_SAVER:Boolean = true;
 
@@ -44,6 +44,7 @@ package {
 		static public const SCREEN_SAVER_WAVE_FLASH_TIME:Number = 0.7;
 		static public const SCREEN_SAVER_WAVE_ALPHA:Number = 0.25;
 		static public const SCREEN_SAVER_SCREEN_TIME:Number = 6 * 1000; // 6 seconds
+		static public const SCREEN_SAVER_HINT_TIME:Number = 8 * 1000;
 
 		static public const HANDLE_COLOR_QUICK_CHANGE_TIME:Number = 500;
 		static public const HANDLE_COLOR_CHANGE_TIME:Number = 1000;
@@ -71,6 +72,9 @@ package {
 		protected var screenSaverWaveTime:Number;
 		protected var screenSaverScreenTime:Number;
 		protected var screenSaverScreenIndex:int;
+		protected var screenSaverHintTime:Number;
+		protected var screenSaverPreviousHintHandle:Handle;
+		protected var screenSaverHintHandleList:Vector.<Handle>;
 
 		private var handles:Vector.<Handle>;
 		
@@ -142,6 +146,7 @@ package {
 			if (START_ON_SCREEN_SAVER) enterScreenSaverMode();
 			idleTime = 0;
 			screenSaverScreenTime = 0;
+			screenSaverHintTime = 0;
 			
 			addEventListener(Event.ENTER_FRAME, handleEnterFrame);
 			addEventListener(MouseEvent.MOUSE_DOWN, handleMouseDown);
@@ -156,6 +161,10 @@ package {
 			if (!handle || !handle.draggable) return;
 
 			movingHandle = handle;
+			
+			for each(var h:Handle in handles) {
+				h.hideGrabHint();
+			}
 
 			dragging = true;
 			dragPoint = new Point(mouseX, mouseY);
@@ -333,6 +342,29 @@ package {
 				if (screenSaverScreenTime >= SCREEN_SAVER_SCREEN_TIME) {
 					screenSaverScreenTime -= SCREEN_SAVER_SCREEN_TIME;
 					nextScreenSaverScreen();
+				}
+				screenSaverHintTime += dTime;
+				if (screenSaverHintTime >= SCREEN_SAVER_HINT_TIME) {
+					screenSaverHintTime -= SCREEN_SAVER_HINT_TIME;
+					var hintHandle:Handle = null;
+					var renewed:Boolean = false;
+					while (!hintHandle) {
+						if (!screenSaverHintHandleList || (screenSaverHintHandleList.length == 0)) {
+							if (renewed) break;
+							renewed = true;
+							screenSaverHintHandleList = handles.concat();
+						}
+						var hintIndex:int = int(Math.random() * screenSaverHintHandleList.length);
+						h = screenSaverHintHandleList[hintIndex];
+						screenSaverHintHandleList.splice(hintIndex, 1);
+						if (h.draggable && (h != screenSaverPreviousHintHandle)) {
+							hintHandle = h;
+						}
+					}
+					if (hintHandle) {						
+						hintHandle.showGrabHint();
+						screenSaverPreviousHintHandle = hintHandle;
+					}
 				}
 			} else {
 				// Check if enough idleTime has passed to enter screenSaverMode
@@ -568,7 +600,8 @@ package {
 				h.screen.fadeToScreenSaver(instant);
 			}
 			screenSaverScreenIndex = handles.indexOf(currentHandle);
-			
+			screenSaverHintTime = 0;
+			screenSaverHintHandleList = null;
 		}
 		
 		protected function onScreenSaverFinished():void {

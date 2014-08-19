@@ -39,6 +39,8 @@ package med.display {
 		public var willBeLeft:Boolean;
 		public var screenLeft:Boolean;
 		
+		protected var grabHint:HandleGrabHint;
+
 		protected var _draggable:Boolean;
 		public function get draggable():Boolean { return _draggable; }
 		public function set draggable(value:Boolean):void {
@@ -84,6 +86,7 @@ package med.display {
 			mouseChildren = false;
 
 			draggable = true;
+			
 		}
 		
 		public function showDragDirection():void {
@@ -94,6 +97,16 @@ package med.display {
 		public function clearDragDirection():void {
 			grab.gotoAndStop(1);
 			grab.scaleX = 1;
+		}
+		public function showGrabHint():void {
+			if (grabHint) return;
+			grabHint = new HandleGrabHint();
+			grabHint.x = grab.x;
+			grabHint.y = grab.y;
+			addChild(grabHint);
+		}
+		public function hideGrabHint():void {
+			if (grabHint) grabHint.forceOff();
 		}
 		
 		
@@ -142,6 +155,14 @@ package med.display {
 					var currentB:uint = uint(sourceB + (targetB - sourceB) * eased);
 					
 					setColor(currentR + currentG + currentB);
+				}
+			}
+			
+			if (grabHint) {
+				grabHint.animate(dTime);
+				if (grabHint.finished) {
+					if (grabHint.parent) grabHint.parent.removeChild(grabHint);
+					grabHint = null;
 				}
 			}
 		}

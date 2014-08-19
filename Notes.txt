@@ -4,16 +4,10 @@
 All high res videos please.
 screenSaver for info4 - video?
 
-Buffer.Full event
-
-
  
  
 *Slowing down after multiple videos have played.
-?Show different video snippets in the different features (currently all play from the start of the gen better ad)
 *Make the screensavers trigger after a time, whether the end of the story is reached or not.
-"Swipe here" on the bars for Feature (or some other instructions to let people know)
-Audio on videos and screensaver (Do we need to source/approve audio for the screensaver?)
 *Improve performance however possible
 	*Flag to toggle bitmap caching?
 		*cache TextContent
@@ -22,6 +16,11 @@ Audio on videos and screensaver (Do we need to source/approve audio for the scre
 	*instead of camera bounds, tether it to each box on the screen?
 *Video improvements in Core too
  
+
+?Show different video snippets in the different features (currently all play from the start of the gen better ad)
+"Swipe here" on the bars for Feature (or some other instructions to let people know)
+Audio on videos and screensaver (Do we need to source/approve audio for the screensaver?)
+
 
 One version with CACHE_AND_SNAP, one without
  
