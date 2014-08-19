@@ -108,6 +108,7 @@ package med.display {
 		
 		public function forceOff():void {
 			bouncesRemaining = 0;
+			forcedOff = true;
 		}
 
 	}
