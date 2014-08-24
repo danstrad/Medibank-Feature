@@ -35,7 +35,7 @@ package {
 
 	public class Main extends Sprite {
 		
-		static public const SET_INDEX:int = 1;
+		static public const SET_INDEX:int = 2;
 
 		protected static const START_ON_SCREEN_SAVER:Boolean = true;
 

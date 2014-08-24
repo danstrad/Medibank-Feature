@@ -65,7 +65,7 @@ IN AUSTRALIA?</Title>
 			<Infographic>
 				<slide type="splash_text" duration="1" />
 				<slide type="video">
-					<video url="assets/vision/Generation Better.mp4" startTime="0" sourceWidth="640" sourceHeight="360" scale="auto" />
+					<video url="assets/vision/Generation Better.mp4" startTime="0" sourceWidth="640" sourceHeight="360" scale="auto" volume="0" />
 				</slide>
 			</Infographic>
 		</ScreenSaverContent>
@@ -78,7 +78,7 @@ IN AUSTRALIA?</Title>
 				<text>OUR VISION.</text>				
 			</slide>
 			<slide type="video" duration="6000" animateOn="wipe_from_left" animateOff="wipe_from_top">
-				<video url="assets/vision/Generation Better.mp4" startTime="0" sourceWidth="640" sourceHeight="360" scale="auto" />
+				<video url="assets/vision/Generation Better.mp4" startTime="0" sourceWidth="640" sourceHeight="360" scale="auto" volume="0" />
 				<appearance boxColor="1" wipeColor="1" />
 				<textstate duration="6000">
 					<text type="splash">HEALTH IS ONE OF THE BIGGEST
@@ -115,7 +115,7 @@ by 2033, reflecting 12.4% of GDP." />
 			</slide>			
 						
 			<slide type="video" duration="6000" animateOn="wipe_from_left" animateOff="wipe_from_top">
-				<video url="assets/vision/Generation Better.mp4" startTime="7" sourceWidth="640" sourceHeight="360" scale="auto" />
+				<video url="assets/vision/Generation Better.mp4" startTime="7" sourceWidth="640" sourceHeight="360" scale="auto" volume="0" />
 				<appearance boxColor="1" wipeColor="1" />
 				<textstate duration="6000">
 					<text type="splash">AT MEDIBANK, WE BELIEVE WE HAVE AN IMPORTANT
@@ -339,7 +339,7 @@ HEALTH CHALLENGE.</ScreenSaverText>
 			<Infographic>
 				<slide type="splash_text" duration="1" />
 				<slide type="video">
-					<video url="assets/vision/Generation Better.mp4" startTime="34" sourceWidth="640" sourceHeight="360" scale="auto" />
+					<video url="assets/vision/Generation Better.mp4" startTime="34" sourceWidth="640" sourceHeight="360" scale="auto" volume="0" />
 				</slide>
 			</Infographic>
 		</ScreenSaverContent>
@@ -390,7 +390,7 @@ UNPRECEDENTED OPPORTUNITY
 TO MEET THE MENTAL HEALTH CHALLENGE.</text>
 			</slide>
 			<slide type="video" duration="12500" animateOn="wipe_from_left" animateOff="wipe_from_top">
-				<video url="assets/vision/Generation Better.mp4" startTime="34" sourceWidth="640" sourceHeight="360" scale="auto" />
+				<video url="assets/vision/Generation Better.mp4" startTime="34" sourceWidth="640" sourceHeight="360" scale="auto" volume="0" />
 				<appearance boxColor="3" wipeColor="1" />
 				<textstate duration="4000">
 					<text type="pop" position="bottomRight" size="medium">But major system changes are needed to get the best outcomes.</text>
@@ -431,7 +431,7 @@ COMMUNITY FUND.</ScreenSaverText>
 			<Infographic>
 				<slide type="splash_text" duration="1" />
 				<slide type="video">
-					<video url="assets/vision/Generation Better.mp4" startTime="13" sourceWidth="640" sourceHeight="360" scale="auto" />
+					<video url="assets/vision/Generation Better.mp4" startTime="13" sourceWidth="640" sourceHeight="360" scale="auto" volume="0" />
 				</slide>
 			</Infographic>
 		</ScreenSaverContent>
@@ -590,7 +590,7 @@ WITH FLYBUYS AND MEDIBANK.</text>
 
 			<slide type="video" duration="8000" animateOn="wipe_from_left" animateOff="wipe_from_left">
 				<appearance boxColor="1" wipeColor="1" />
-				<video url="assets/vision/Generation Better.mp4" startTime="22" sourceWidth="640" sourceHeight="360" scale="auto" />
+				<video url="assets/vision/Generation Better.mp4" startTime="22" sourceWidth="640" sourceHeight="360" scale="auto" volume="0" />
 				<textstate duration="4000">
 					<text type="splash" textScale="0.85">MEDIBANK HAS PARTNERED WITH FLYBUYS
 TO REWARD MEMBERS FOR BEING ACTIVE.</text>
@@ -822,7 +822,7 @@ Leith works from home as part of our
 work@home model.</text>
 			</slide>
 			<slide type="video" duration="13000" animateOn="wipe_from_left" animateOff="wipe_from_top">
-				<video url="assets/prof1/MVI_0038.MOV" sourceWidth="1920" sourceHeight="1088" scale="auto" />
+				<video url="assets/prof1/MVI_0038.MOV" sourceWidth="1920" sourceHeight="1088" scale="auto" volume="0" />
 				<appearance boxColor="3" wipeColor="1" />
 				<textstate>
 					<text type="pop" position="topright" size="small">5,000 fewer ambulance callouts.</text>
